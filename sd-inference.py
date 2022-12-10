@@ -83,6 +83,7 @@ warnings.filterwarnings("ignore")
 os.environ["WANDB_SILENT"] = "true"#mute wandb run message
 os.environ["WANDB_API_KEY"]="16d21dc747a6f33247f1e9c96895d4ffa5ea0b27"
 parser = argparse.ArgumentParser()
+parser.add_argument("--device",help="GPU device number, e.g. cuda:0",default=0)
 parser.add_argument("--version",type=str,help="wandb model version, e.g. v1",required=True)
 parser.add_argument("--run_id",type=str,help="wandb run id of model",required=True)
 parser.add_argument("--data_root",default="./book dataset",help="path to read csv files")
@@ -248,7 +249,7 @@ def generate(
     #generate fixed latents if no latents exist
     global latents
     if latents==None or latents.shape[0]!=samples_per_prompt:
-      generator = torch.Generator(device='cuda')
+      generator = torch.Generator(device=args.device)
       generator = generator.manual_seed(global_seed)
       latents=torch.zeros(samples_per_prompt,
                            pipeline.unet.in_channels,img_size // 8, img_size // 8)
@@ -256,7 +257,7 @@ def generate(
         latents[j,:,:,:] = torch.randn(
             (pipeline.unet.in_channels, img_size // 8, img_size // 8),
             generator = generator,
-            device = 'cuda'
+            device = args.device
         )
 
 
@@ -380,7 +381,7 @@ pipeline = StableDiffusionPipeline.from_pretrained(
       torch_dtype=torch.float16,
       safety_checker=None,
       scheduler = noise_scheduler,
-      ).to('cuda')
+      ).to(argparse.device)
 
 #delete downloaded model to save storage
 if args.delete_model:
