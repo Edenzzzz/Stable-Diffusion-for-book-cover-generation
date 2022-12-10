@@ -433,13 +433,10 @@ all_images = []
 
 for _ in range(num_rows):
     with autocast("cuda"):
-        index = 0
-        prompt = [prompt]*4
         #batch generation
-        while index < 4: 
-          images = pipeline(prompt[index:index+args.batch_size],height=height,width=width,num_inference_steps=50, guidance_scale=7.5).images
+        for i in range(2):
+          images = pipeline([prompt]*2,height=height,width=width,num_inference_steps=50, guidance_scale=7.5).images
           all_images.extend(images)
-          index += args.batch_size
 grid = image_grid(all_images, num_samples, num_rows)
 wandb.log({"For_fun":wandb.Image(grid)})
 
