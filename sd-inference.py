@@ -175,7 +175,7 @@ def visualize_prompts(
     include_desc=False,
     max_length=15,
     legible_prompt=True,
-    samples_per_prompt=3,
+    samples_per_prompt=4,
     img_size=512,
     inference_steps=75,
     save_to_drive=False,
@@ -227,11 +227,7 @@ def visualize_prompts(
     if summerize==True:
       assert include_desc==True, "include_desc is False, \
       no summerization can be done without book description!" 
-    if include_desc==True and batch_generate==True:
-      #TODO: checkout the bug: passing tokenizer with padding=True to from_pretrained() does not solve this.
-      print("Setting batch_generate to false since passing stacked descriptions of different length to model will cause error.")
-      print("---------------------------------------------")
-      batch_generate=False
+
     assert save_dir and save_to_drive and os.path.isdir(save_dir), "Must specify save_to_drive=True and save_dir with a valid dir"
     import gc
     gc.collect()
@@ -287,12 +283,14 @@ def visualize_prompts(
         if legible_prompt:
             legible_text="legible text"
         if summerize:
+            torch.cuda.empty_cache()
             inputs = tokenizer(description, max_length=1024, 
                                return_tensors="pt",truncation=True,padding="max_length")
             summary_ids = model.generate(inputs['input_ids'], num_beams=3,\
                                          min_length=2, max_length=max_length)
             description = tokenizer.batch_decode(summary_ids, skip_special_tokens=True, 
                                           clean_up_tokenization_spaces=False)[0]#batch_decode returns a list of strings; here len(list)=1, only one input string
+            torch.cuda.empty_cache()
         ###get prompt
         template=test_templates[i]
         if include_desc:
