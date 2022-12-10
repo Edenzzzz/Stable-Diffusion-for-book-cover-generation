@@ -79,6 +79,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--version",type=str,help="wandb model version, e.g. v1",required=True)
 parser.add_argument("--run_id",type=str,help="wandb run id of model",required=True)
 parser.add_argument("--data_root",default="./book dataset",help="path to read csv files")
+parser.add_argument("--batch_size",default=3,type=int,help="Generation batch size. For a GPU with 16gb memory, 4 is maximum.")
 parser.add_argument("--save_for__fid",default=False,help="whether to generate and save more images for FID score evaluation")
 parser.add_argument("--num_imgs",type=int,default=4000,help="number of images to generate for computing FID score. Only to be specified if save_for_fid is True")
 parser.add_argument('--save_dir',type=str,default="./Ouput_images",help="Output dir for generated images.")
@@ -166,7 +167,6 @@ for i in range(len(summary_placeholders),len(test_templates)):
   summary_placeholders+=[random.choice(summary_placeholders)]
 summary_placeholders=summary_placeholders[:len(test_templates)]
 
-
 #fix random seed by fixing latents
 latents=None
 def visualize_prompts(
@@ -249,7 +249,7 @@ def visualize_prompts(
             device = 'cuda'
         )
     
-
+``
     import matplotlib.pyplot as plt,random
     #generate from test prompts only
     df=pd.read_csv(args.data_root+"/df_test.csv")
@@ -308,9 +308,10 @@ def visualize_prompts(
 
       with autocast("cuda"):
         if batch_generate:#batch generation
-          images=pipeline(text,height=img_size,width=img_size,
-                          num_inference_steps=50, guidance_scale=7.5,
-                          latents=latents).images
+          for index in range(0,len(text),args.batch_size):
+            images+=pipeline(text[index*args.batch_size:(index+1)*args.batch_size],height=img_size,width=img_size,
+                            num_inference_steps=50, guidance_scale=7.5,
+                            latents=latents).images
         else:#To avoid out of memory, generate one at a time
           for j in range(samples_per_prompt):
             images+=pipeline(text[j],height=img_size,
