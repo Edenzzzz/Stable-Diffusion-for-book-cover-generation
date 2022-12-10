@@ -381,7 +381,7 @@ pipeline = StableDiffusionPipeline.from_pretrained(
       torch_dtype=torch.float16,
       safety_checker=None,
       scheduler = noise_scheduler,
-      ).to(argparse.device)
+      ).to(args.device)
 
 #delete downloaded model to save storage
 if args.delete_model:
