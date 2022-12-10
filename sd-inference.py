@@ -375,37 +375,38 @@ model_dir = my_model_artifact.download()
 
 # Load your Hugging Face model from that folder
 #  using the same model class
-text_encoder = CLIPTextModel.from_pretrained(
-        model_dir, subfolder="text_encoder"
-        , use_auth_token=True,
-        load_in_8bit=True,device_map="auto"
-    )
-vae = AutoencoderKL.from_pretrained(
-      model_dir, subfolder="vae"
-      , use_auth_token=True,
-      load_in_8bit=True,device_map="auto"
-)
-unet = UNet2DConditionModel.from_pretrained(
-      model_dir, subfolder="unet"
-      , use_auth_token=True,
-      load_in_8bit=True,device_map="auto"
+# text_encoder = CLIPTextModel.from_pretrained(
+#         model_dir, subfolder="text_encoder"
+#         , use_auth_token=True,
+#         load_in_8bit=True,device_map="auto"
+#     )
+# vae = AutoencoderKL.from_pretrained(
+#       model_dir, subfolder="vae"
+#       , use_auth_token=True,
+#       load_in_8bit=True,device_map="auto"
+# )
+# unet = UNet2DConditionModel.from_pretrained(
+#       model_dir, subfolder="unet"
+#       , use_auth_token=True,
+#       load_in_8bit=True,device_map="auto"
 
-)
-tokenizer = CLIPTokenizer.from_pretrained(
-      model_dir,subfolder="tokenizer",
-      use_auth_token=True,
-      load_in_8bit=True,device_map="auto"
-)
+# )
+# tokenizer = CLIPTokenizer.from_pretrained(
+#       model_dir,subfolder="tokenizer",
+#       use_auth_token=True,
+#       load_in_8bit=True,device_map="auto"
+# )
 pipeline = StableDiffusionPipeline.from_pretrained(
       model_dir,
-      vae=vae,
-      unet=unet,
-      text_encoder=text_encoder,
-      tokenizer=tokenizer,
-      feature_extractor=CLIPFeatureExtractor.from_pretrained("openai/clip-vit-base-patch32",load_in_8bit=True,device_map="auto"),
+      # vae=vae,
+      # unet=unet,
+      # text_encoder=text_encoder,
+      # tokenizer=tokenizer,
+      # feature_extractor=CLIPFeatureExtractor.from_pretrained("openai/clip-vit-base-patch32",load_in_8bit=True,device_map="auto"),
       safety_checker=None,
       scheduler = noise_scheduler,
-      device_map="auto"
+      # device_map="auto"
+      load_in_8bit=True
       )
 
 #delete downloaded model to save storage
