@@ -301,6 +301,7 @@ def generate(
                                           min_length=2, max_length=max_length)
             description = tokenizer.batch_decode(summary_ids, skip_special_tokens=True, 
                                           clean_up_tokenization_spaces=False)[0]#batch_decode returns a list of strings; here len(list)=1, only one input string
+            del summary_ids,inputs                             
             torch.cuda.empty_cache()
         ###get prompt
         template=test_templates[i]
@@ -310,34 +311,27 @@ def generate(
           text += [template]
         else:
           text += [template.format(legible_text,author,title)]
-
+          
 
       ###inference 
       from torch import autocast
       images=[]
       print(f"Inference iteration {i}")
-      torch.cuda.empty_cache()#free memory before inference (hope this works)
 
+      torch.cuda.empty_cache()#free memory before inference (hope this works)
       with autocast("cuda"):
         if batch_generate:#batch generation
           index = 0
           while index < len(text):
-            output = pipeline(text[index:index+args.batch_size],height=img_size,width=img_size,
+            images += pipeline(text[index:index+args.batch_size],height=img_size,width=img_size,
                             num_inference_steps=50, guidance_scale=7.5,
                             latents=latents[index:index+args.batch_size]).images
-            #offload to cpu array to free memory
-            
-            images +=[image.numpy() for image in output]
             index = index+args.batch_size
         else:#To avoid out of memory, generate one at a time
           for j in range(samples_per_prompt):
-            output = pipeline(text[j],height=img_size,
+            images += pipeline(text[j],height=img_size,
                               width=img_size,num_inference_steps=inference_steps, 
                               guidance_scale=7.5,latents=latents[None,j]).images
-            print("-----------")
-            print((output[0]))
-            print("-----------")
-            images +=[image.numpy() for image in output]
                               
       try:
         axes[i][0].set_title(f"Prompt {i}, legible={legible_prompt},summerize={summerize},include_desc={include_desc}")
