@@ -1,0 +1,45 @@
+[34m[1mwandb[39m[22m: Downloading large artifact stable_diffusion_model:v15, 5465.06MB. 16 files...
+[34m[1mwandb[39m[22m:   16 of 16 files downloaded.
+Done. 0:0:0.0
+You have passed `None` for safety_checker to disable its functionality in <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'>. Note that this might lead to problems when using <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> and is not recommended.
+You have disabled the safety checker for <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> by passing `safety_checker=None`. Ensure that you abide to the conditions of the Stable Diffusion license and do not expose unfiltered results in services or applications open to the public. Both the diffusers team and Hugging Face strongly recommend to keep the safety filter enabled in all public facing circumstances, disabling it only for use-cases that involve analyzing network behavior or auditing its results. For more information, please have a look at https://github.com/huggingface/diffusers/pull/254 .
+Load stable_diffusion_model:v15 from wandb cloud checkpoint
+Visualization results will be saved in ./Ouput_images/v15 inference
+Inference iteration 0
+  0%|                                                    | 0/50 [00:00<?, ?it/s]
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/runpy.py", line 185, in _run_module_as_main
+    mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+  File "/usr/lib/python3.8/runpy.py", line 111, in _get_module_details
+    __import__(pkg_name)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 390, in <module>
+    visualize_prompts(pipeline,summerize=False,samples_per_prompt=4,
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 312, in visualize_prompts
+    images+=pipeline(text[index*args.batch_size:(index+1)*args.batch_size],height=img_size,width=img_size,
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/pipelines/stable_diffusion/pipeline_stable_diffusion.py", line 387, in __call__
+    noise_pred = self.unet(latent_model_input, t, encoder_hidden_states=text_embeddings).sample
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/models/unet_2d_condition.py", line 333, in forward
+    sample = upsample_block(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/models/unet_2d_blocks.py", line 1190, in forward
+    hidden_states = attn(hidden_states, encoder_hidden_states=encoder_hidden_states).sample
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/models/attention.py", line 202, in forward
+    hidden_states = block(hidden_states, context=encoder_hidden_states, timestep=timestep)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/models/attention.py", line 404, in forward
+    hidden_states = self.attn1(norm_hidden_states) + hidden_states
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/models/attention.py", line 497, in forward
+    hidden_states = self._attention(query, key, value)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/models/attention.py", line 514, in _attention
+    attention_probs = attention_scores.softmax(dim=-1)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 3.00 GiB (GPU 0; 10.76 GiB total capacity; 3.70 GiB already allocated; 2.85 GiB free; 6.68 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF

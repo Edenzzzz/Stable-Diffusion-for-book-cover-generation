@@ -1,0 +1,544 @@
+2022-12-10 03:46:40,474 INFO    StreamThr :147279 [internal.py:wandb_internal():87] W&B internal server running at pid: 147279, started at: 2022-12-10 03:46:40.473279
+2022-12-10 03:46:40,478 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: status
+2022-12-10 03:46:40,479 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: status
+2022-12-10 03:46:40,481 DEBUG   SenderThread:147279 [sender.py:send():303] send: header
+2022-12-10 03:46:40,481 INFO    WriterThread:147279 [datastore.py:open_for_write():75] open: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/run-338wajmd.wandb
+2022-12-10 03:46:40,497 DEBUG   SenderThread:147279 [sender.py:send():303] send: run
+2022-12-10 03:46:40,501 INFO    SenderThread:147279 [sender.py:_maybe_setup_resume():593] checking resume status for None/book_cover_generation/338wajmd
+2022-12-10 03:46:41,272 INFO    SenderThread:147279 [sender.py:_maybe_setup_resume():656] configured resuming with: ResumeState(resumed=True,step=40016,history=40016,events=1224,output=111,runtime=36815,wandb_runtime=None,summary={'lr': 4.999999999983049e-06, 'loss': 0.026316290721297264, 'step': '4999/5000', '_step': 40015, 'epoch': 2, '_runtime': 32857, '_timestamp': 1670080469, 'mean_epoch_loss': 0.14604474741418336},config={'seed': {'desc': None, 'value': 42}, '_wandb': {'desc': None, 'value': {'t': {'1': [1, 3, 11, 12, 41, 45, 49, 55, 71, 79], '3': [13, 15, 16], '4': '3.7.12', '5': '0.12.21', '6': '4.24.0', '8': [1, 2, 5]}, 'framework': 'huggingface', 'start_time': 1670047612, 'cli_version': '0.12.21', 'is_jupyter_run': True, 'python_version': '3.7.12', 'is_kaggle_kernel': True, 'huggingface_version': '4.24.0'}}, 'epochs': {'desc': None, 'value': 8}, 'scale_lr': {'desc': None, 'value': False}, 'templates': {'desc': None, 'value': ['A {} book cover with author: {}, book title: {} ', 'A {} book cover written by author: {} with book title: {} ', 'A  {} book\xa0cover\xa0with\xa0author name:{},\xa0book\xa0title:\xa0{}', 'A detailed {} book cover with author: {} and book title: {} ']}, 'output_dir': {'desc': None, 'value': './model'}, 'train_unet': {'desc': None, 'value': False}, 'weight_decay': {'desc': None, 'value': 0.001}, 'learning_rate': {'desc': None, 'value': 5e-06}, 'num_templates': {'desc': None, 'value': 4}, 'include_summary': {'desc': None, 'value': False}, 'train_batch_size': {'desc': None, 'value': 1}, 'train_text_encoder': {'desc': None, 'value': True}, 'training_dataset_size': {'desc': None, 'value': 5000}, 'gradient_checkpointing': {'desc': None, 'value': False}, 'gradient_accumulation_steps': {'desc': None, 'value': 10}, 'pretrained_model_name_or_path': {'desc': None, 'value': 'CompVis/stable-diffusion-v1-4'}})
+2022-12-10 03:46:41,468 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: check_version
+2022-12-10 03:46:41,469 INFO    SenderThread:147279 [dir_watcher.py:__init__():216] watching files in: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files
+2022-12-10 03:46:41,469 INFO    SenderThread:147279 [sender.py:_start_run_threads():928] run started: 338wajmd with start time 1670628785.466495
+2022-12-10 03:46:41,469 DEBUG   SenderThread:147279 [sender.py:send():303] send: summary
+2022-12-10 03:46:41,470 INFO    SenderThread:147279 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-10 03:46:41,470 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: check_version
+2022-12-10 03:46:41,539 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: run_start
+2022-12-10 03:46:41,553 DEBUG   HandlerThread:147279 [system_info.py:__init__():31] System info init
+2022-12-10 03:46:41,553 DEBUG   HandlerThread:147279 [system_info.py:__init__():46] System info init done
+2022-12-10 03:46:41,554 INFO    HandlerThread:147279 [system_monitor.py:start():150] Starting system monitor
+2022-12-10 03:46:41,554 INFO    SystemMonitor:147279 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2022-12-10 03:46:41,555 INFO    SystemMonitor:147279 [interfaces.py:start():168] Started cpu
+2022-12-10 03:46:41,556 INFO    SystemMonitor:147279 [interfaces.py:start():168] Started disk
+2022-12-10 03:46:41,556 INFO    SystemMonitor:147279 [interfaces.py:start():168] Started gpu
+2022-12-10 03:46:41,557 INFO    SystemMonitor:147279 [interfaces.py:start():168] Started memory
+2022-12-10 03:46:41,558 INFO    SystemMonitor:147279 [interfaces.py:start():168] Started network
+2022-12-10 03:46:41,616 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:46:41,616 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:46:41,691 DEBUG   SenderThread:147279 [sender.py:send():303] send: telemetry
+2022-12-10 03:46:42,472 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_created():275] file/dir created: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/wandb-summary.json
+2022-12-10 03:46:42,473 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_created():275] file/dir created: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:46:44,470 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:46:46,471 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:46:50,472 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:46:56,475 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:46:56,694 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:46:56,694 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:46:58,476 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:03,478 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:04,478 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:06,479 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:08,479 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:10,480 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:11,480 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/config.yaml
+2022-12-10 03:47:11,782 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:47:11,782 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:47:12,481 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:14,482 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:16,482 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:18,483 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:20,484 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:22,484 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:24,485 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:26,486 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:27,119 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:47:27,119 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:47:28,487 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:29,487 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:30,487 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:32,488 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:34,489 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:36,490 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:38,490 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:40,491 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:41,559 DEBUG   SystemMonitor:147279 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2022-12-10 03:47:41,561 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:47:42,191 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:47:42,191 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:47:42,492 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:44,492 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:46,493 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:48,494 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:50,494 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:52,495 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:53,495 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:54,496 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:56,497 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:47:57,368 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:47:57,368 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:47:58,497 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:00,498 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:02,499 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:04,499 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:06,500 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:08,501 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:10,501 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:11,563 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:48:12,502 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:12,687 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:48:12,688 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:48:14,503 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:16,504 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:18,504 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:19,505 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:20,505 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:22,506 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:24,506 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:26,507 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:27,869 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:48:27,870 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:48:28,508 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:30,509 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:32,509 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:34,510 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:36,511 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:38,511 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:40,512 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:41,564 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:48:42,513 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:42,948 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:48:42,948 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:48:43,513 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:44,514 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:46,514 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:48,515 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:50,516 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:52,516 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:54,517 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:56,518 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:48:58,171 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:48:58,171 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:48:58,519 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:00,519 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:02,520 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:04,521 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:06,521 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:08,522 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:09,523 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:10,523 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:11,566 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:49:12,524 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:13,247 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:49:13,247 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:49:14,524 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:16,525 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:18,526 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:20,527 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:22,527 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:24,528 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:26,529 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:28,432 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:49:28,433 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:49:28,530 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:30,530 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:32,531 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:34,532 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:35,532 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:36,533 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:38,533 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:40,534 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:41,568 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:49:42,535 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:43,507 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:49:43,508 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:49:44,535 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:46,536 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:48,537 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:50,538 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:52,538 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:54,539 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:56,540 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:58,540 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:49:58,728 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:49:58,728 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:50:00,541 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:01,541 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:02,542 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:04,543 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:06,543 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:08,544 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:10,545 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:11,569 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:50:12,545 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:13,922 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:50:13,923 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:50:14,546 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:16,547 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:18,548 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:20,548 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:22,549 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:24,550 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:26,550 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:27,551 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:28,551 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:29,000 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:50:29,000 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:50:30,552 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:32,553 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:34,553 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:36,554 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:38,555 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:40,555 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:41,571 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:50:42,556 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:44,264 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:50:44,264 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:50:45,557 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:47,558 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:49,559 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:51,559 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:53,560 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:55,561 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:57,561 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:50:59,341 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:50:59,342 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:50:59,562 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:01,563 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:03,564 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:05,564 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:07,565 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:09,566 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:11,566 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:11,572 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:51:13,567 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:14,602 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:51:14,602 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:51:15,568 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:17,569 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:25,436 DEBUG   SenderThread:147279 [sender.py:send():303] send: files
+2022-12-10 03:51:25,436 INFO    SenderThread:147279 [sender.py:_save_file():1171] saving file media/images/examples_40016_e927f79749e77c0cd706.png with policy now
+2022-12-10 03:51:25,479 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: partial_history
+2022-12-10 03:51:25,480 DEBUG   SenderThread:147279 [sender.py:send():303] send: history
+2022-12-10 03:51:25,481 DEBUG   SenderThread:147279 [sender.py:send():303] send: summary
+2022-12-10 03:51:25,481 INFO    SenderThread:147279 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-10 03:51:25,572 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/wandb-summary.json
+2022-12-10 03:51:25,572 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_created():275] file/dir created: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/media/images/examples_40016_e927f79749e77c0cd706.png
+2022-12-10 03:51:25,573 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_created():275] file/dir created: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/media
+2022-12-10 03:51:25,573 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_created():275] file/dir created: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/media/images
+2022-12-10 03:51:26,139 INFO    Thread-16 :147279 [upload_job.py:push():143] Uploaded file /tmp/tmpympntmvgwandb/wer0iyml-media/images/examples_40016_e927f79749e77c0cd706.png
+2022-12-10 03:51:26,862 INFO    Thread-17 :147279 [upload_job.py:push():143] Uploaded file /tmp/tmpympntmvgwandb/2lgqkbyr-media/images/examples_40016_e927f79749e77c0cd706.png
+2022-12-10 03:51:29,679 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:51:29,680 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:51:39,579 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:41,574 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:51:41,579 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:43,580 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:44,871 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:51:44,871 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:51:45,581 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:47,581 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:49,582 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:51,583 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:53,584 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:55,585 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:57,585 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:59,586 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:51:59,995 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:51:59,996 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:52:01,587 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:03,588 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:11,575 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:52:11,591 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:13,592 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:15,071 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:52:15,071 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:52:15,592 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:17,593 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:19,593 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:21,594 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:23,594 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:25,595 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:27,596 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:29,597 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:30,358 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:52:30,359 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:52:31,598 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:33,599 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:35,600 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:41,577 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:52:41,603 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:43,604 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:45,445 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:52:45,446 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:52:45,605 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:47,606 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:49,607 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:51,608 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:53,609 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:55,610 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:57,611 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:52:59,612 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:00,556 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:53:00,556 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:53:01,613 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:03,614 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:05,615 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:07,616 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:11,581 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:53:13,619 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:15,620 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:15,638 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:53:15,639 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:53:17,621 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:19,622 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:21,623 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:23,624 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:25,625 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:27,626 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:29,627 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:30,925 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:53:30,926 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:53:31,628 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:33,629 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:35,630 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:37,631 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:39,632 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:41,582 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:53:45,634 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:46,038 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:53:46,038 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:53:47,635 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:49,635 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:51,636 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:53,636 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:55,637 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:57,638 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:53:59,639 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:01,114 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:54:01,115 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:54:01,639 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:03,640 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:05,641 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:07,642 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:09,643 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:11,584 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:54:11,644 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:16,327 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:54:16,327 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:54:17,647 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:19,648 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:21,648 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:23,649 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:25,649 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:27,650 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:29,650 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:31,475 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:54:31,475 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:54:31,651 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:33,652 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:35,653 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:37,654 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:39,654 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:41,586 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:54:41,655 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:43,656 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:46,552 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:54:46,552 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:54:49,660 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:51,661 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:53,662 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:55,663 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:57,664 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:54:59,665 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:01,666 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:01,731 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:55:01,731 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:55:03,667 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:05,668 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:07,669 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:09,670 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:11,587 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:55:11,671 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:13,673 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:15,673 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:16,809 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:55:16,809 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:55:23,677 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:25,678 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:27,679 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:29,680 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:31,681 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:31,999 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:55:31,999 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:55:33,682 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:35,683 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:37,684 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:39,685 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:41,589 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:55:41,686 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:43,687 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:45,688 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:47,075 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:55:47,076 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:55:47,689 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:55,692 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:57,693 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:55:59,694 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:01,695 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:02,274 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:56:02,274 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:56:03,696 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:05,697 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:07,698 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:09,699 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:11,590 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:56:11,700 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:13,701 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:15,702 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:17,475 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:56:17,475 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:56:17,703 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:19,704 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:27,708 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:29,709 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:31,710 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:32,574 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:56:32,574 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:56:33,711 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:35,712 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:37,713 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:39,714 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:41,592 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:56:41,715 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:43,716 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:45,717 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:47,718 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:47,730 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 03:56:47,731 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 03:56:49,719 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:51,720 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:56:59,890 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: partial_history
+2022-12-10 03:56:59,890 DEBUG   SenderThread:147279 [sender.py:send():303] send: files
+2022-12-10 03:56:59,891 INFO    SenderThread:147279 [sender.py:_save_file():1171] saving file media/images/examples_40017_a8716569b671e16fa399.png with policy now
+2022-12-10 03:56:59,892 DEBUG   SenderThread:147279 [sender.py:send():303] send: history
+2022-12-10 03:56:59,892 DEBUG   SenderThread:147279 [sender.py:send():303] send: summary
+2022-12-10 03:56:59,895 INFO    SenderThread:147279 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-10 03:57:00,574 INFO    Thread-18 :147279 [upload_job.py:push():143] Uploaded file /tmp/tmpympntmvgwandb/3jd04ndn-media/images/examples_40017_a8716569b671e16fa399.png
+2022-12-10 03:57:00,724 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/wandb-summary.json
+2022-12-10 03:57:00,725 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_created():275] file/dir created: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/media/images/examples_40017_a8716569b671e16fa399.png
+2022-12-10 03:57:00,725 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/media/images
+2022-12-10 03:57:00,881 DEBUG   SenderThread:147279 [sender.py:send():303] send: exit
+2022-12-10 03:57:00,881 INFO    SenderThread:147279 [sender.py:send_exit():442] handling exit code: 1
+2022-12-10 03:57:00,881 INFO    SenderThread:147279 [sender.py:send_exit():444] handling runtime: 619
+2022-12-10 03:57:00,882 INFO    SenderThread:147279 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-10 03:57:00,882 INFO    SenderThread:147279 [sender.py:send_exit():450] send defer
+2022-12-10 03:57:00,883 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 03:57:00,883 INFO    HandlerThread:147279 [handler.py:handle_request_defer():162] handle defer: 0
+2022-12-10 03:57:00,883 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: defer
+2022-12-10 03:57:00,883 INFO    SenderThread:147279 [sender.py:send_request_defer():459] handle sender defer: 0
+2022-12-10 03:57:00,883 INFO    SenderThread:147279 [sender.py:transition_state():463] send defer: 1
+2022-12-10 03:57:00,883 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 03:57:00,884 INFO    HandlerThread:147279 [handler.py:handle_request_defer():162] handle defer: 1
+2022-12-10 03:57:00,884 INFO    HandlerThread:147279 [system_monitor.py:finish():160] Stopping system monitor
+2022-12-10 03:57:00,885 DEBUG   SystemMonitor:147279 [system_monitor.py:_start():137] Finished system metrics aggregation loop
+2022-12-10 03:57:00,886 DEBUG   SystemMonitor:147279 [system_monitor.py:_start():141] Publishing last batch of metrics
+2022-12-10 03:57:00,888 INFO    HandlerThread:147279 [interfaces.py:finish():175] Joined cpu
+2022-12-10 03:57:00,888 INFO    HandlerThread:147279 [interfaces.py:finish():175] Joined disk
+2022-12-10 03:57:01,151 INFO    HandlerThread:147279 [interfaces.py:finish():175] Joined gpu
+2022-12-10 03:57:01,152 INFO    HandlerThread:147279 [interfaces.py:finish():175] Joined memory
+2022-12-10 03:57:01,152 INFO    HandlerThread:147279 [interfaces.py:finish():175] Joined network
+2022-12-10 03:57:01,152 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: defer
+2022-12-10 03:57:01,152 INFO    SenderThread:147279 [sender.py:send_request_defer():459] handle sender defer: 1
+2022-12-10 03:57:01,152 INFO    SenderThread:147279 [sender.py:transition_state():463] send defer: 2
+2022-12-10 03:57:01,153 DEBUG   SenderThread:147279 [sender.py:send():303] send: stats
+2022-12-10 03:57:01,154 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 03:57:01,154 INFO    HandlerThread:147279 [handler.py:handle_request_defer():162] handle defer: 2
+2022-12-10 03:57:01,154 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: defer
+2022-12-10 03:57:01,154 INFO    SenderThread:147279 [sender.py:send_request_defer():459] handle sender defer: 2
+2022-12-10 03:57:01,154 INFO    SenderThread:147279 [sender.py:transition_state():463] send defer: 3
+2022-12-10 03:57:01,155 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 03:57:01,155 INFO    HandlerThread:147279 [handler.py:handle_request_defer():162] handle defer: 3
+2022-12-10 03:57:01,155 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: defer
+2022-12-10 03:57:01,155 INFO    SenderThread:147279 [sender.py:send_request_defer():459] handle sender defer: 3
+2022-12-10 03:57:01,155 INFO    SenderThread:147279 [sender.py:transition_state():463] send defer: 4
+2022-12-10 03:57:01,156 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 03:57:01,156 INFO    HandlerThread:147279 [handler.py:handle_request_defer():162] handle defer: 4
+2022-12-10 03:57:01,156 DEBUG   SenderThread:147279 [sender.py:send():303] send: summary
+2022-12-10 03:57:01,157 INFO    SenderThread:147279 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-10 03:57:01,157 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: defer
+2022-12-10 03:57:01,157 INFO    SenderThread:147279 [sender.py:send_request_defer():459] handle sender defer: 4
+2022-12-10 03:57:01,157 INFO    SenderThread:147279 [sender.py:transition_state():463] send defer: 5
+2022-12-10 03:57:01,157 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 03:57:01,157 INFO    HandlerThread:147279 [handler.py:handle_request_defer():162] handle defer: 5
+2022-12-10 03:57:01,158 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: defer
+2022-12-10 03:57:01,158 INFO    SenderThread:147279 [sender.py:send_request_defer():459] handle sender defer: 5
+2022-12-10 03:57:01,158 INFO    SenderThread:147279 [sender.py:transition_state():463] send defer: 6
+2022-12-10 03:57:01,158 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 03:57:01,158 INFO    HandlerThread:147279 [handler.py:handle_request_defer():162] handle defer: 6
+2022-12-10 03:57:01,159 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: defer
+2022-12-10 03:57:01,159 INFO    SenderThread:147279 [sender.py:send_request_defer():459] handle sender defer: 6
+2022-12-10 03:57:01,468 INFO    Thread-19 :147279 [upload_job.py:push():143] Uploaded file /tmp/tmpympntmvgwandb/bj0m0wsc-media/images/examples_40017_a8716569b671e16fa399.png
+2022-12-10 03:57:01,725 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/wandb-summary.json
+2022-12-10 03:57:01,725 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:57:01,875 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: poll_exit
+2022-12-10 03:57:03,404 INFO    SenderThread:147279 [sender.py:transition_state():463] send defer: 7
+2022-12-10 03:57:03,404 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: poll_exit
+2022-12-10 03:57:03,405 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 03:57:03,405 INFO    HandlerThread:147279 [handler.py:handle_request_defer():162] handle defer: 7
+2022-12-10 03:57:03,406 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: defer
+2022-12-10 03:57:03,406 INFO    SenderThread:147279 [sender.py:send_request_defer():459] handle sender defer: 7
+2022-12-10 03:57:03,406 INFO    SenderThread:147279 [dir_watcher.py:finish():362] shutting down directory watcher
+2022-12-10 03:57:03,726 INFO    Thread-13 :147279 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:57:03,727 INFO    SenderThread:147279 [dir_watcher.py:finish():392] scan: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files
+2022-12-10 03:57:03,727 INFO    SenderThread:147279 [dir_watcher.py:finish():406] scan save: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/config.yaml config.yaml
+2022-12-10 03:57:03,727 INFO    SenderThread:147279 [dir_watcher.py:finish():406] scan save: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/wandb-summary.json wandb-summary.json
+2022-12-10 03:57:03,728 INFO    SenderThread:147279 [dir_watcher.py:finish():406] scan save: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log output.log
+2022-12-10 03:57:03,744 INFO    SenderThread:147279 [dir_watcher.py:finish():406] scan save: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/media/images/examples_40017_a8716569b671e16fa399.png media/images/examples_40017_a8716569b671e16fa399.png
+2022-12-10 03:57:03,744 INFO    SenderThread:147279 [dir_watcher.py:finish():406] scan save: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/media/images/examples_40016_e927f79749e77c0cd706.png media/images/examples_40016_e927f79749e77c0cd706.png
+2022-12-10 03:57:03,744 INFO    SenderThread:147279 [sender.py:transition_state():463] send defer: 8
+2022-12-10 03:57:03,745 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 03:57:03,745 INFO    HandlerThread:147279 [handler.py:handle_request_defer():162] handle defer: 8
+2022-12-10 03:57:03,745 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: defer
+2022-12-10 03:57:03,745 INFO    SenderThread:147279 [sender.py:send_request_defer():459] handle sender defer: 8
+2022-12-10 03:57:03,745 INFO    SenderThread:147279 [file_pusher.py:finish():168] shutting down file pusher
+2022-12-10 03:57:04,119 INFO    Thread-21 :147279 [upload_job.py:push():143] Uploaded file /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/wandb-summary.json
+2022-12-10 03:57:04,145 INFO    Thread-22 :147279 [upload_job.py:push():143] Uploaded file /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/output.log
+2022-12-10 03:57:04,149 INFO    Thread-20 :147279 [upload_job.py:push():143] Uploaded file /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/files/config.yaml
+2022-12-10 03:57:04,349 INFO    Thread-12 :147279 [sender.py:transition_state():463] send defer: 9
+2022-12-10 03:57:04,350 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 03:57:04,350 INFO    HandlerThread:147279 [handler.py:handle_request_defer():162] handle defer: 9
+2022-12-10 03:57:04,350 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: defer
+2022-12-10 03:57:04,351 INFO    SenderThread:147279 [sender.py:send_request_defer():459] handle sender defer: 9
+2022-12-10 03:57:04,351 INFO    SenderThread:147279 [file_pusher.py:join():173] waiting for file pusher
+2022-12-10 03:57:04,351 INFO    SenderThread:147279 [sender.py:transition_state():463] send defer: 10
+2022-12-10 03:57:04,351 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 03:57:04,352 INFO    HandlerThread:147279 [handler.py:handle_request_defer():162] handle defer: 10
+2022-12-10 03:57:04,352 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: defer
+2022-12-10 03:57:04,352 INFO    SenderThread:147279 [sender.py:send_request_defer():459] handle sender defer: 10
+2022-12-10 03:57:04,530 INFO    SenderThread:147279 [sender.py:transition_state():463] send defer: 11
+2022-12-10 03:57:04,531 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 03:57:04,531 INFO    HandlerThread:147279 [handler.py:handle_request_defer():162] handle defer: 11
+2022-12-10 03:57:04,531 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: defer
+2022-12-10 03:57:04,531 INFO    SenderThread:147279 [sender.py:send_request_defer():459] handle sender defer: 11
+2022-12-10 03:57:04,532 INFO    SenderThread:147279 [sender.py:transition_state():463] send defer: 12
+2022-12-10 03:57:04,532 DEBUG   SenderThread:147279 [sender.py:send():303] send: final
+2022-12-10 03:57:04,533 DEBUG   SenderThread:147279 [sender.py:send():303] send: footer
+2022-12-10 03:57:04,533 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 03:57:04,534 INFO    HandlerThread:147279 [handler.py:handle_request_defer():162] handle defer: 12
+2022-12-10 03:57:04,534 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: defer
+2022-12-10 03:57:04,534 INFO    SenderThread:147279 [sender.py:send_request_defer():459] handle sender defer: 12
+2022-12-10 03:57:04,535 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: poll_exit
+2022-12-10 03:57:04,536 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: poll_exit
+2022-12-10 03:57:04,537 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: server_info
+2022-12-10 03:57:04,538 DEBUG   SenderThread:147279 [sender.py:send_request():317] send_request: server_info
+2022-12-10 03:57:04,542 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: get_summary
+2022-12-10 03:57:04,543 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: sampled_history
+2022-12-10 03:57:04,683 INFO    MainThread:147279 [wandb_run.py:_footer_history_summary_info():3408] rendering history
+2022-12-10 03:57:04,683 INFO    MainThread:147279 [wandb_run.py:_footer_history_summary_info():3440] rendering summary
+2022-12-10 03:57:04,683 INFO    MainThread:147279 [wandb_run.py:_footer_sync_info():3364] logging synced files
+2022-12-10 03:57:04,684 DEBUG   HandlerThread:147279 [handler.py:handle_request():139] handle_request: shutdown
+2022-12-10 03:57:04,685 INFO    HandlerThread:147279 [handler.py:finish():814] shutting down handler
+2022-12-10 03:57:05,533 INFO    WriterThread:147279 [datastore.py:close():279] close: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_034640-338wajmd/run-338wajmd.wandb
+2022-12-10 03:57:05,682 INFO    SenderThread:147279 [sender.py:finish():1331] shutting down sender
+2022-12-10 03:57:05,683 INFO    SenderThread:147279 [file_pusher.py:finish():168] shutting down file pusher
+2022-12-10 03:57:05,683 INFO    SenderThread:147279 [file_pusher.py:join():173] waiting for file pusher
+2022-12-10 03:57:05,688 INFO    MainThread:147279 [internal.py:handle_exit():77] Internal process exited

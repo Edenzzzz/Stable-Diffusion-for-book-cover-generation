@@ -1,0 +1,321 @@
+[34m[1mwandb[39m[22m: Downloading large artifact stable_diffusion_model:v14, 5465.06MB. 16 files...
+
+
+[34m[1mwandb[39m[22m:   16 of 16 files downloaded.
+Done. 0:0:12.0
+You have passed `None` for safety_checker to disable its functionality in <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'>. Note that this might lead to problems when using <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> and is not recommended.
+You have disabled the safety checker for <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> by passing `safety_checker=None`. Ensure that you abide to the conditions of the Stable Diffusion license and do not expose unfiltered results in services or applications open to the public. Both the diffusers team and Hugging Face strongly recommend to keep the safety filter enabled in all public facing circumstances, disabling it only for use-cases that involve analyzing network behavior or auditing its results. For more information, please have a look at https://github.com/huggingface/diffusers/pull/254 .
+Load stable_diffusion_model:v14 from wandb cloud checkpoint
+Visualization results will be saved in ./Ouput_images/v14 inference
+Inference iteration 0
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.09it/s]
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:11<00:00,  4.29it/s]
+  8%|███▌                                        | 4/50 [00:00<00:11,  4.17it/s]
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:11<00:00,  4.17it/s]
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.13it/s]
+  2%|▉                                           | 1/50 [00:00<00:11,  4.13it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.08it/s]
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.06it/s]
+  8%|███▌                                        | 4/50 [00:00<00:11,  4.07it/s]
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.05it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.04it/s]
+Inference iteration 4
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.04it/s]
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.04it/s]
+  2%|▉                                           | 1/50 [00:00<00:11,  4.17it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.03it/s]
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.02it/s]
+  6%|██▋                                         | 3/50 [00:00<00:11,  4.03it/s]
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.02it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.02it/s]
+ 10%|████▍                                       | 5/50 [00:01<00:11,  4.02it/s]
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.02it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.02it/s]
+ 14%|██████▏                                     | 7/50 [00:01<00:10,  4.02it/s]
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.02it/s]
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.02it/s]
+  2%|▉                                           | 1/50 [00:00<00:11,  4.17it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.02it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.02it/s]
+ 12%|█████▎                                      | 6/50 [00:01<00:10,  4.30it/s]
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:11<00:00,  4.29it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:11<00:00,  4.17it/s]
+ 12%|█████▎                                      | 6/50 [00:01<00:10,  4.27it/s]
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:11<00:00,  4.19it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.12it/s]
+Inference iteration 2
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:11<00:00,  4.17it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.10it/s]
+Inference iteration 3
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:11<00:00,  4.17it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.10it/s]
+Inference iteration 4
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.16it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.10it/s]
+Inference iteration 5
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:11<00:00,  4.17it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.11it/s]
+  0%|                                                    | 0/50 [00:00<?, ?it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.17it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.10it/s]
+ 14%|██████▏                                     | 7/50 [00:01<00:10,  4.26it/s]
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:11<00:00,  4.17it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.10it/s]
+ 14%|██████▏                                     | 7/50 [00:01<00:10,  4.26it/s]
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:11<00:00,  4.17it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.10it/s]
+ 12%|█████▎                                      | 6/50 [00:01<00:10,  4.25it/s]
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.17it/s]
+
+
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:12<00:00,  4.10it/s]
+Traceback (most recent call last):
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/tokenization_utils_base.py", line 715, in convert_to_tensors
+    tensor = as_tensor(value)
+ValueError: expected sequence of length 282 at dim 1 (got 215)
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/runpy.py", line 185, in _run_module_as_main
+    mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+  File "/usr/lib/python3.8/runpy.py", line 111, in _get_module_details
+    __import__(pkg_name)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 404, in <module>
+    visualize_prompts(pipeline,summerize=False,samples_per_prompt=4,
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 313, in visualize_prompts
+    images+=pipeline(text[index:index+args.batch_size],height=img_size,width=img_size,
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/pipelines/stable_diffusion/pipeline_stable_diffusion.py", line 270, in __call__
+    text_inputs = self.tokenizer(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/tokenization_utils_base.py", line 2488, in __call__
+    encodings = self._call_one(text=text, text_pair=text_pair, **all_kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/tokenization_utils_base.py", line 2574, in _call_one
+    return self.batch_encode_plus(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/tokenization_utils_base.py", line 2765, in batch_encode_plus
+    return self._batch_encode_plus(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/tokenization_utils.py", line 737, in _batch_encode_plus
+    batch_outputs = self._batch_prepare_for_model(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/tokenization_utils.py", line 817, in _batch_prepare_for_model
+    batch_outputs = BatchEncoding(batch_outputs, tensor_type=return_tensors)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/tokenization_utils_base.py", line 210, in __init__
+    self.convert_to_tensors(tensor_type=tensor_type, prepend_batch_axis=prepend_batch_axis)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/tokenization_utils_base.py", line 731, in convert_to_tensors
+    raise ValueError(
+ValueError: Unable to create tensor, you should probably activate truncation and/or padding with 'padding=True' 'truncation=True' to have batched tensors with the same length. Perhaps your features (`input_ids` in this case) have excessive nesting (inputs type `list` where type `int` is expected).
+Inference iteration 0
