@@ -412,7 +412,8 @@ pipeline = StableDiffusionPipeline(
         tokenizer=tokenizer,
         feature_extractor=CLIPFeatureExtractor.from_pretrained("openai/clip-vit-base-patch32"),#this is not fine-tuned.,
         scheduler=noise_scheduler,
-        safety_checker=None
+        safety_checker=None,
+        padding="longest"
         
 )
 #delete downloaded model to save storage
