@@ -393,6 +393,7 @@ tokenizer = CLIPTokenizer.from_pretrained(
     subfolder="tokenizer",
     use_auth_token=True,
     Padding="max_length",
+    max_length=77,
     Truncation=True,
     load_in_8bit=True,
   )
