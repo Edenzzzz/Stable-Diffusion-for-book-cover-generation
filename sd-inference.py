@@ -78,7 +78,7 @@ import wandb
 import subprocess
 import json
 os.environ["WANDB_SILENT"] = "true"#mute wandb run message
-
+os.environ["WANDB_API_KEY"]="16d21dc747a6f33247f1e9c96895d4ffa5ea0b27"
 parser = argparse.ArgumentParser()
 parser.add_argument("--version",type=str,help="wandb model version, e.g. v1",required=True)
 parser.add_argument("--run_id",type=str,help="wandb run id of model",required=True)
@@ -363,11 +363,7 @@ wandb_model = "stable_diffusion_model:"+args.version
 noise_scheduler = DDIMScheduler(beta_start=0.00085, beta_end=0.012, beta_schedule="scaled_linear", clip_sample=False, set_alpha_to_one=False)
 run_id = args.run_id
 
-#load from wandb checkpoint
-os.environ["WANDB_API_KEY"]="16d21dc747a6f33247f1e9c96895d4ffa5ea0b27"
-#can't use artifact in offline mode
-#     os.environ['WANDB_MODE'] = 'online'
-#     wandb.init(id=run_id,resume="must") 
+###load from wandb checkpoint
 wandb.init(project="book_cover_generation",id=run_id,name="stable_diffusion "+wandb_model.split(":")[-1]+"+inference",resume='must')
 my_model_artifact = wandb.run.use_artifact(wandb_model)
 # Download model weights to a folder and return the path
@@ -376,7 +372,7 @@ model_dir = my_model_artifact.download()
 # Load your Hugging Face model from that folder
 #  using the same model class
 
-pipeline = StableDiffusionPipeline(
+pipeline = StableDiffusionPipeline.from_pretrained(
       model_dir,
       torch_dtype=torch.float16,
       safety_checker=None,
