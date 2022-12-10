@@ -311,7 +311,7 @@ def visualize_prompts(
           for index in range(0,len(text),args.batch_size):
             images+=pipeline(text[index*args.batch_size:(index+1)*args.batch_size],height=img_size,width=img_size,
                             num_inference_steps=50, guidance_scale=7.5,
-                            latents=latents).images
+                            latents=latents[index*args.batch_size:(index+1)*args.batch_size]).images
         else:#To avoid out of memory, generate one at a time
           for j in range(samples_per_prompt):
             images+=pipeline(text[j],height=img_size,
