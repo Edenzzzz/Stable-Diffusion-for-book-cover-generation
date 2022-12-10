@@ -379,12 +379,12 @@ text_encoder = CLIPTextModel.from_pretrained(
     device_map="auto"
 )
 vae = AutoencoderKL.from_pretrained(
-    pretrained_model_name_or_path, subfolder="vae"
+    model_dir, subfolder="vae"
     , use_auth_token=True,
     load_in_8bit=True
 )
 unet = UNet2DConditionModel.from_pretrained(
-    pretrained_model_name_or_path, subfolder="unet"
+    model_dir, subfolder="unet"
     , use_auth_token=True,
     load_in_8bit=True
 )
