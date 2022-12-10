@@ -404,7 +404,8 @@ pipeline = StableDiffusionPipeline(
       feature_extractor=CLIPFeatureExtractor.from_pretrained("openai/clip-vit-base-patch32",load_in_8bit=True,device_map="auto"),
       safety_checker=None,
       scheduler = noise_scheduler,
-      ).to('cuda')
+      device_map="auto"
+      )
 
 #delete downloaded model to save storage
 if args.delete_model:
