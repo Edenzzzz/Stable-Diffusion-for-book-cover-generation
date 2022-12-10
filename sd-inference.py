@@ -83,7 +83,7 @@ parser.add_argument("--data_root",default="./book dataset",help="path to read cs
 parser.add_argument("--batch_size",default=3,type=int,help="Generation batch size. For a GPU with 16gb memory, 4 is maximum.")
 parser.add_argument("--save_for__fid",default=False,help="whether to generate and save more images for FID score evaluation")
 parser.add_argument("--num_imgs",type=int,default=4000,help="number of images to generate for computing FID score. Only to be specified if save_for_fid is True")
-parser.add_argument('--save_dir',type=str,default="./Ouput_images",help="Output dir for generated images.")
+parser.add_argument('--save_dir',type=str,default="./Output_images",help="Output dir for generated images.")
 parser.add_argument("--delete_model",type=bool,default=True,help="whether to delete downloaded model artifact to save storage")
 args = parser.parse_args()
 def image_grid(imgs, rows, cols):
