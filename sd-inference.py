@@ -425,7 +425,7 @@ from torch import autocast
 prompt="Clear, highly detailed book cover with title: Badger's love story and author: Wenxuan Tan"
 # prompt="Clear, highly detailed book cover with description "+book_df.loc[7202]['book_desc']
 
-num_samples = 2 #@param {type:"number"}
+num_cols = 2 #@param {type:"number"}
 num_rows = 2 #@param {type:"number"}
 width=512
 height=512
@@ -434,10 +434,10 @@ all_images = []
 for _ in range(num_rows):
     with autocast("cuda"):
         #batch generation
-        for i in range(2):
-          images = pipeline([prompt]*2,height=height,width=width,num_inference_steps=50, guidance_scale=7.5).images
+        for i in range(num_rows):
+          images = pipeline([prompt]*num_cols,height=height,width=width,num_inference_steps=50, guidance_scale=7.5).images
           all_images.extend(images)
-grid = image_grid(all_images, num_samples, num_rows)
+grid = image_grid(all_images, num_rows, num_cols)
 wandb.log({"For_fun":wandb.Image(grid)})
 
 ####
