@@ -248,8 +248,8 @@ def visualize_prompts(
             generator = generator,
             device = 'cuda'
         )
-    
-``
+
+
     import matplotlib.pyplot as plt,random
     #generate from test prompts only
     df=pd.read_csv(args.data_root+"/df_test.csv")
@@ -259,7 +259,7 @@ def visualize_prompts(
     fig,axes=plt.subplots(len(test_templates),
                           samples_per_prompt,
                           figsize=(img_size/dpi*samples_per_prompt,
-                                   img_size/dpi*len(test_templates))
+                                    img_size/dpi*len(test_templates))
                           )
     fig.subplots_adjust(wspace=0, hspace=0)#combind with axes[i][j].set_aspect('auto'); remove spacing
     # plt.suptitle(,y=0.89)
@@ -285,9 +285,9 @@ def visualize_prompts(
         if summerize:
             torch.cuda.empty_cache()
             inputs = tokenizer(description, max_length=1024, 
-                               return_tensors="pt",truncation=True,padding="max_length")
+                                return_tensors="pt",truncation=True,padding="max_length")
             summary_ids = model.generate(inputs['input_ids'], num_beams=3,\
-                                         min_length=2, max_length=max_length)
+                                          min_length=2, max_length=max_length)
             description = tokenizer.batch_decode(summary_ids, skip_special_tokens=True, 
                                           clean_up_tokenization_spaces=False)[0]#batch_decode returns a list of strings; here len(list)=1, only one input string
             torch.cuda.empty_cache()
