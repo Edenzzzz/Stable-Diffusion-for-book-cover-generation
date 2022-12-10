@@ -66,8 +66,6 @@ from accelerate import Accelerator
 from accelerate.logging import get_logger
 from accelerate.utils import set_seed
 from diffusers import AutoencoderKL, DDPMScheduler, PNDMScheduler,DDIMScheduler, StableDiffusionPipeline, UNet2DConditionModel
-from diffusers.hub_utils import init_git_repo, push_to_hub
-from diffusers.optimization import get_scheduler
 from diffusers.pipelines.stable_diffusion import StableDiffusionSafetyChecker
 from PIL import Image
 from tqdm.auto import tqdm
