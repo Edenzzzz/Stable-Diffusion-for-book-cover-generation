@@ -83,7 +83,7 @@ warnings.filterwarnings("ignore")
 os.environ["WANDB_SILENT"] = "true"#mute wandb run message
 os.environ["WANDB_API_KEY"]="16d21dc747a6f33247f1e9c96895d4ffa5ea0b27"
 parser = argparse.ArgumentParser()
-parser.add_argument("--device",help="GPU device number, e.g. cuda:0",default=0)
+parser.add_argument("--device",help="GPU device number, e.g. cuda:0",default="cuda:0")
 parser.add_argument("--version",type=str,help="wandb model version, e.g. v1",required=True)
 parser.add_argument("--run_id",type=str,help="wandb run id of model",required=True)
 parser.add_argument("--data_root",default="./book dataset",help="path to read csv files")
