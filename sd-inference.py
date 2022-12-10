@@ -350,7 +350,7 @@ def visualize_prompts(
     fig.show()
     image=Image.open(img_path)
     wandb.log({"examples":wandb.Image(image)})
-    subprocess.run("rm checkpoint_image_sample.jpg")
+    subprocess.run(["rm", "checkpoint_image_sample.jpg"])
 
 
 ### Fine tune result evaluation
@@ -386,7 +386,7 @@ pipeline = StableDiffusionPipeline.from_pretrained(
       ).to('cuda')
 #delete downloaded model to save storage
 if args.delete_model:
-  subprocess.run("rm -r artifacts")
+  subprocess.run(["rm", "-r","artifacts"])
 
 print(f'Load {wandb_model} from wandb cloud checkpoint')
 if os.path.isdir(args.data_root+"/"+wandb_model.split(":")[-1]+" inference"):
@@ -445,6 +445,5 @@ for _ in range(num_rows):
           index += args.batch_size
 grid = image_grid(all_images, num_samples, num_rows)
 wandb.log({"For_fun":wandb.Image(grid)})
-
 
 ####
