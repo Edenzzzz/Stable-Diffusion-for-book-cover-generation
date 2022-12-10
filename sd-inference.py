@@ -316,7 +316,7 @@ def visualize_prompts(
           while index < len(text):
             images+=pipeline(text[index:index+args.batch_size],height=img_size,width=img_size,
                             num_inference_steps=50, guidance_scale=7.5,
-                            latents=latents[index:index+args.batch_size]).images
+                            latents=latents[index:index+args.batch_size], padding="longest").images
             index = index+args.batch_size
         else:#To avoid out of memory, generate one at a time
           for j in range(samples_per_prompt):
@@ -412,9 +412,7 @@ pipeline = StableDiffusionPipeline(
         tokenizer=tokenizer,
         feature_extractor=CLIPFeatureExtractor.from_pretrained("openai/clip-vit-base-patch32"),#this is not fine-tuned.,
         scheduler=noise_scheduler,
-        safety_checker=None,
-        padding="longest"
-        
+        safety_checker=None,  
 )
 #delete downloaded model to save storage
 if args.delete_model:
