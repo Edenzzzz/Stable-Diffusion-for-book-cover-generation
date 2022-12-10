@@ -324,13 +324,13 @@ def generate(
           while index < len(text):
             images+=pipeline(text[index:index+args.batch_size],height=img_size,width=img_size,
                             num_inference_steps=50, guidance_scale=7.5,
-                            latents=latents[index:index+args.batch_size]).images
+                            latents=latents[index:index+args.batch_size]).images.numpy()
             index = index+args.batch_size
         else:#To avoid out of memory, generate one at a time
           for j in range(samples_per_prompt):
             images += pipeline(text[j],height=img_size,
                               width=img_size,num_inference_steps=inference_steps, 
-                              guidance_scale=7.5,latents=latents[None,j]).images
+                              guidance_scale=7.5,latents=latents[None,j]).images.numpy()
                               
       try:
         axes[i][0].set_title(f"Prompt {i}, legible={legible_prompt},summerize={summerize},include_desc={include_desc}")
@@ -393,7 +393,7 @@ if os.path.isdir(args.data_root+"/"+wandb_model.split(":")[-1]+" inference"):
 save_dir = args.save_dir+"/"+wandb_model.split(":")[-1]+" inference"
 os.makedirs(save_dir,exist_ok=True)
 print(f"Visualization results will be saved in {save_dir}")
-
+print(f"model running on device {args.device}")
 # generate(pipeline,summerize=False,samples_per_prompt=4,
 #                   include_desc=False,legible_prompt=False,
 #                   batch_generate=True,save_to_drive=True,
