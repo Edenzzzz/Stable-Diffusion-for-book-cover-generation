@@ -77,6 +77,9 @@ import pandas as pd
 import wandb
 import subprocess
 import json
+import warnings
+warnings.filterwarnings("ignore")
+
 os.environ["WANDB_SILENT"] = "true"#mute wandb run message
 os.environ["WANDB_API_KEY"]="16d21dc747a6f33247f1e9c96895d4ffa5ea0b27"
 parser = argparse.ArgumentParser()
@@ -174,7 +177,7 @@ summary_placeholders=summary_placeholders[:len(test_templates)]
 
 #fix random seed by fixing latents
 latents=None
-def visualize_prompts(
+def generate(
     pipeline: StableDiffusionPipeline,
     summerize=False,
     include_desc=False,
@@ -312,6 +315,7 @@ def visualize_prompts(
       from torch import autocast
       images=[]
       print(f"Inference iteration {i}")
+      torch.cuda.empty_cache()#free memory before inferencing (hope this works)
 
       with autocast("cuda"):
         if batch_generate:#batch generation
@@ -371,10 +375,32 @@ model_dir = my_model_artifact.download()
 
 # Load your Hugging Face model from that folder
 #  using the same model class
+text_encoder = CLIPTextModel.from_pretrained(
+        model_dir, subfolder="text_encoder"
+        , use_auth_token=True,
+        load_in_8bit=True,device_map="auto"
+    )
+vae = AutoencoderKL.from_pretrained(
+      model_dir, subfolder="vae"
+      , use_auth_token=True,
+      load_in_8bit=True,device_map="auto"
+)
+unet = UNet2DConditionModel.from_pretrained(
+      model_dir, subfolder="unet"
+      , use_auth_token=True,
+      load_in_8bit=True,device_map="auto"
 
-pipeline = StableDiffusionPipeline.from_pretrained(
-      model_dir,
-      torch_dtype=torch.float16,
+)
+tokenizer = CLIPTokenizer.from_pretrained(
+      model_dir,subfolder="tokenizer",
+      use_auth_token=True,
+      load_in_8bit=True,device_map="auto"
+)
+pipeline = StableDiffusionPipeline(
+      vae=vae,
+      unet=unet,
+      text_encoder=text_encoder,
+      tokenizer=tokenizer,
       safety_checker=None,
       scheduler = noise_scheduler,
       ).to('cuda')
@@ -390,17 +416,17 @@ save_dir = args.save_dir+"/"+wandb_model.split(":")[-1]+" inference"
 os.makedirs(save_dir,exist_ok=True)
 print(f"Visualization results will be saved in {save_dir}")
 
-visualize_prompts(pipeline,summerize=False,samples_per_prompt=4,
+generate(pipeline,summerize=False,samples_per_prompt=4,
                   include_desc=False,legible_prompt=False,
                   batch_generate=True,save_to_drive=True,
                   save_dir=save_dir)
                   
-visualize_prompts(pipeline,summerize=True,include_desc=True,
+generate(pipeline,summerize=True,include_desc=True,
                   samples_per_prompt=4,
                   legible_prompt=False,save_to_drive=True,
                   save_dir=save_dir)
 
-visualize_prompts(pipeline,summerize=False,samples_per_prompt=4,
+generate(pipeline,summerize=False,samples_per_prompt=4,
                   include_desc=True,legible_prompt=False,
                   batch_generate=True,save_to_drive=True,
                   save_dir=save_dir)
