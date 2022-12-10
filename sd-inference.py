@@ -316,7 +316,7 @@ def visualize_prompts(
             index = index+args.batch_size
         else:#To avoid out of memory, generate one at a time
           for j in range(samples_per_prompt):
-            images+=pipeline(text[j],height=img_size,
+            images += pipeline(text[j],height=img_size,
                               width=img_size,num_inference_steps=inference_steps, 
                               guidance_scale=7.5,latents=latents[None,j]).images
                               
@@ -418,7 +418,7 @@ torch.cuda.memory_allocated()
 
 from torch import autocast
 # prompt = "a grafitti in a wall with a <cat-toy> on it" #@param {type:"string"}
-prompt="Clear, highly detailed book cover with title :Badger's love story and author: Wenxuan Tan"
+prompt="Clear, highly detailed book cover with title: Badger's love story and author: Wenxuan Tan"
 # prompt="Clear, highly detailed book cover with description "+book_df.loc[7202]['book_desc']
 
 num_samples = 2 #@param {type:"number"}
@@ -429,9 +429,13 @@ all_images = []
 
 for _ in range(num_rows):
     with autocast("cuda"):
-        images = pipeline([prompt] * num_samples,height=height,width=width,num_inference_steps=50, guidance_scale=7.5).images
-        all_images.extend(images)
-
+        index = 0
+        prompt = [prompt]*4
+        #batch generation
+        while index < 4: 
+          images = pipeline(prompt[index:index+args.batch_size],height=height,width=width,num_inference_steps=50, guidance_scale=7.5).images
+          all_images.extend(images)
+          index += args.batch_size
 grid = image_grid(all_images, num_samples, num_rows)
 wandb.log({"For_fun":wandb.Image(grid)})
 
