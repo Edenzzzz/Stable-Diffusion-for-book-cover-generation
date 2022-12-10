@@ -315,7 +315,7 @@ def generate(
       from torch import autocast
       images=[]
       print(f"Inference iteration {i}")
-      torch.cuda.empty_cache()#free memory before inferencing (hope this works)
+      torch.cuda.empty_cache()#free memory before inference (hope this works)
 
       with autocast("cuda"):
         if batch_generate:#batch generation
@@ -375,39 +375,12 @@ model_dir = my_model_artifact.download()
 
 # Load your Hugging Face model from that folder
 #  using the same model class
-# text_encoder = CLIPTextModel.from_pretrained(
-#         model_dir, subfolder="text_encoder"
-#         , use_auth_token=True,
-#         load_in_8bit=True,device_map="auto"
-#     )
-# vae = AutoencoderKL.from_pretrained(
-#       model_dir, subfolder="vae"
-#       , use_auth_token=True,
-#       load_in_8bit=True,device_map="auto"
-# )
-# unet = UNet2DConditionModel.from_pretrained(
-#       model_dir, subfolder="unet"
-#       , use_auth_token=True,
-#       load_in_8bit=True,device_map="auto"
-
-# )
-# tokenizer = CLIPTokenizer.from_pretrained(
-#       model_dir,subfolder="tokenizer",
-#       use_auth_token=True,
-#       load_in_8bit=True,device_map="auto"
-# )
 pipeline = StableDiffusionPipeline.from_pretrained(
       model_dir,
-      # vae=vae,
-      # unet=unet,
-      # text_encoder=text_encoder,
-      # tokenizer=tokenizer,
-      # feature_extractor=CLIPFeatureExtractor.from_pretrained("openai/clip-vit-base-patch32",load_in_8bit=True,device_map="auto"),
+      torch_dtype=torch.float16,
       safety_checker=None,
       scheduler = noise_scheduler,
-      device_map="sequential",
-      load_in_8bit=True
-      )
+      ).to('cuda')
 
 #delete downloaded model to save storage
 if args.delete_model:
@@ -420,15 +393,15 @@ save_dir = args.save_dir+"/"+wandb_model.split(":")[-1]+" inference"
 os.makedirs(save_dir,exist_ok=True)
 print(f"Visualization results will be saved in {save_dir}")
 
-generate(pipeline,summerize=False,samples_per_prompt=4,
-                  include_desc=False,legible_prompt=False,
-                  batch_generate=True,save_to_drive=True,
-                  save_dir=save_dir)
+# generate(pipeline,summerize=False,samples_per_prompt=4,
+#                   include_desc=False,legible_prompt=False,
+#                   batch_generate=True,save_to_drive=True,
+#                   save_dir=save_dir)
                   
-generate(pipeline,summerize=True,include_desc=True,
-                  samples_per_prompt=4,
-                  legible_prompt=False,save_to_drive=True,
-                  save_dir=save_dir)
+# generate(pipeline,summerize=True,include_desc=True,
+#                   samples_per_prompt=4,
+#                   legible_prompt=False,save_to_drive=True,
+#                   save_dir=save_dir)
 
 generate(pipeline,summerize=False,samples_per_prompt=4,
                   include_desc=True,legible_prompt=False,
