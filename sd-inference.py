@@ -396,7 +396,7 @@ tokenizer = CLIPTokenizer.from_pretrained(
       use_auth_token=True,
       load_in_8bit=True,device_map="auto"
 )
-pipeline = StableDiffusionPipeline(
+pipeline = StableDiffusionPipeline.from_pretrained(
       vae=vae,
       unet=unet,
       text_encoder=text_encoder,
