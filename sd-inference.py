@@ -77,6 +77,7 @@ import pandas as pd
 import wandb
 import subprocess
 import json
+os.environ["WANDB_SILENT"] = "true"#mute wandb run message
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--version",type=str,help="wandb model version, e.g. v1",required=True)
@@ -231,7 +232,9 @@ def visualize_prompts(
     if summerize==True:
       assert include_desc==True, "include_desc is False, \
       no summerization can be done without book description!" 
-
+    if summerize==False and include_desc==True:
+      batch_generate = False
+      print("Setting batch_generate to false since adding description without summerizing will cause batch tensors to have different lenght. This is probably a bug.")
     assert save_dir and save_to_drive and os.path.isdir(save_dir), "Must specify save_to_drive=True and save_dir with a valid dir"
     import gc
     gc.collect()
