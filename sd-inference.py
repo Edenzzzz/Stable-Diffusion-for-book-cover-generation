@@ -375,7 +375,8 @@ model_dir = my_model_artifact.download()
 text_encoder = CLIPTextModel.from_pretrained(
     model_dir, subfolder="text_encoder"
     , use_auth_token=True,
-    load_in_8bit=True
+    load_in_8bit=True,
+    device_map="auto"
 )
 vae = AutoencoderKL.from_pretrained(
     pretrained_model_name_or_path, subfolder="vae"
