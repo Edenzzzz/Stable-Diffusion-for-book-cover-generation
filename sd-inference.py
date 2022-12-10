@@ -390,16 +390,16 @@ save_dir = args.save_dir+"/"+wandb_model.split(":")[-1]+" inference"
 os.makedirs(save_dir,exist_ok=True)
 print(f"Visualization results will be saved in {save_dir}")
 
-# # + colab={"background_save": true} id="u3FupDFgQs0M"
-# visualize_prompts(pipeline,summerize=False,samples_per_prompt=4,
-#                   include_desc=False,legible_prompt=False,
-#                   batch_generate=True,save_to_drive=True,
-#                   save_dir=save_dir)
+visualize_prompts(pipeline,summerize=False,samples_per_prompt=4,
+                  include_desc=False,legible_prompt=False,
+                  batch_generate=True,save_to_drive=True,
+                  save_dir=save_dir)
+                  
+visualize_prompts(pipeline,summerize=True,include_desc=True,
+                  samples_per_prompt=4,
+                  legible_prompt=False,save_to_drive=True,
+                  save_dir=save_dir)
 
-# visualize_prompts(pipeline,summerize=True,include_desc=True,
-#                   samples_per_prompt=4,
-#                   legible_prompt=False,save_to_drive=True,
-#                   save_dir=save_dir)
 visualize_prompts(pipeline,summerize=False,samples_per_prompt=4,
                   include_desc=True,legible_prompt=False,
                   batch_generate=True,save_to_drive=True,
