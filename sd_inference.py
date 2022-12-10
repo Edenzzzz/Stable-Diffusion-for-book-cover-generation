@@ -1,0 +1,377 @@
+# ---
+# jupyter:
+#   jupytext:
+#     text_representation:
+#       extension: .py
+#       format_name: light
+#       format_version: '1.5'
+#       jupytext_version: 1.14.2
+#   kernelspec:
+#     display_name: Python 3
+#     language: python
+#     name: python3
+# ---
+
+# + _uuid="8f2839f25d086af736a60e9eeb907d3b93b6e0e5" _cell_guid="b1076dfc-b9ad-4769-8c92-a6c4dae69d19"
+#@title Install the required libs
+# %pip install -qq diffusers["training"]==0.7.2
+# %pip install -qq transformers==4.24.0 ftfy
+# %pip install -qq "ipywidgets>=7,<8"
+# %pip install wandb
+# %pip install kornia
+# %pip install bitsandbytes
+#0.10 version doesn't contain login()
+# %pip install huggingface_hub==0.11.1
+
+#deepspeed
+# # !pip install torch==1.12.1 --extra-index-url https://download.pytorch.org/whl/cu116 --upgrade
+# # !pip install deepspeed==0.7.4 --upgrade
+# # !pip install diffusers==0.6.0 triton==2.0.0.dev20221005 --upgrade
+# # !pip install transformers[sentencepiece]==4.24.0 accelerate --upgrade
+# -
+
+#@title Login to the Hugging Face Hub
+#@markdown Add a token with the "Write Access" role to be able to add your trained concept to the [Library of Concepts](https://huggingface.co/sd-concepts-library)
+from huggingface_hub import login
+login("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")
+# notebook_login()
+# from google.colab import drive
+# drive.mount("/content/drive",force_remount=True)
+
+# +
+#@title Import required libraries
+# # %pip install protobuf==3.20.* #For deepspe
+
+import argparse
+import itertools
+import math
+import os
+import random
+import numpy as np
+import torch,torch.nn as nn
+import torch.nn.functional as F
+import torch.utils.checkpoint
+from torch.utils.data import Dataset
+import torchvision
+import PIL
+from accelerate import Accelerator
+from accelerate.logging import get_logger
+from accelerate.utils import set_seed
+from diffusers import AutoencoderKL, DDPMScheduler, PNDMScheduler,DDIMScheduler, StableDiffusionPipeline, UNet2DConditionModel
+from diffusers.hub_utils import init_git_repo, push_to_hub
+from diffusers.optimization import get_scheduler
+from diffusers.pipelines.stable_diffusion import StableDiffusionSafetyChecker
+from PIL import Image
+from tqdm.auto import tqdm
+from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer,TrainingArguments
+import kornia.augmentation as K#augmentaiton
+import pandas as pd
+import wandb
+def image_grid(imgs, rows, cols):
+    assert len(imgs) == rows*cols
+
+    w, h = imgs[0].size
+    grid = Image.new('RGB', size=(cols*w, rows*h))
+    grid_w, grid_h = grid.size
+    
+    for i, img in enumerate(imgs):
+        grid.paste(img, box=(i%cols*w, i//cols*h))
+    return grid
+    
+#For reproducibility
+def set_seed(seed: int = 42) -> None:
+    np.random.seed(seed)
+    random.seed(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    # When running on the CuDNN backend, two further options must be set
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    # Set a fixed value for the hash seed
+    os.environ["PYTHONHASHSEED"] = str(seed)
+    print(f"Random seed set as {seed}")
+global_seed=42
+set_seed(global_seed)
+# -
+
+#@markdown `pretrained_model_name_or_path` which Stable Diffusion checkpoint you want to use
+#pretrained_model_name_or_path = "runwayml/stable-diffusion-v1-5" #@param {type:"string"}
+pretrained_model_name_or_path ="CompVis/stable-diffusion-v1-4"
+data_root="/kaggle/input/goodreads-best-books"
+label_root="/kaggle/input/goodreads-best-book-cleaned-version"
+
+# +
+#@title Setup the prompt templates for training 
+book_cover_templates=[#the first entry is for "highly legible text"
+    "A {} book cover with author: {}, book title: {} ",
+    #repeat some prompts to give model prior knowledge about book cover styles
+    "A {} book cover written by author: {} with book title: {} ",
+#     "A {} simple book cover with author {}, book title {} ",
+#     "A plain {} book cover with author {}. The book title is{} ",
+#     "A {} vivid book cover with author {}, book title {} ",
+    "A  {} book cover with author name:{}, book title: {}",
+# #     "We are going to create a clear, {}, highly detailed book cover with author named {}, and book title is '{}'",
+#     "An intricate {}, book cover including book author:{}, book title: '{}'",
+#     "A detailed, {}, book cover with {} ,written by author {}",
+#     "A creative, colorful {}, book cover written by {}. The book title is {}, ",
+#     "A {} old-fashioned, plain book cover written by {}. The book title is {}",
+#     "A simple, {}, old-fashioned book cover with author name {}, book title {} ",
+#     "A simple, {}, plain book cover with author name {}, book title {} ",
+    "A detailed {} book cover with author: {} and book title: {} "
+    
+]
+#TODO: add more to match the number of templates
+summary_placeholders=[
+    ', and abstract {}',
+    ",summary {}",
+    ", the book describes that {}",
+    ", book discription {}",
+    ", main story {}",
+    ", the book is mainly about {}",
+    ", and main story {}",
+    "and book abstract {}",
+    ", and book description {}"
+]
+test_templates=[#the first entry is for "highly legible text"
+    "A {} book cover with author: {}, book title: {} ",
+    #repeat some prompts to give model prior knowledge about book cover styles
+    "A {} book cover written by author: {} with book title: {} ",
+    "A {} simple book cover with author: {}, book title: {} ",
+    "A {} vivid, fantastic book cover with author: {}, book title: {} ",
+#     "We are going to create a clear, {}, highly detailed book cover with author named {}, and book title is '{}'",
+    "An intricate {}, book cover including book author:{}, book title: '{}'",
+    "A detailed, {}, book cover written by author: {}, with title:{}",
+    "A creative, colorful {}, book cover written by: {}. The book title is: {}, ",
+    "A {} old-fashioned, plain book cover written by: {}. The book title is: {}",
+    "A simple, {}, old-fashioned book cover with author name: {}, book title: {} ",
+    "A cartoon-styled, entertaining book cover with author name: {}, book title: {}"
+]
+
+
+#pad to the same length 
+for i in range(len(summary_placeholders),len(test_templates)):
+  summary_placeholders+=[random.choice(summary_placeholders)]
+summary_placeholders=summary_placeholders[:len(test_templates)]
+
+# -
+
+#@title Training hyperparameters 
+hyperparam = {
+    "None": "This is just inference"
+}
+
+
+#fix random seed by fixing latents
+latents=None
+def visualize_prompts(
+    pipeline: StableDiffusionPipeline,
+    summerize=False,
+    include_desc=False,#include description
+    max_length=15,#only when summerize=True
+    legible_prompt=True,
+    samples_per_prompt=3,
+    img_size=512,
+    inference_steps=75,
+    save_to_drive=False,
+    batch_generate=True
+    ):
+    if summerize==True:
+      assert include_desc==True, "include_desc is False, \
+      no summerization can be done without book description!" 
+    if include_desc==True and batch_generate==True:
+      #TODO: checkout the bug: passing tokenizer with padding=True to from_pretrained() does not solve this.
+      print("Setting batch_generate to false since passing stacked descriptions of different length to model will cause error.")
+      print("---------------------------------------------")
+      batch_generate=False
+    import gc
+    gc.collect()
+    torch.cuda.empty_cache()
+    torch.cuda.memory_allocated()
+    
+    #fix random seed by fixing latents.
+    #generate fixed latents if no latents exist
+    global latents
+    if latents==None or latents.shape[0]!=samples_per_prompt:
+      generator = torch.Generator(device='cuda')
+      generator = generator.manual_seed(global_seed)
+      latents=torch.zeros(samples_per_prompt,
+                           pipeline.unet.in_channels,img_size // 8, img_size // 8)
+      for j in range(samples_per_prompt):
+        latents[j,:,:,:] = torch.randn(
+            (pipeline.unet.in_channels, img_size // 8, img_size // 8),
+            generator = generator,
+            device = 'cuda'
+        )
+    
+
+    import matplotlib.pyplot as plt,random
+    #generate from test prompts only
+    df=pd.read_csv(label_root+"/df_test.csv")
+
+    #set up figures
+    dpi=plt.figure().dpi
+    fig,axes=plt.subplots(len(test_templates),
+                          samples_per_prompt,
+                          figsize=(img_size/dpi*samples_per_prompt,
+                                   img_size/dpi*len(test_templates))
+                          )
+    fig.subplots_adjust(wspace=0, hspace=0)#combind with axes[i][j].set_aspect('auto'); remove spacing
+    # plt.suptitle(,y=0.89)
+
+    #fix random seed by fixing latents
+    if include_desc:
+      from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+      tokenizer = AutoTokenizer.from_pretrained("sshleifer/distilbart-cnn-12-6")
+      if summerize:
+          model = AutoModelForSeq2SeqLM.from_pretrained("sshleifer/distilbart-cnn-12-6")
+
+
+    for i in range(len(test_templates)):
+      text=[]
+      for j in range(samples_per_prompt):
+        row=df.iloc[j]
+        legible_text,author,title,description = ("",row['book_authors'], row['book_title'], row['book_desc'])
+
+        if legible_prompt:
+            legible_text="legible text"
+        if summerize:
+            inputs = tokenizer(description, max_length=1024, 
+                               return_tensors="pt",truncation=True,padding="max_length")
+            summary_ids = model.generate(inputs['input_ids'], num_beams=3,\
+                                         min_length=2, max_length=max_length)
+            description = tokenizer.batch_decode(summary_ids, skip_special_tokens=True, 
+                                          clean_up_tokenization_spaces=False)[0]#batch_decode returns a list of strings; here len(list)=1, only one input string
+        #get prompt
+        template=test_templates[i]
+        if include_desc:
+          template+=summary_placeholders[i]#append new prompt to list
+          template=template.format(legible_text,author,title,description)
+          # print("before tokenizer:", len(template))
+          # #pad to the same length
+          # inputs = tokenizer(template, max_length=1024, 
+          #                      return_tensors="pt",truncation=True,padding=True)
+          
+          # template = tokenizer.batch_decode(inputs['input_ids'], skip_special_tokens=True, 
+          #                                 clean_up_tokenization_spaces=False)[0]
+          # print("after:",len(template))
+          text += [template]
+        else:
+          text += [template.format(legible_text,author,title)]
+
+
+      #inference 
+      from torch import autocast
+      images=[]
+      print(f"Inference iteration {i}")
+
+      with autocast("cuda"):
+        if batch_generate:#batch generation
+          images=pipeline(text,height=img_size,width=img_size,
+                          num_inference_steps=50, guidance_scale=7.5,
+                          latents=latents).images
+        else:#To avoid out of memory, generate one at a time
+          for j in range(samples_per_prompt):
+            images+=pipeline(text[j],height=img_size,
+                              width=img_size,num_inference_steps=inference_steps, 
+                              guidance_scale=7.5,latents=latents[None,j]).images
+                              
+      try:
+        axes[i][0].set_title(f"Prompt {i}, legible={legible_prompt},summerize={summerize},include_desc={include_desc}")
+        for j in range(samples_per_prompt):
+            axes[i][j].imshow(images[j])
+            axes[i][j].set_aspect('auto')#remove spacing
+      #single plot case
+      except:
+        axes[i].set_title(f"Prompt {i}, legible={legible_prompt},summerize={summerize},include_desc={include_desc}")
+        #debug
+        print(images[0])
+        print("images:",images)
+        axes[i].imshow(images[0])
+        axes[i].set_aspect('auto')
+
+    if save_to_drive:  
+      #save fig with paramters
+      img_name=f"Generated_covers:legible={legible_prompt},summerize={summerize},\
+                include_desc={include_desc},max_length={max_length}.png"
+      path="./"+img_name
+      plt.savefig(path)
+      fig.show()
+    
+  #save checkpoint generation results in wandb
+    img_path="checkpoint_image_sample.jpg"
+    plt.savefig(img_path)
+    fig.show()
+    from PIL import Image
+    image=Image.open(img_path)
+    wandb.log({"examples":wandb.Image(image)})
+
+# +
+#@title Fine tune result evaluation
+wandb_model = "stable_diffusion_model:v18"
+noise_scheduler = DDIMScheduler(beta_start=0.00085, beta_end=0.012, beta_schedule="scaled_linear", clip_sample=False, set_alpha_to_one=False)
+
+
+#load from wandb checkpoint
+os.environ["WANDB_API_KEY"]="16d21dc747a6f33247f1e9c96895d4ffa5ea0b27"
+#can't use artifact in offline mode
+#     os.environ['WANDB_MODE'] = 'online'
+#     wandb.init(id=run_id,resume="must") 
+wandb.init(project="book_cover_generation",name=wandb_model.split(":")[-1]+" inference")
+my_model_artifact = wandb.run.use_artifact(wandb_model)
+  # Download model weights to a folder and return the path
+model_dir = my_model_artifact.download()
+
+  # Load your Hugging Face model from that folder
+  #  using the same model class
+tokenizer = CLIPTokenizer.from_pretrained(
+    model_dir,
+    subfolder="tokenizer",
+    use_auth_token=True,
+    Padding="max_length",
+    Truncation=True,
+  )
+pipeline = StableDiffusionPipeline.from_pretrained(
+      model_dir,
+      torch_dtype=torch.float16,
+      safety_checker=None,
+      scheduler = noise_scheduler,
+      tokenizer = tokenizer#enable padding
+      ).to('cuda')
+print(f'Load {wandb_model} from wandb cloud checkpoint')
+# -
+
+visualize_prompts(pipeline,summerize=False,samples_per_prompt=4,include_desc=False
+                  ,legible_prompt=False,batch_generate=True)
+
+visualize_prompts(pipeline,summerize=True,include_desc=True,samples_per_prompt=4,legible_prompt=False)
+
+visualize_prompts(pipeline,summerize=False,samples_per_prompt=4,include_desc=True,
+                  legible_prompt=False,batch_generate=True)
+
+# ### Just for fun
+
+# +
+#@title Run the Stable Diffusion pipeline
+import gc
+gc.collect()
+torch.cuda.empty_cache()
+torch.cuda.memory_allocated()
+
+from torch import autocast
+# prompt = "a grafitti in a wall with a <cat-toy> on it" #@param {type:"string"}
+prompt="Clear, highly detailed book cover with title :Pokemen's love story and author: Wenxuan Tan"
+# prompt="Clear, highly detailed book cover with description "+book_df.loc[7202]['book_desc']
+
+num_samples = 2 #@param {type:"number"}
+num_rows = 2 #@param {type:"number"}
+width=512
+height=512
+all_images = [] 
+
+for _ in range(num_rows):
+    with autocast("cuda"):
+        images = pipeline([prompt] * num_samples,height=height,width=width,num_inference_steps=50, guidance_scale=7.5).images
+        all_images.extend(images)
+
+grid = image_grid(all_images, num_samples, num_rows)
+grid
