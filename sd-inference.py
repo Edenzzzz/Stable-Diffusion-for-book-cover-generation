@@ -191,7 +191,7 @@ def visualize_prompts(
     - include_desc (bool, optional): Whether to include the book description in the prompt. Default is False.
     - max_length (int, optional): The maximum length of the summerized description. Only used when summerize=True.
     - legible_prompt (bool, optional): Whether to add "legible text" to the prompt. Default is True.
-    - samples_per_prompt (int, optional): The number of samples to generate for each prompt. Default is 3.
+    - samples_per_prompt (int, optional): The number of samples to generate for each prompt. Default is 4.
     - img_size (int, optional): The output image size. Default is 512.
     - inference_steps (int, optional): The number of denoising steps. The bigger the less noisy. Default is 75.
     - save_to_drive (bool, optional): Whether to save the generated images to Google Drive. Default is False.
@@ -308,10 +308,12 @@ def visualize_prompts(
 
       with autocast("cuda"):
         if batch_generate:#batch generation
-          for index in range(0,len(text),args.batch_size):
-            images+=pipeline(text[index*args.batch_size:(index+1)*args.batch_size],height=img_size,width=img_size,
+          index = 0
+          while index < len(text):
+            images+=pipeline(text[index:index+args.batch_size],height=img_size,width=img_size,
                             num_inference_steps=50, guidance_scale=7.5,
                             latents=latents[index*args.batch_size:(index+1)*args.batch_size]).images
+            index = index+args.batch_size
         else:#To avoid out of memory, generate one at a time
           for j in range(samples_per_prompt):
             images+=pipeline(text[j],height=img_size,
