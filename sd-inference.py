@@ -367,25 +367,50 @@ os.environ["WANDB_API_KEY"]="16d21dc747a6f33247f1e9c96895d4ffa5ea0b27"
 #     wandb.init(id=run_id,resume="must") 
 wandb.init(project="book_cover_generation",id=run_id,name="stable_diffusion "+wandb_model.split(":")[-1]+"+inference",resume='must')
 my_model_artifact = wandb.run.use_artifact(wandb_model)
-  # Download model weights to a folder and return the path
+# Download model weights to a folder and return the path
 model_dir = my_model_artifact.download()
 
-  # Load your Hugging Face model from that folder
-  #  using the same model class
+# Load your Hugging Face model from that folder
+#  using the same model class
+text_encoder = CLIPTextModel.from_pretrained(
+    model_dir, subfolder="text_encoder"
+    , use_auth_token=True,
+    load_in_8bit=True
+)
+vae = AutoencoderKL.from_pretrained(
+    pretrained_model_name_or_path, subfolder="vae"
+    , use_auth_token=True,
+    load_in_8bit=True
+)
+unet = UNet2DConditionModel.from_pretrained(
+    pretrained_model_name_or_path, subfolder="unet"
+    , use_auth_token=True,
+    load_in_8bit=True
+)
 tokenizer = CLIPTokenizer.from_pretrained(
     model_dir,
     subfolder="tokenizer",
     use_auth_token=True,
     Padding="max_length",
     Truncation=True,
+    load_in_8bit=True,
   )
-pipeline = StableDiffusionPipeline.from_pretrained(
-      model_dir,
-      torch_dtype=torch.float16,
-      safety_checker=None,
-      scheduler = noise_scheduler,
-      tokenizer = tokenizer#enable padding
-      ).to('cuda')
+
+# pipeline = StableDiffusionPipeline(
+#       model_dir,
+#       torch_dtype=torch.float16,
+#       safety_checker=None,
+#       scheduler = noise_scheduler,
+#       tokenizer = tokenizer#enable padding
+#       ).to('cuda')
+pipeline = StableDiffusionPipeline(
+        vae=vae,
+        unet=unet,
+        text_encoder=text_encoder,
+        tokenizer=tokenizer,
+        feature_extractor=CLIPFeatureExtractor.from_pretrained("openai/clip-vit-base-patch32")#this is not fine-tuned.
+        
+)
 #delete downloaded model to save storage
 if args.delete_model:
   subprocess.run(["rm", "-r","artifacts"])
