@@ -314,6 +314,7 @@ def visualize_prompts(
         if batch_generate:#batch generation
           index = 0
           while index < len(text):
+            print(text[index:index+args.batch_size])
             images+=pipeline(text[index:index+args.batch_size],height=img_size,width=img_size,
                             num_inference_steps=50, guidance_scale=7.5,
                             latents=latents[index:index+args.batch_size], padding="longest").images
@@ -412,7 +413,8 @@ pipeline = StableDiffusionPipeline(
         tokenizer=tokenizer,
         feature_extractor=CLIPFeatureExtractor.from_pretrained("openai/clip-vit-base-patch32"),#this is not fine-tuned.,
         scheduler=noise_scheduler,
-        safety_checker=None,  
+        safety_checker=None,
+        
 )
 #delete downloaded model to save storage
 if args.delete_model:
