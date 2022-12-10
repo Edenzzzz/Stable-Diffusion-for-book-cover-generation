@@ -66,6 +66,8 @@ from accelerate import Accelerator
 from accelerate.logging import get_logger
 from accelerate.utils import set_seed
 from diffusers import AutoencoderKL, DDPMScheduler, PNDMScheduler,DDIMScheduler, StableDiffusionPipeline, UNet2DConditionModel
+from diffusers.hub_utils import init_git_repo, push_to_hub
+from diffusers.optimization import get_scheduler
 from diffusers.pipelines.stable_diffusion import StableDiffusionSafetyChecker
 from PIL import Image
 from tqdm.auto import tqdm
@@ -312,7 +314,6 @@ def visualize_prompts(
         if batch_generate:#batch generation
           index = 0
           while index < len(text):
-            print(text[index:index+args.batch_size])
             images+=pipeline(text[index:index+args.batch_size],height=img_size,width=img_size,
                             num_inference_steps=50, guidance_scale=7.5,
                             latents=latents[index:index+args.batch_size]).images
@@ -371,49 +372,14 @@ model_dir = my_model_artifact.download()
 
 # Load your Hugging Face model from that folder
 #  using the same model class
-text_encoder = CLIPTextModel.from_pretrained(
-    model_dir, subfolder="text_encoder"
-    , use_auth_token=True,
-    load_in_8bit=True,
-    device_map="auto"
-)
-vae = AutoencoderKL.from_pretrained(
-    model_dir, subfolder="vae"
-    , use_auth_token=True,
-    load_in_8bit=True
-)
-unet = UNet2DConditionModel.from_pretrained(
-    model_dir, subfolder="unet"
-    , use_auth_token=True,
-    load_in_8bit=True
-)
-tokenizer = CLIPTokenizer.from_pretrained(
-    model_dir,
-    subfolder="tokenizer",
-    use_auth_token=True,
-    Padding="max_length",
-    max_length=77,
-    Truncation=True,
-    load_in_8bit=True,
-  )
 
-# pipeline = StableDiffusionPipeline(
-#       model_dir,
-#       torch_dtype=torch.float16,
-#       safety_checker=None,
-#       scheduler = noise_scheduler,
-#       tokenizer = tokenizer#enable padding
-#       ).to('cuda')
 pipeline = StableDiffusionPipeline(
-        vae=vae,
-        unet=unet,
-        text_encoder=text_encoder,
-        tokenizer=tokenizer,
-        feature_extractor=CLIPFeatureExtractor.from_pretrained("openai/clip-vit-base-patch32"),#this is not fine-tuned.,
-        scheduler=noise_scheduler,
-        safety_checker=None,
-        
-)
+      model_dir,
+      torch_dtype=torch.float16,
+      safety_checker=None,
+      scheduler = noise_scheduler,
+      ).to('cuda')
+
 #delete downloaded model to save storage
 if args.delete_model:
   subprocess.run(["rm", "-r","artifacts"])
