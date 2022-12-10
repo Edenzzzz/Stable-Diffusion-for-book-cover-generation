@@ -287,6 +287,7 @@ def generate(
     ### Get model output 
     for i in range(len(test_templates)):
       text=[]
+      ### Generate prompts
       for j in range(samples_per_prompt):
         row=df.iloc[j]
         legible_text,author,title,description = ("",row['book_authors'], row['book_title'], row['book_desc'])
@@ -303,7 +304,6 @@ def generate(
                                           clean_up_tokenization_spaces=False)[0]#batch_decode returns a list of strings; here len(list)=1, only one input string
             del summary_ids,inputs                             
             torch.cuda.empty_cache()
-        ###get prompt
         template=test_templates[i]
         if include_desc:
           template+=summary_placeholders[i]#append new prompt to list
@@ -318,8 +318,8 @@ def generate(
       images=[]
       print(f"Inference iteration {i}")
 
-      torch.cuda.empty_cache()#free memory before inference (hope this works)
-      with autocast("cuda"):
+      #free memory before inference (hope this works)
+      with autocast("cuda"), torch.no_grad():
         if batch_generate:#batch generation
           index = 0
           while index < len(text):
@@ -328,6 +328,7 @@ def generate(
                             latents=latents[index:index+args.batch_size]).images
             index = index+args.batch_size
         else:#To avoid out of memory, generate one at a time
+          torch.cuda.empty_cache()
           for j in range(samples_per_prompt):
             images += pipeline(text[j],height=img_size,
                               width=img_size,num_inference_steps=inference_steps, 
