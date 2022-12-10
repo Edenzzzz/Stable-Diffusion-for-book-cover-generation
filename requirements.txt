@@ -813,12 +813,5 @@ yapf==0.32.0
 yarl==1.7.2
 yellowbrick==1.5
 zict==2.2.0
--qq diffusers["training"]==0.7.2
--qq transformers==4.24.0 
-ftfy
 zipp==3.8.0
--qq "ipywidgets>=7,<8"
-wandb
-kornia	
-bitsandbytes
 huggingface_hub==0.11.1
