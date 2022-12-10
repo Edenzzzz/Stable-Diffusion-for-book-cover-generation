@@ -1,0 +1,3 @@
+[submodule "TTUR-FID-score"]
+	path = TTUR-FID-score
+	url = https://github.com/Edenzzzz/TTUR-FID-score
