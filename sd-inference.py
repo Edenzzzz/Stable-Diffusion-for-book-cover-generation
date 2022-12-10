@@ -359,7 +359,7 @@ os.environ["WANDB_API_KEY"]="16d21dc747a6f33247f1e9c96895d4ffa5ea0b27"
 #can't use artifact in offline mode
 #     os.environ['WANDB_MODE'] = 'online'
 #     wandb.init(id=run_id,resume="must") 
-wandb.init(project="book_cover_generation",id=run_id,name="stable_diffusion"+wandb_model.split(":")[-1]+"+inference",resume='must')
+wandb.init(project="book_cover_generation",id=run_id,name="stable_diffusion "+wandb_model.split(":")[-1]+"+inference",resume='must')
 my_model_artifact = wandb.run.use_artifact(wandb_model)
   # Download model weights to a folder and return the path
 model_dir = my_model_artifact.download()
