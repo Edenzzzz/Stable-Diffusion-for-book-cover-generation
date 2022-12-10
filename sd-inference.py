@@ -326,7 +326,7 @@ def generate(
                             num_inference_steps=50, guidance_scale=7.5,
                             latents=latents[index:index+args.batch_size]).images
             #offload to cpu array to free memory
-            print(type(output[1]))
+            
             images +=[image.numpy() for image in output]
             index = index+args.batch_size
         else:#To avoid out of memory, generate one at a time
@@ -334,6 +334,9 @@ def generate(
             output = pipeline(text[j],height=img_size,
                               width=img_size,num_inference_steps=inference_steps, 
                               guidance_scale=7.5,latents=latents[None,j]).images
+            print("-----------")
+            print((output[0]))
+            print("-----------")
             images +=[image.numpy() for image in output]
                               
       try:
