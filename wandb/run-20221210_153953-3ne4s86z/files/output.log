@@ -1,0 +1,11 @@
+[34m[1mwandb[39m[22m: Downloading large artifact stable_diffusion_model:v15, 5465.06MB. 16 files...
+[34m[1mwandb[39m[22m:   16 of 16 files downloaded.
+Done. 0:0:1.8
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/runpy.py", line 185, in _run_module_as_main
+    mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+  File "/usr/lib/python3.8/runpy.py", line 111, in _get_module_details
+    __import__(pkg_name)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 408, in <module>
+    pipeline = StableDiffusionPipeline(
+TypeError: __init__() got an unexpected keyword argument 'padding'

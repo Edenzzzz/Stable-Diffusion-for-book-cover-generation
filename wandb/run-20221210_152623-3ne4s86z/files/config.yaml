@@ -1,0 +1,97 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.13.6
+    framework: huggingface
+    huggingface_version: 4.24.0
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    python_version: 3.8.10
+    start_time: 1670707583.093848
+    t:
+      1:
+      - 1
+      - 11
+      - 41
+      - 49
+      - 55
+      - 71
+      - 79
+      2:
+      - 1
+      - 11
+      - 41
+      - 49
+      - 55
+      - 71
+      - 79
+      3:
+      - 5
+      - 13
+      - 14
+      - 23
+      4: 3.8.10
+      5: 0.13.6
+      6: 4.24.0
+      8:
+      - 5
+epochs:
+  desc: null
+  value: 2
+gradient_accumulation_steps:
+  desc: null
+  value: 8
+gradient_checkpointing:
+  desc: null
+  value: false
+include_summary:
+  desc: null
+  value: false
+learning_rate:
+  desc: null
+  value: 5.0e-06
+num_templates:
+  desc: null
+  value: 10
+output_dir:
+  desc: null
+  value: ./model
+pretrained_model_name_or_path:
+  desc: null
+  value: CompVis/stable-diffusion-v1-4
+scale_lr:
+  desc: null
+  value: false
+seed:
+  desc: null
+  value: 42
+templates:
+  desc: null
+  value:
+  - 'A {} book cover with author: {}, book title: {} '
+  - 'A {} book cover written by author: {} with book title: {} '
+  - 'A beautiful {} book cover written by author: {} with book title: {}'
+  - 'A good-looking {} book cover written by author: {} with book title: {}'
+  - 'A amazing {} book cover written by author: {} with book title: {}'
+  - 'A plain {} book cover with author name: {}. The book title is: {} '
+  - A  {} book cover with author name:{}, book title: {}
+  - We are going to create a clear, {}, highly detailed book cover with author named {}, and book title is '{}'
+  - An intricate {}, book cover including book author:{}, book title: '{}'
+  - 'A detailed {} book cover with author: {} and book title: {} '
+train_batch_size:
+  desc: null
+  value: 1
+train_text_encoder:
+  desc: null
+  value: true
+train_unet:
+  desc: null
+  value: false
+training_dataset_size:
+  desc: null
+  value: 5000
+weight_decay:
+  desc: null
+  value: 0.01

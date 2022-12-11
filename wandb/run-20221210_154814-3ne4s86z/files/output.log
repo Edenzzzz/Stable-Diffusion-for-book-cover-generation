@@ -1,0 +1,35 @@
+[34m[1mwandb[39m[22m: Downloading large artifact stable_diffusion_model:v15, 5465.06MB. 16 files...
+[34m[1mwandb[39m[22m:   16 of 16 files downloaded.
+Done. 0:0:1.9
+/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/pipelines/stable_diffusion/pipeline_stable_diffusion.py:101: FutureWarning: The configuration file of this scheduler: DDIMScheduler {
+  "_class_name": "DDIMScheduler",
+  "_diffusers_version": "0.10.0",
+  "beta_end": 0.012,
+  "beta_schedule": "scaled_linear",
+  "beta_start": 0.00085,
+  "clip_sample": false,
+  "num_train_timesteps": 1000,
+  "prediction_type": "epsilon",
+  "set_alpha_to_one": false,
+  "steps_offset": 0,
+  "trained_betas": null
+}
+ is outdated. `steps_offset` should be set to 1 instead of 0. Please make sure to update the config accordingly as leaving `steps_offset` might led to incorrect results in future versions. If you have downloaded this checkpoint from the Hugging Face Hub, it would be very nice if you could open a Pull request for the `scheduler/scheduler_config.json` file
+  deprecate("steps_offset!=1", "1.0.0", deprecation_message, standard_warn=False)
+You have disabled the safety checker for <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> by passing `safety_checker=None`. Ensure that you abide to the conditions of the Stable Diffusion license and do not expose unfiltered results in services or applications open to the public. Both the diffusers team and Hugging Face strongly recommend to keep the safety filter enabled in all public facing circumstances, disabling it only for use-cases that involve analyzing network behavior or auditing its results. For more information, please have a look at https://github.com/huggingface/diffusers/pull/254 .
+Load stable_diffusion_model:v15 from wandb cloud checkpoint
+Visualization results will be saved in ./Output_images/v15 inference
+Inference iteration 0
+["A  book cover with author: Alicia Howard, book title: Street Bitches Don't Need Love 2 , and abstract Hurricane succeeds at her plan to force Rashida into a mental institution. This leaves Taz with no choice but to put his children in the care of the last person Rashida would expect or accept. Taz feels he has no options since he has to find a new connect because Pablo refuses to deal with him. He delegates this task to Craig. Craig's drug usage is spiraling out of control. He has become more of a fiend than a hustler. Liking the sample he tested previously, he decides to reach out to the dealer and see if he could potentially become their new plug. However, Craig isn't aware that dealing with this guy may cost the lives of him and his team. Hurricane withdraws from WC and it is starting to piss him off. His anger is not directed towards her, but towards the cause of her problems. He decides to go after Taz and his crew to eliminate the cause of Hurricane's pain. WC recruits his brother who has more ties to the situation than anyone knows. Unbeknownst to WC, Hurricane is also working on a takedown of her own. This installment has more twists and turns, and revealed secrets. Which side will come out on top or which side will take losses due to those secrets. Read and find out. ", 'A  book cover with author: Johann Wolfgang von Goethe, book title: Iphigenie auf Tauris , and abstract Da sie Diana ihr Leben verdankt, dient Iphigenie der Göttin auf der Insel Tauris als Priesterin, obwohl sie sich schmerzlich nach ihrer Heimat Griechenland sehnt. Als ihr Bruder Orest auf die Insel kommt und der Göttin geopfert werden soll, muss Iphigenie sich zwischen Pflicht und eigenen Wünschen entscheiden. Goethes Bearbeitung des antiken Stoffs, die er 1786 endgültig abschloss, besticht durch ihre glanzvolle Komposition und psychologische Tiefe: Mit seinem Drama »Iphigenie auf Tauris« schuf er eines der großen Meisterwerke der Weimarer Klassik.', "A  book cover with author: Shanna Swendson, book title: Kiss and Spell , and abstract With great power comes great danger...When a freak accident leaves Katie Chandler with magical powers, it seems like a wish come true for the former magical immune. But it also means she's vulnerable to magic, just when the dangerous Elf Lord is cooking up another scheme in his bid for power. Anyone who gets in his way disappears--including Katie and her wizard boyfriend, Owen Palmer.Now Katie's under a spell that obscures her true identity, living a life right out of a romantic comedy movie in a Hollywood set version of New York. Will she be able to find her true Mr. Right in time to break the spell with a kiss and warn everyone, or will she be trapped forever, unaware of the doom facing her world?"]
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/runpy.py", line 185, in _run_module_as_main
+    mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+  File "/usr/lib/python3.8/runpy.py", line 111, in _get_module_details
+    __import__(pkg_name)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 438, in <module>
+    visualize_prompts(pipeline,summerize=False,samples_per_prompt=4,
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 316, in visualize_prompts
+    images+=pipeline(text[index:index+args.batch_size],height=img_size,width=img_size,
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+TypeError: __call__() got an unexpected keyword argument 'padding'

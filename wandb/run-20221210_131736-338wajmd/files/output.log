@@ -1,0 +1,19 @@
+[34m[1mwandb[39m[22m: Downloading large artifact stable_diffusion_model:v14, 5465.06MB. 16 files...
+[34m[1mwandb[39m[22m:   16 of 16 files downloaded.
+Done. 0:0:1.9
+You have passed `None` for safety_checker to disable its functionality in <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'>. Note that this might lead to problems when using <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> and is not recommended.
+You have disabled the safety checker for <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> by passing `safety_checker=None`. Ensure that you abide to the conditions of the Stable Diffusion license and do not expose unfiltered results in services or applications open to the public. Both the diffusers team and Hugging Face strongly recommend to keep the safety filter enabled in all public facing circumstances, disabling it only for use-cases that involve analyzing network behavior or auditing its results. For more information, please have a look at https://github.com/huggingface/diffusers/pull/254 .
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/runpy.py", line 185, in _run_module_as_main
+    mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+  File "/usr/lib/python3.8/runpy.py", line 111, in _get_module_details
+    __import__(pkg_name)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 391, in <module>
+    subprocess.run("rm -r artifacts")
+  File "/usr/lib/python3.8/subprocess.py", line 493, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.8/subprocess.py", line 858, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.8/subprocess.py", line 1704, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'rm -r artifacts'

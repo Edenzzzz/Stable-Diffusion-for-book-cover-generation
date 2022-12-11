@@ -1,0 +1,30 @@
+You have passed `None` for safety_checker to disable its functionality in <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'>. Note that this might lead to problems when using <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> and is not recommended.
+You have disabled the safety checker for <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> by passing `safety_checker=None`. Ensure that you abide to the conditions of the Stable Diffusion license and do not expose unfiltered results in services or applications open to the public. Both the diffusers team and Hugging Face strongly recommend to keep the safety filter enabled in all public facing circumstances, disabling it only for use-cases that involve analyzing network behavior or auditing its results. For more information, please have a look at https://github.com/huggingface/diffusers/pull/254 .
+Load stable_diffusion_model:v15 from wandb cloud checkpoint
+Visualization results will be saved in ./Output_images/v15 inference
+model running on device cuda:0
+Setting batch_generate to false since adding description without summerizing will cause batch tensors to have different lenght. This is probably a bug.
+Inference iteration 0
+The following part of your input was truncated because CLIP can only handle sequences up to 77 tokens: ["connect because pablo refuses to deal with him. he delegates this task to craig. craig's drug usage is spiraling out of control. he has become more of a fiend than a hustler. liking the sample he tested previously, he decides to reach out to the dealer and see if he could potentially become their new plug. however, craig isn 't aware that dealing with this guy may cost the lives of him and his team. hurricane withdraws from wc and it is starting to piss him off. his anger is not directed towards her, but towards the cause of her problems. he decides to go after taz and his crew to eliminate the cause of hurricane's pain. wc recruits his brother who has more ties to the situation than anyone knows. unbeknownst to wc, hurricane is also working on a takedown of her own. this installment has more twists and turns, and revealed secrets. which side will come out on top or which side will take losses due to those secrets. read and find out. <|endoftext|>"]
+
+
+
+
+100%|███████████████████████████████████████████| 75/75 [00:09<00:00,  7.58it/s]
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/runpy.py", line 185, in _run_module_as_main
+    mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+  File "/usr/lib/python3.8/runpy.py", line 111, in _get_module_details
+    __import__(pkg_name)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 414, in <module>
+    generate(pipeline,summerize=False,samples_per_prompt=4,
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 340, in generate
+    images +=[image.numpy() for image in output]
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 340, in <listcomp>
+    images +=[image.numpy() for image in output]
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/PIL/Image.py", line 517, in __getattr__
+    raise AttributeError(name)
+AttributeError: numpy
+-----------
+<PIL.Image.Image image mode=RGB size=512x512 at 0x7EFB748A5BB0>
+-----------

@@ -1,0 +1,151 @@
+2022-12-10 17:04:00,717 INFO    StreamThr :153851 [internal.py:wandb_internal():87] W&B internal server running at pid: 153851, started at: 2022-12-10 17:04:00.715985
+2022-12-10 17:04:00,720 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: status
+2022-12-10 17:04:00,721 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: status
+2022-12-10 17:04:00,723 DEBUG   SenderThread:153851 [sender.py:send():303] send: header
+2022-12-10 17:04:00,723 INFO    WriterThread:153851 [datastore.py:open_for_write():75] open: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/run-3ne4s86z.wandb
+2022-12-10 17:04:00,738 DEBUG   SenderThread:153851 [sender.py:send():303] send: run
+2022-12-10 17:04:00,743 INFO    SenderThread:153851 [sender.py:_maybe_setup_resume():593] checking resume status for None/book_cover_generation/3ne4s86z
+2022-12-10 17:04:00,876 INFO    SenderThread:153851 [sender.py:_maybe_setup_resume():656] configured resuming with: ResumeState(resumed=True,step=10010,history=10010,events=509,output=126,runtime=14858.421258,wandb_runtime=2603,summary={'lr': 5.000000000000097e-06, '_step': 10009, 'epoch': 2, 'examples': {'path': 'media/images/examples_10009_c188ff971cc4366b54b7.png', 'size': 10957822, '_type': 'image-file', 'width': 2048, 'format': 'png', 'height': 5120, 'sha256': 'c188ff971cc4366b54b73e27454ebd43ee12004d5ee2c3840046f71d4a56f108'}, '_timestamp': 1670713157.7068834, 'loss': 0.0006580792833119631, 'step': '4999/5000', '_wandb': {'runtime': 2603}, '_runtime': 14849.291565418243, 'mean_epoch_loss': 0.1403961726793088},config={'seed': {'desc': None, 'value': 42}, '_wandb': {'desc': None, 'value': {'t': {'1': [1, 11, 41, 49, 55, 71, 79], '2': [1, 11, 41, 49, 55, 71, 79], '3': [5, 13, 14, 23], '4': '3.8.10', '5': '0.13.6', '6': '4.24.0', '8': [5]}, 'framework': 'huggingface', 'start_time': 1670713408.732074, 'cli_version': '0.13.6', 'is_jupyter_run': False, 'python_version': '3.8.10', 'is_kaggle_kernel': False, 'huggingface_version': '4.24.0'}}, 'epochs': {'desc': None, 'value': 2}, 'scale_lr': {'desc': None, 'value': False}, 'templates': {'desc': None, 'value': ['A {} book cover with author: {}, book title: {} ', 'A {} book cover written by author: {} with book title: {} ', 'A beautiful {} book cover written by author: {} with book title: {}', 'A good-looking {} book cover written by author: {} with book title: {}', 'A amazing {} book cover written by author: {} with book title: {}', 'A plain {} book cover with author name: {}. The book title is: {} ', 'A  {} book\xa0cover\xa0with\xa0author name:{},\xa0book\xa0title:\xa0{}', "We\xa0are\xa0going\xa0to\xa0create\xa0a\xa0clear, {}, highly detailed book\xa0cover\xa0with\xa0author\xa0named\xa0{},\xa0and\xa0book\xa0title\xa0is\xa0'{}'", "An intricate {}, book\xa0cover\xa0including\xa0book\xa0author:{},\xa0book\xa0title:\xa0'{}'", 'A detailed {} book cover with author: {} and book title: {} ']}, 'output_dir': {'desc': None, 'value': './model'}, 'train_unet': {'desc': None, 'value': False}, 'weight_decay': {'desc': None, 'value': 0.01}, 'learning_rate': {'desc': None, 'value': 5e-06}, 'num_templates': {'desc': None, 'value': 10}, 'include_summary': {'desc': None, 'value': False}, 'train_batch_size': {'desc': None, 'value': 1}, 'train_text_encoder': {'desc': None, 'value': True}, 'training_dataset_size': {'desc': None, 'value': 5000}, 'gradient_checkpointing': {'desc': None, 'value': False}, 'gradient_accumulation_steps': {'desc': None, 'value': 8}, 'pretrained_model_name_or_path': {'desc': None, 'value': 'CompVis/stable-diffusion-v1-4'}})
+2022-12-10 17:04:01,072 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: check_version
+2022-12-10 17:04:01,073 INFO    SenderThread:153851 [dir_watcher.py:__init__():216] watching files in: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files
+2022-12-10 17:04:01,073 INFO    SenderThread:153851 [sender.py:_start_run_threads():928] run started: 3ne4s86z with start time 1670698582.288054
+2022-12-10 17:04:01,073 DEBUG   SenderThread:153851 [sender.py:send():303] send: summary
+2022-12-10 17:04:01,074 INFO    SenderThread:153851 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-10 17:04:01,074 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: check_version
+2022-12-10 17:04:01,148 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: run_start
+2022-12-10 17:04:01,163 DEBUG   HandlerThread:153851 [system_info.py:__init__():31] System info init
+2022-12-10 17:04:01,164 DEBUG   HandlerThread:153851 [system_info.py:__init__():46] System info init done
+2022-12-10 17:04:01,164 INFO    HandlerThread:153851 [system_monitor.py:start():150] Starting system monitor
+2022-12-10 17:04:01,164 INFO    SystemMonitor:153851 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2022-12-10 17:04:01,165 INFO    SystemMonitor:153851 [interfaces.py:start():168] Started cpu
+2022-12-10 17:04:01,165 INFO    SystemMonitor:153851 [interfaces.py:start():168] Started disk
+2022-12-10 17:04:01,166 INFO    SystemMonitor:153851 [interfaces.py:start():168] Started gpu
+2022-12-10 17:04:01,167 INFO    SystemMonitor:153851 [interfaces.py:start():168] Started memory
+2022-12-10 17:04:01,168 INFO    SystemMonitor:153851 [interfaces.py:start():168] Started network
+2022-12-10 17:04:01,222 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 17:04:01,222 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 17:04:01,296 DEBUG   SenderThread:153851 [sender.py:send():303] send: telemetry
+2022-12-10 17:04:02,077 INFO    Thread-13 :153851 [dir_watcher.py:_on_file_created():275] file/dir created: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/wandb-summary.json
+2022-12-10 17:04:03,074 INFO    Thread-13 :153851 [dir_watcher.py:_on_file_created():275] file/dir created: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/output.log
+2022-12-10 17:04:05,075 INFO    Thread-13 :153851 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/output.log
+2022-12-10 17:04:07,076 INFO    Thread-13 :153851 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/output.log
+2022-12-10 17:04:12,078 INFO    Thread-13 :153851 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/output.log
+2022-12-10 17:04:13,078 INFO    Thread-13 :153851 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/output.log
+2022-12-10 17:04:15,079 INFO    Thread-13 :153851 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/output.log
+2022-12-10 17:04:16,332 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-10 17:04:16,332 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: stop_status
+2022-12-10 17:04:17,080 INFO    Thread-13 :153851 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/output.log
+2022-12-10 17:04:19,080 INFO    Thread-13 :153851 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/output.log
+2022-12-10 17:04:21,081 INFO    Thread-13 :153851 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/output.log
+2022-12-10 17:04:21,241 DEBUG   SenderThread:153851 [sender.py:send():303] send: exit
+2022-12-10 17:04:21,242 INFO    SenderThread:153851 [sender.py:send_exit():442] handling exit code: 1
+2022-12-10 17:04:21,242 INFO    SenderThread:153851 [sender.py:send_exit():444] handling runtime: 2623
+2022-12-10 17:04:21,242 INFO    SenderThread:153851 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-10 17:04:21,242 INFO    SenderThread:153851 [sender.py:send_exit():450] send defer
+2022-12-10 17:04:21,242 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 17:04:21,242 INFO    HandlerThread:153851 [handler.py:handle_request_defer():162] handle defer: 0
+2022-12-10 17:04:21,243 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: defer
+2022-12-10 17:04:21,243 INFO    SenderThread:153851 [sender.py:send_request_defer():459] handle sender defer: 0
+2022-12-10 17:04:21,243 INFO    SenderThread:153851 [sender.py:transition_state():463] send defer: 1
+2022-12-10 17:04:21,243 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 17:04:21,243 INFO    HandlerThread:153851 [handler.py:handle_request_defer():162] handle defer: 1
+2022-12-10 17:04:21,243 INFO    HandlerThread:153851 [system_monitor.py:finish():160] Stopping system monitor
+2022-12-10 17:04:21,243 DEBUG   SystemMonitor:153851 [system_monitor.py:_start():130] Starting system metrics aggregation loop
+2022-12-10 17:04:21,244 DEBUG   SystemMonitor:153851 [system_monitor.py:_start():137] Finished system metrics aggregation loop
+2022-12-10 17:04:21,244 DEBUG   SystemMonitor:153851 [system_monitor.py:_start():141] Publishing last batch of metrics
+2022-12-10 17:04:21,244 INFO    HandlerThread:153851 [interfaces.py:finish():175] Joined cpu
+2022-12-10 17:04:21,245 INFO    HandlerThread:153851 [interfaces.py:finish():175] Joined disk
+2022-12-10 17:04:21,413 INFO    HandlerThread:153851 [interfaces.py:finish():175] Joined gpu
+2022-12-10 17:04:21,413 INFO    HandlerThread:153851 [interfaces.py:finish():175] Joined memory
+2022-12-10 17:04:21,413 INFO    HandlerThread:153851 [interfaces.py:finish():175] Joined network
+2022-12-10 17:04:21,414 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: defer
+2022-12-10 17:04:21,414 INFO    SenderThread:153851 [sender.py:send_request_defer():459] handle sender defer: 1
+2022-12-10 17:04:21,414 INFO    SenderThread:153851 [sender.py:transition_state():463] send defer: 2
+2022-12-10 17:04:21,414 DEBUG   SenderThread:153851 [sender.py:send():303] send: stats
+2022-12-10 17:04:21,415 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 17:04:21,416 INFO    HandlerThread:153851 [handler.py:handle_request_defer():162] handle defer: 2
+2022-12-10 17:04:21,416 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: defer
+2022-12-10 17:04:21,416 INFO    SenderThread:153851 [sender.py:send_request_defer():459] handle sender defer: 2
+2022-12-10 17:04:21,416 INFO    SenderThread:153851 [sender.py:transition_state():463] send defer: 3
+2022-12-10 17:04:21,417 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 17:04:21,417 INFO    HandlerThread:153851 [handler.py:handle_request_defer():162] handle defer: 3
+2022-12-10 17:04:21,417 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: defer
+2022-12-10 17:04:21,417 INFO    SenderThread:153851 [sender.py:send_request_defer():459] handle sender defer: 3
+2022-12-10 17:04:21,417 INFO    SenderThread:153851 [sender.py:transition_state():463] send defer: 4
+2022-12-10 17:04:21,418 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 17:04:21,418 INFO    HandlerThread:153851 [handler.py:handle_request_defer():162] handle defer: 4
+2022-12-10 17:04:21,419 DEBUG   SenderThread:153851 [sender.py:send():303] send: summary
+2022-12-10 17:04:21,419 INFO    SenderThread:153851 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-10 17:04:21,420 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: defer
+2022-12-10 17:04:21,420 INFO    SenderThread:153851 [sender.py:send_request_defer():459] handle sender defer: 4
+2022-12-10 17:04:21,420 INFO    SenderThread:153851 [sender.py:transition_state():463] send defer: 5
+2022-12-10 17:04:21,421 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 17:04:21,421 INFO    HandlerThread:153851 [handler.py:handle_request_defer():162] handle defer: 5
+2022-12-10 17:04:21,421 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: defer
+2022-12-10 17:04:21,421 INFO    SenderThread:153851 [sender.py:send_request_defer():459] handle sender defer: 5
+2022-12-10 17:04:21,524 INFO    SenderThread:153851 [sender.py:transition_state():463] send defer: 6
+2022-12-10 17:04:21,524 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 17:04:21,524 INFO    HandlerThread:153851 [handler.py:handle_request_defer():162] handle defer: 6
+2022-12-10 17:04:21,524 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: defer
+2022-12-10 17:04:21,525 INFO    SenderThread:153851 [sender.py:send_request_defer():459] handle sender defer: 6
+2022-12-10 17:04:22,082 INFO    Thread-13 :153851 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/config.yaml
+2022-12-10 17:04:22,082 INFO    Thread-13 :153851 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/wandb-summary.json
+2022-12-10 17:04:22,242 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: poll_exit
+2022-12-10 17:04:23,082 INFO    Thread-13 :153851 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/output.log
+2022-12-10 17:04:23,420 INFO    SenderThread:153851 [sender.py:transition_state():463] send defer: 7
+2022-12-10 17:04:23,421 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: poll_exit
+2022-12-10 17:04:23,422 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 17:04:23,422 INFO    HandlerThread:153851 [handler.py:handle_request_defer():162] handle defer: 7
+2022-12-10 17:04:23,422 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: defer
+2022-12-10 17:04:23,422 INFO    SenderThread:153851 [sender.py:send_request_defer():459] handle sender defer: 7
+2022-12-10 17:04:23,423 INFO    SenderThread:153851 [dir_watcher.py:finish():362] shutting down directory watcher
+2022-12-10 17:04:24,082 INFO    Thread-13 :153851 [dir_watcher.py:_on_file_modified():292] file/dir modified: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/output.log
+2022-12-10 17:04:24,083 INFO    SenderThread:153851 [dir_watcher.py:finish():392] scan: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files
+2022-12-10 17:04:24,083 INFO    SenderThread:153851 [dir_watcher.py:finish():406] scan save: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/config.yaml config.yaml
+2022-12-10 17:04:24,084 INFO    SenderThread:153851 [dir_watcher.py:finish():406] scan save: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/wandb-summary.json wandb-summary.json
+2022-12-10 17:04:24,084 INFO    SenderThread:153851 [dir_watcher.py:finish():406] scan save: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/output.log output.log
+2022-12-10 17:04:24,090 INFO    SenderThread:153851 [sender.py:transition_state():463] send defer: 8
+2022-12-10 17:04:24,100 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 17:04:24,101 INFO    HandlerThread:153851 [handler.py:handle_request_defer():162] handle defer: 8
+2022-12-10 17:04:24,101 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: defer
+2022-12-10 17:04:24,101 INFO    SenderThread:153851 [sender.py:send_request_defer():459] handle sender defer: 8
+2022-12-10 17:04:24,101 INFO    SenderThread:153851 [file_pusher.py:finish():168] shutting down file pusher
+2022-12-10 17:04:24,508 INFO    Thread-16 :153851 [upload_job.py:push():143] Uploaded file /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/config.yaml
+2022-12-10 17:04:24,513 INFO    Thread-17 :153851 [upload_job.py:push():143] Uploaded file /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/wandb-summary.json
+2022-12-10 17:04:24,526 INFO    Thread-18 :153851 [upload_job.py:push():143] Uploaded file /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/files/output.log
+2022-12-10 17:04:24,728 INFO    Thread-12 :153851 [sender.py:transition_state():463] send defer: 9
+2022-12-10 17:04:24,728 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 17:04:24,728 INFO    HandlerThread:153851 [handler.py:handle_request_defer():162] handle defer: 9
+2022-12-10 17:04:24,729 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: defer
+2022-12-10 17:04:24,729 INFO    SenderThread:153851 [sender.py:send_request_defer():459] handle sender defer: 9
+2022-12-10 17:04:24,729 INFO    SenderThread:153851 [file_pusher.py:join():173] waiting for file pusher
+2022-12-10 17:04:24,729 INFO    SenderThread:153851 [sender.py:transition_state():463] send defer: 10
+2022-12-10 17:04:24,730 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 17:04:24,730 INFO    HandlerThread:153851 [handler.py:handle_request_defer():162] handle defer: 10
+2022-12-10 17:04:24,730 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: defer
+2022-12-10 17:04:24,730 INFO    SenderThread:153851 [sender.py:send_request_defer():459] handle sender defer: 10
+2022-12-10 17:04:24,926 INFO    SenderThread:153851 [sender.py:transition_state():463] send defer: 11
+2022-12-10 17:04:24,926 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 17:04:24,926 INFO    HandlerThread:153851 [handler.py:handle_request_defer():162] handle defer: 11
+2022-12-10 17:04:24,927 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: defer
+2022-12-10 17:04:24,927 INFO    SenderThread:153851 [sender.py:send_request_defer():459] handle sender defer: 11
+2022-12-10 17:04:24,927 INFO    SenderThread:153851 [sender.py:transition_state():463] send defer: 12
+2022-12-10 17:04:24,928 DEBUG   SenderThread:153851 [sender.py:send():303] send: final
+2022-12-10 17:04:24,929 DEBUG   SenderThread:153851 [sender.py:send():303] send: footer
+2022-12-10 17:04:24,929 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 17:04:24,929 INFO    HandlerThread:153851 [handler.py:handle_request_defer():162] handle defer: 12
+2022-12-10 17:04:24,929 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: defer
+2022-12-10 17:04:24,930 INFO    SenderThread:153851 [sender.py:send_request_defer():459] handle sender defer: 12
+2022-12-10 17:04:24,931 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: poll_exit
+2022-12-10 17:04:24,932 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: poll_exit
+2022-12-10 17:04:24,933 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: server_info
+2022-12-10 17:04:24,934 DEBUG   SenderThread:153851 [sender.py:send_request():317] send_request: server_info
+2022-12-10 17:04:24,938 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: get_summary
+2022-12-10 17:04:24,939 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: sampled_history
+2022-12-10 17:04:25,087 DEBUG   HandlerThread:153851 [handler.py:handle_request():139] handle_request: shutdown
+2022-12-10 17:04:25,087 INFO    HandlerThread:153851 [handler.py:finish():814] shutting down handler
+2022-12-10 17:04:25,929 INFO    WriterThread:153851 [datastore.py:close():279] close: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221210_170400-3ne4s86z/run-3ne4s86z.wandb
+2022-12-10 17:04:26,086 INFO    SenderThread:153851 [sender.py:finish():1331] shutting down sender
+2022-12-10 17:04:26,086 INFO    SenderThread:153851 [file_pusher.py:finish():168] shutting down file pusher
+2022-12-10 17:04:26,086 INFO    SenderThread:153851 [file_pusher.py:join():173] waiting for file pusher
+2022-12-10 17:04:26,090 INFO    MainThread:153851 [internal.py:handle_exit():77] Internal process exited

@@ -1,0 +1,222 @@
+2022-12-10 18:24:45,508 INFO    StreamThr :155869 [internal.py:wandb_internal():87] W&B internal server running at pid: 155869, started at: 2022-12-10 18:24:45.507776
+2022-12-10 18:24:45,509 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: status
+2022-12-10 18:24:45,510 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: status
+2022-12-10 18:24:45,512 DEBUG   SenderThread:155869 [sender.py:send():303] send: header
+2022-12-10 18:24:45,512 INFO    WriterThread:155869 [datastore.py:open_for_write():75] open: /home/wenxuan/Stable-diffusion-for-book-cover-generation/Output_images/v12 inference/wandb/run-20221210_182445-zw0344ea/run-zw0344ea.wandb
+2022-12-10 18:24:45,527 DEBUG   SenderThread:155869 [sender.py:send():303] send: run
+2022-12-10 18:24:45,540 INFO    SenderThread:155869 [sender.py:_maybe_setup_resume():593] checking resume status for None/Stable-diffusion-for-book-cover-generation-Output_images_v12 inference/zw0344ea
+2022-12-10 18:25:20,607 INFO    StreamThr :155869 [internal.py:wandb_internal():87] W&B internal server running at pid: 155869, started at: 2022-12-10 18:25:20.606198
+2022-12-10 18:25:20,608 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: status
+2022-12-10 18:25:20,609 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: status
+2022-12-10 18:25:20,611 DEBUG   SenderThread:155869 [sender.py:send():303] send: header
+2022-12-10 18:25:20,611 INFO    WriterThread:155869 [datastore.py:open_for_write():75] open: /home/wenxuan/Stable-diffusion-for-book-cover-generation/Output_images/v12 inference/wandb/run-20221210_182520-fbdkp0mg/run-fbdkp0mg.wandb
+2022-12-10 18:25:20,613 DEBUG   SenderThread:155869 [sender.py:send():303] send: run
+2022-12-10 18:25:20,620 INFO    SenderThread:155869 [sender.py:_maybe_setup_resume():593] checking resume status for None/Stable-diffusion-for-book-cover-generation-Output_images_v12 inference/fbdkp0mg
+2022-12-10 18:25:25,615 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:25:30,616 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:25:35,617 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:25:40,619 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:25:45,620 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:25:50,621 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:25:55,623 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:26:00,625 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:26:05,626 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:26:10,627 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:26:15,629 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:26:28,735 INFO    StreamThr :155869 [internal.py:wandb_internal():87] W&B internal server running at pid: 155869, started at: 2022-12-10 18:26:28.734139
+2022-12-10 18:26:28,737 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: status
+2022-12-10 18:26:28,739 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: status
+2022-12-10 18:26:28,741 DEBUG   SenderThread:155869 [sender.py:send():303] send: header
+2022-12-10 18:26:28,742 INFO    WriterThread:155869 [datastore.py:open_for_write():75] open: /home/wenxuan/Stable-diffusion-for-book-cover-generation/Output_images/v12 inference/wandb/run-20221210_182628-zw0344ea/run-zw0344ea.wandb
+2022-12-10 18:26:28,742 DEBUG   SenderThread:155869 [sender.py:send():303] send: run
+2022-12-10 18:26:28,751 INFO    SenderThread:155869 [sender.py:_maybe_setup_resume():593] checking resume status for None/Stable-diffusion-for-book-cover-generation-Output_images_v12 inference/zw0344ea
+2022-12-10 18:26:33,744 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:26:38,745 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:26:43,746 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:26:48,747 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:26:53,749 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:26:58,750 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:27:03,752 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:27:08,753 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:27:13,754 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:27:18,756 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: keepalive
+2022-12-10 18:28:18,386 DEBUG   SenderThread:155869 [sender.py:send():303] send: exit
+2022-12-10 18:28:18,387 INFO    SenderThread:155869 [sender.py:send_exit():442] handling exit code: 1
+2022-12-10 18:28:18,387 INFO    SenderThread:155869 [sender.py:send_exit():444] handling runtime: 0
+2022-12-10 18:28:18,388 DEBUG   SenderThread:155869 [sender.py:send():303] send: exit
+2022-12-10 18:28:18,389 INFO    SenderThread:155869 [sender.py:send_exit():442] handling exit code: 1
+2022-12-10 18:28:18,389 INFO    SenderThread:155869 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-10 18:28:18,389 INFO    SenderThread:155869 [sender.py:send_exit():444] handling runtime: 0
+2022-12-10 18:28:18,390 INFO    SenderThread:155869 [sender.py:send_exit():450] send defer
+2022-12-10 18:28:18,390 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,390 INFO    SenderThread:155869 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-10 18:28:18,391 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 0
+2022-12-10 18:28:18,391 INFO    SenderThread:155869 [sender.py:send_exit():450] send defer
+2022-12-10 18:28:18,391 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,392 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 0
+2022-12-10 18:28:18,392 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,392 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 1
+2022-12-10 18:28:18,392 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 0
+2022-12-10 18:28:18,393 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,393 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,394 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 0
+2022-12-10 18:28:18,394 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 1
+2022-12-10 18:28:18,394 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 1
+2022-12-10 18:28:18,394 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,395 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 1
+2022-12-10 18:28:18,395 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,395 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 2
+2022-12-10 18:28:18,395 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 1
+2022-12-10 18:28:18,396 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,396 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,396 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 1
+2022-12-10 18:28:18,396 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 2
+2022-12-10 18:28:18,396 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 2
+2022-12-10 18:28:18,397 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,397 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 2
+2022-12-10 18:28:18,397 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,397 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 3
+2022-12-10 18:28:18,398 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 2
+2022-12-10 18:28:18,398 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,398 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,398 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 2
+2022-12-10 18:28:18,399 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 3
+2022-12-10 18:28:18,399 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 3
+2022-12-10 18:28:18,399 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,399 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 3
+2022-12-10 18:28:18,399 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 4
+2022-12-10 18:28:18,400 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,400 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,400 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 3
+2022-12-10 18:28:18,400 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 4
+2022-12-10 18:28:18,400 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,401 DEBUG   SenderThread:155869 [sender.py:send():303] send: summary
+2022-12-10 18:28:18,401 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 3
+2022-12-10 18:28:18,401 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 4
+2022-12-10 18:28:18,401 INFO    SenderThread:155869 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-10 18:28:18,401 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,402 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,402 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 4
+2022-12-10 18:28:18,402 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 4
+2022-12-10 18:28:18,402 DEBUG   SenderThread:155869 [sender.py:send():303] send: summary
+2022-12-10 18:28:18,402 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 5
+2022-12-10 18:28:18,403 INFO    SenderThread:155869 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-10 18:28:18,403 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,403 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,403 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 5
+2022-12-10 18:28:18,403 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 4
+2022-12-10 18:28:18,403 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,404 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 5
+2022-12-10 18:28:18,404 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 5
+2022-12-10 18:28:18,404 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 6
+2022-12-10 18:28:18,404 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,404 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 5
+2022-12-10 18:28:18,405 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,405 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,405 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 6
+2022-12-10 18:28:18,405 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 5
+2022-12-10 18:28:18,405 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,405 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 6
+2022-12-10 18:28:18,405 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 6
+2022-12-10 18:28:18,406 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 7
+2022-12-10 18:28:18,406 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,406 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,406 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 6
+2022-12-10 18:28:18,407 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 7
+2022-12-10 18:28:18,407 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,407 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,407 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 6
+2022-12-10 18:28:18,407 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 7
+2022-12-10 18:28:18,407 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 7
+2022-12-10 18:28:18,407 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 8
+2022-12-10 18:28:18,408 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,408 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,408 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 7
+2022-12-10 18:28:18,408 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 8
+2022-12-10 18:28:18,409 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,409 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,409 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 7
+2022-12-10 18:28:18,409 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 8
+2022-12-10 18:28:18,409 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 8
+2022-12-10 18:28:18,409 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 9
+2022-12-10 18:28:18,410 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,410 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,410 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 8
+2022-12-10 18:28:18,410 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 9
+2022-12-10 18:28:18,410 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,411 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,411 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 8
+2022-12-10 18:28:18,411 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 9
+2022-12-10 18:28:18,411 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 9
+2022-12-10 18:28:18,411 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 10
+2022-12-10 18:28:18,412 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,412 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,412 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 9
+2022-12-10 18:28:18,412 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 10
+2022-12-10 18:28:18,412 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,412 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,413 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 9
+2022-12-10 18:28:18,413 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 10
+2022-12-10 18:28:18,413 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 10
+2022-12-10 18:28:18,413 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 11
+2022-12-10 18:28:18,413 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,414 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,414 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 10
+2022-12-10 18:28:18,414 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 11
+2022-12-10 18:28:18,414 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,414 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,414 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 10
+2022-12-10 18:28:18,415 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 11
+2022-12-10 18:28:18,415 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 11
+2022-12-10 18:28:18,415 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 12
+2022-12-10 18:28:18,416 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,416 DEBUG   SenderThread:155869 [sender.py:send():303] send: final
+2022-12-10 18:28:18,416 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,416 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 11
+2022-12-10 18:28:18,416 DEBUG   SenderThread:155869 [sender.py:send():303] send: footer
+2022-12-10 18:28:18,417 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 12
+2022-12-10 18:28:18,417 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,417 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,417 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 11
+2022-12-10 18:28:18,417 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 12
+2022-12-10 18:28:18,417 INFO    SenderThread:155869 [sender.py:transition_state():463] send defer: 12
+2022-12-10 18:28:18,418 DEBUG   SenderThread:155869 [sender.py:send():303] send: final
+2022-12-10 18:28:18,419 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: defer
+2022-12-10 18:28:18,419 DEBUG   SenderThread:155869 [sender.py:send():303] send: footer
+2022-12-10 18:28:18,419 INFO    HandlerThread:155869 [handler.py:handle_request_defer():162] handle defer: 12
+2022-12-10 18:28:18,420 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: defer
+2022-12-10 18:28:18,420 INFO    SenderThread:155869 [sender.py:send_request_defer():459] handle sender defer: 12
+2022-12-10 18:28:18,421 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: poll_exit
+2022-12-10 18:28:18,421 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: poll_exit
+2022-12-10 18:28:18,421 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: poll_exit
+2022-12-10 18:28:18,422 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: poll_exit
+2022-12-10 18:28:18,423 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: poll_exit
+2022-12-10 18:28:18,423 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: poll_exit
+2022-12-10 18:28:18,424 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: server_info
+2022-12-10 18:28:18,425 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: server_info
+2022-12-10 18:28:18,425 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: get_summary
+2022-12-10 18:28:18,428 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: sampled_history
+2022-12-10 18:28:18,573 INFO    MainThread:155869 [wandb_run.py:_footer_history_summary_info():3408] rendering history
+2022-12-10 18:28:18,573 INFO    MainThread:155869 [wandb_run.py:_footer_history_summary_info():3440] rendering summary
+2022-12-10 18:28:18,574 INFO    MainThread:155869 [wandb_run.py:_footer_sync_info():3364] logging synced files
+2022-12-10 18:28:18,574 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: shutdown
+2022-12-10 18:28:18,575 INFO    HandlerThread:155869 [handler.py:finish():814] shutting down handler
+2022-12-10 18:28:19,416 INFO    WriterThread:155869 [datastore.py:close():279] close: /home/wenxuan/Stable-diffusion-for-book-cover-generation/Output_images/v12 inference/wandb/run-20221210_182628-zw0344ea/run-zw0344ea.wandb
+2022-12-10 18:28:19,573 INFO    SenderThread:155869 [sender.py:finish():1331] shutting down sender
+2022-12-10 18:28:19,578 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: poll_exit
+2022-12-10 18:28:19,578 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: poll_exit
+2022-12-10 18:28:19,579 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: server_info
+2022-12-10 18:28:19,580 DEBUG   SenderThread:155869 [sender.py:send_request():317] send_request: server_info
+2022-12-10 18:28:19,580 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: get_summary
+2022-12-10 18:28:19,585 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: sampled_history
+2022-12-10 18:28:19,734 INFO    MainThread:155869 [wandb_run.py:_footer_history_summary_info():3408] rendering history
+2022-12-10 18:28:19,734 INFO    MainThread:155869 [wandb_run.py:_footer_history_summary_info():3440] rendering summary
+2022-12-10 18:28:19,734 INFO    MainThread:155869 [wandb_run.py:_footer_sync_info():3364] logging synced files
+2022-12-10 18:28:19,735 DEBUG   HandlerThread:155869 [handler.py:handle_request():139] handle_request: shutdown
+2022-12-10 18:28:19,735 INFO    HandlerThread:155869 [handler.py:finish():814] shutting down handler
+2022-12-10 18:28:20,419 INFO    WriterThread:155869 [datastore.py:close():279] close: /home/wenxuan/Stable-diffusion-for-book-cover-generation/Output_images/v12 inference/wandb/run-20221210_182520-fbdkp0mg/run-fbdkp0mg.wandb
+2022-12-10 18:28:20,733 INFO    SenderThread:155869 [sender.py:finish():1331] shutting down sender
+2022-12-10 18:28:20,862 INFO    MainThread:155869 [internal.py:handle_exit():77] Internal process exited
+2022-12-10 18:28:20,863 INFO    MainThread:155869 [internal.py:handle_exit():77] Internal process exited
+2022-12-10 18:28:20,863 INFO    MainThread:155869 [internal.py:handle_exit():77] Internal process exited
+2022-12-10 18:28:20,864 WARNING MsgRouterThr:155869 [router.py:message_loop():74] EOFError seen in message_loop
