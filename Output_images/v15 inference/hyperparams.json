@@ -1,23 +1,29 @@
 {
     "seed": 42,
-    "epochs": 8,
+    "epochs": 2,
     "scale_lr": false,
     "templates": [
         "A {} book cover with author: {}, book title: {} ",
         "A {} book cover written by author: {} with book title: {} ",
+        "A beautiful {} book cover written by author: {} with book title: {}",
+        "A good-looking {} book cover written by author: {} with book title: {}",
+        "A amazing {} book cover written by author: {} with book title: {}",
+        "A plain {} book cover with author name: {}. The book title is: {} ",
         "A  {} book\u00a0cover\u00a0with\u00a0author name:{},\u00a0book\u00a0title:\u00a0{}",
+        "We\u00a0are\u00a0going\u00a0to\u00a0create\u00a0a\u00a0clear, {}, highly detailed book\u00a0cover\u00a0with\u00a0author\u00a0named\u00a0{},\u00a0and\u00a0book\u00a0title\u00a0is\u00a0'{}'",
+        "An intricate {}, book\u00a0cover\u00a0including\u00a0book\u00a0author:{},\u00a0book\u00a0title:\u00a0'{}'",
         "A detailed {} book cover with author: {} and book title: {} "
     ],
     "output_dir": "./model",
     "train_unet": false,
-    "weight_decay": 0.001,
+    "weight_decay": 0.01,
     "learning_rate": 5e-06,
-    "num_templates": 4,
+    "num_templates": 10,
     "include_summary": false,
     "train_batch_size": 1,
     "train_text_encoder": true,
     "training_dataset_size": 5000,
     "gradient_checkpointing": false,
-    "gradient_accumulation_steps": 10,
+    "gradient_accumulation_steps": 8,
     "pretrained_model_name_or_path": "CompVis/stable-diffusion-v1-4"
 }
