@@ -88,10 +88,11 @@ parser.add_argument("--version",type=str,help="wandb model version, e.g. v1",req
 parser.add_argument("--run_id",type=str,help="wandb run id of model",required=True)
 parser.add_argument("--data_root",default="./book dataset",help="path to read csv files")
 parser.add_argument("--batch_size",default=3,type=int,help="Generation batch size. For a GPU with 16gb memory, 4 is maximum.")
-parser.add_argument("--save_for__fid",default=False,help="whether to generate and save more images for FID score evaluation")
+parser.add_argument("--calc_fid",default=False,help="whether to generate and save more images for FID score evaluation")
 parser.add_argument("--num_imgs",type=int,default=4000,help="number of images to generate for computing FID score. Only to be specified if save_for_fid is True")
 parser.add_argument('--save_dir',type=str,default="./Output_images",help="Output dir for generated images.")
 parser.add_argument("--delete_model",type=bool,default=True,help="whether to delete downloaded model artifact to save storage")
+parser.add_argument("--fid_source_path",type=str,default="../book dataset/test_set_with_missing_images.dat",help="path or compressed numpy file")
 args = parser.parse_args()
 def image_grid(imgs, rows, cols):
     assert len(imgs) == rows*cols
@@ -125,7 +126,7 @@ set_seed(global_seed)
 
 # + id="34721mAdQs0L"
 #@title Setup the prompt templates for training 
-book_cover_templates=[#the first entry is for "highly legible text"
+training_templates=[#the first entry is for "highly legible text"
     "A {} book cover with author: {}, book title: {} ",
     #repeat some prompts to give model prior knowledge about book cover styles
     "A {} book cover written by author: {} with book title: {} ",
@@ -148,7 +149,7 @@ summary_placeholders=[
     ', and abstract {}',
     ",summary {}",
     ", the book describes that {}",
-    ", book discription {}",
+    ", book discription {}",
     ", main story {}",
     ", the book is mainly about {}",
     ", and main story {}",
@@ -162,7 +163,7 @@ test_templates=[#the first entry is for "highly legible text"
     "A {} simple book cover with author: {}, book title: {} ",
     "A {} vivid, fantastic book cover with author: {}, book title: {} ",
 #     "We are going to create a clear, {}, highly detailed book cover with author named {}, and book title is '{}'",
-    "An intricate {}, book cover including book author:{}, book title: '{}'",
+    "An intricate {}, book cover including book author:{}, book title: '{}'",
     "A detailed, {}, book cover written by author: {}, with title:{}",
     "A creative, colorful {}, book cover written by: {}. The book title is: {}, ",
     "A {} old-fashioned, plain book cover written by: {}. The book title is: {}",
@@ -176,9 +177,31 @@ for i in range(len(summary_placeholders),len(test_templates)):
   summary_placeholders+=[random.choice(summary_placeholders)]
 summary_placeholders=summary_placeholders[:len(test_templates)]
 
+def get_fid_images(
+  pipeline: StableDiffusionPipeline,
+  save_dir: str
+):
+  # os.makedirs(args.save_dir,exist_ok=True)
+  index = 0
+  df = pd.read_csv(args.data_root+"/df_test.csv")
+  while index < 4000:
+    torch.cuda.empty_cache()
+    
+    rows = df.iloc[index:index+args.batch_size]
+    name,author,title,description = (rows[df.columns[0]],rows['book_authors'], rows['book_title'], rows['book_desc'])
+    prompt = []
+    for i in range(len(rows)):
+      prompt += [random.choice(training_templates).format(author[i],title[i],description[i])]
+
+    images = pipeline(prompt,height=img_size,width=img_size,
+                            num_inference_steps=50, guidance_scale=7.5).images
+    for img in range(images):
+      img.save(os.path.join(args.save_dir,name+'.jpg'))
+    index += args.batch_size
+
 #fix random seed by fixing latents
 latents=None
-def generate(
+def visualize_prompts(
     pipeline: StableDiffusionPipeline,
     summerize=False,
     include_desc=False,
@@ -273,7 +296,6 @@ def generate(
                                     img_size/dpi*len(test_templates))
                           )
     fig.subplots_adjust(wspace=0, hspace=0)#combind with axes[i][j].set_aspect('auto'); remove spacing
-    # plt.suptitle(,y=0.89)
 
     ###fix random seed by fixing latents
     if include_desc:
@@ -394,51 +416,57 @@ if os.path.isdir(args.data_root+"/"+wandb_model.split(":")[-1]+" inference"):
   print("Save dir already exists.")
 save_dir = args.save_dir+"/"+wandb_model.split(":")[-1]+" inference"
 os.makedirs(save_dir,exist_ok=True)
-print(f"Visualization results will be saved in {save_dir}")
+print(f"Output will be saved in {save_dir}")
 print(f"model running on device {args.device}")
+if args.calc_fid:
+  print("Generating images on the test set to compute FID score......")
+  get_fid_images(pipeline, save_dir)
+  import fid
+  paths = (save_dir,)
+  fid.calculate_fid_given_paths(paths, inception_path)
+else:
+  print("Generating a few images for quick comparison........")
+  visualize_prompts(pipeline,summerize=False,samples_per_prompt=4,
+                    include_desc=False,legible_prompt=False,
+                    batch_generate=True,save_to_drive=True,
+                    save_dir=save_dir)
+                    
+  visualize_prompts(pipeline,summerize=True,include_desc=True,
+                    samples_per_prompt=4,
+                    legible_prompt=False,save_to_drive=True,
+                    save_dir=save_dir)
 
-generate(pipeline,summerize=False,samples_per_prompt=4,
-                  include_desc=False,legible_prompt=False,
-                  batch_generate=True,save_to_drive=True,
-                  save_dir=save_dir)
-                  
-generate(pipeline,summerize=True,include_desc=True,
-                  samples_per_prompt=4,
-                  legible_prompt=False,save_to_drive=True,
-                  save_dir=save_dir)
+  visualize_prompts(pipeline,summerize=False,samples_per_prompt=4,
+                    include_desc=True,legible_prompt=False,
+                    batch_generate=True,save_to_drive=True,
+                    save_dir=save_dir)
+                    
+  ###save training hyperparameters to json 
+  json.dump(dict(wandb.run.config),open(os.path.join(save_dir,"hyperparams.json"),"w"),indent=4)
 
-generate(pipeline,summerize=False,samples_per_prompt=4,
-                  include_desc=True,legible_prompt=False,
-                  batch_generate=True,save_to_drive=True,
-                  save_dir=save_dir)
-                  
-###save training hyperparameters to json 
-json.dump(dict(wandb.run.config),open(os.path.join(save_dir,"hyperparams.json"),"w"),indent=4)
+  ### Just for fun
+  import gc
+  gc.collect()
+  torch.cuda.empty_cache()
+  torch.cuda.memory_allocated()
 
-### Just for fun
-import gc
-gc.collect()
-torch.cuda.empty_cache()
-torch.cuda.memory_allocated()
+  from torch import autocast
+  # prompt = "a grafitti in a wall with a <cat-toy> on it" #@param {type:"string"}
+  prompt="Clear, highly detailed book cover with title: Badger's love story and author: Wenxuan Tan"
+  # prompt="Clear, highly detailed book cover with description "+book_df.loc[7202]['book_desc']
 
-from torch import autocast
-# prompt = "a grafitti in a wall with a <cat-toy> on it" #@param {type:"string"}
-prompt="Clear, highly detailed book cover with title: Badger's love story and author: Wenxuan Tan"
-# prompt="Clear, highly detailed book cover with description "+book_df.loc[7202]['book_desc']
+  num_cols = 2 #@param {type:"number"}
+  num_rows = 2 #@param {type:"number"}
+  width=512
+  height=512
+  all_images = [] 
 
-num_cols = 2 #@param {type:"number"}
-num_rows = 2 #@param {type:"number"}
-width=512
-height=512
-all_images = [] 
+  for _ in range(num_rows):
+      with autocast("cuda"):
+          #batch generation
+          for i in range(num_rows):
+            images = pipeline([prompt]*num_cols,height=height,width=width,num_inference_steps=50, guidance_scale=7.5).images
+            all_images.extend(images)
+  grid = image_grid(all_images, num_rows, num_cols)
+  wandb.log({"For_fun":wandb.Image(grid)})
 
-for _ in range(num_rows):
-    with autocast("cuda"):
-        #batch generation
-        for i in range(num_rows):
-          images = pipeline([prompt]*num_cols,height=height,width=width,num_inference_steps=50, guidance_scale=7.5).images
-          all_images.extend(images)
-grid = image_grid(all_images, num_rows, num_cols)
-wandb.log({"For_fun":wandb.Image(grid)})
-
-####
