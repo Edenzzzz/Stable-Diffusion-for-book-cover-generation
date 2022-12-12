@@ -20,7 +20,9 @@ from __future__ import absolute_import, division, print_function
 import numpy as np
 import os
 import gzip, pickle
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
+tf.disable_eager_execution()
 from imageio import imread
 from scipy import linalg
 import pathlib
