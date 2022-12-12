@@ -192,7 +192,7 @@ def get_fid_images(
     
     rows = df.iloc[index:index+args.batch_size]
     #legible_text is a place_holder
-    name,legible_text,author,title = (rows[df.columns[0]],"",rows['book_authors'], rows['book_title'])
+    name,legible_text,author,title = (str(rows[df.columns[0]]),"",rows['book_authors'], rows['book_title'])
     prompt = []
     for i in range(len(rows)):
       prompt += [random.choice(training_templates).format(legible_text,author[i],title[i])]
@@ -200,8 +200,10 @@ def get_fid_images(
     images = pipeline(prompt,height=args.img_size,width=args.img_size,
                             num_inference_steps=50, guidance_scale=7.5).images
     for img in images:
-      print(os.path.join(args.save_dir,name+'.png'))
-      img.save(os.path.join(args.save_dir,name+'.png'))
+      print(os.path.join(args.save_dir,name+'.jpg'))
+      print(args.save_dir)
+      print(name)
+      img.save(os.path.join(args.save_dir,name+'.jpg'))
     #increment index  
     index += args.batch_size
   print("________________________________________")
