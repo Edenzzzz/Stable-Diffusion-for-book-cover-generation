@@ -87,7 +87,7 @@ parser.add_argument("--device",help="GPU device number, e.g. cuda:0",default="cu
 parser.add_argument("--version",type=str,help="wandb model version, e.g. v1",required=True)
 parser.add_argument("--run_id",type=str,help="wandb run id of model",required=True)
 parser.add_argument("--data_root",default="./book dataset",help="path to read csv files")
-parser.add_argument("--batch_size",default=3,type=int,help="Generation batch size. For a GPU with 16gb memory, 4 is maximum.")
+parser.add_argument("--batch_size",default=2,type=int,help="Generation batch size. For a GPU with 16gb memory, 4 is maximum.")
 parser.add_argument("--calc_fid",default=False,help="whether to generate and save more images for FID score evaluation")
 parser.add_argument("--num_imgs",type=int,default=4000,help="number of images to generate for computing FID score. Only to be specified if save_for_fid is True")
 parser.add_argument('--save_dir',type=str,default="./Output_images",help="Output dir for generated images.")
@@ -182,7 +182,7 @@ def get_fid_images(
   save_dir: str
 ):
   index = 0
-  num_generated = os.path.listdir(save_dir)
+  num_generated = os.listdir(save_dir)
   df = pd.read_csv(args.data_root+"/df_test.csv")[num_generated:]
   print(f"{num_generated} images already generated. Skipping them... ")
 
