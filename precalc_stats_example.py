@@ -23,7 +23,7 @@ import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--data_path",default="/home/wenxuan/book dataset",help="dir that contains the .dat file")
 parser.add_argument("--compress_image",default=False)
-parser.add_argument("--calc_stats",default=False)
+parser.add_argument("--calc_stats",default=True)
 args = parser.parse_args()
 data_path = args.data_path # set path to training set images
 # data_path="/content/drive/MyDrive/book dataset"
@@ -132,4 +132,5 @@ def calc_stats():
 if args.compress_image:
     compress_image(set='df_test.csv',size=4000)
 if args.calc_stats:
+    print("-------------------------------------")
     calc_stats()
