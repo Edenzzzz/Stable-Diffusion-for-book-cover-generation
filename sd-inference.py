@@ -403,13 +403,13 @@ def visualize_prompts(
 
 if args.version!="v0":###v0 is pretrained model
   ### Fine tune result evaluation
-  wandb_model = "stable_diffusion_model:"+args.version
+  model_name = "stable_diffusion_model:"+args.version
   noise_scheduler = DDIMScheduler(beta_start=0.00085, beta_end=0.012, beta_schedule="scaled_linear", clip_sample=False, set_alpha_to_one=False)
   run_id = args.run_id
 
   ###load from wandb checkpoint
-  wandb.init(project="book_cover_generation",id=run_id,name="stable_diffusion "+wandb_model.split(":")[-1]+"+inference",resume='must')
-  my_model_artifact = wandb.run.use_artifact(wandb_model)
+  wandb.init(project="book_cover_generation",id=run_id,name="stable_diffusion "+model_name.split(":")[-1]+"+inference",resume='must')
+  my_model_artifact = wandb.run.use_artifact(model_name)
   # Download model weights to a folder and return the path
   model_dir = my_model_artifact.download()
 
@@ -426,18 +426,19 @@ if args.version!="v0":###v0 is pretrained model
   if args.delete_model:
     subprocess.run(["rm", "-r","artifacts"])
   print("------------------------------------------")
-  print(f'Load {wandb_model} from wandb cloud checkpoint')
+  print(f'Load {model_name} from wandb cloud checkpoint')
 else:### version==v0, download pretrained model from huggingface
   print('Load pretrained model from huggingface') 
   model_id = "runwayml/stable-diffusion-v1-5"
+  model_name = "stable_diffusion_model:v0"
   pipeline = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16, revision="fp16").to(args.device)
   
-if os.path.isdir(args.data_root+"/"+wandb_model.split(":")[-1]+" inference"):
+if os.path.isdir(args.data_root+"/"+model_name.split(":")[-1]+" inference"):
   print("Save dir already exists.")
 
   
 
-save_dir = args.save_dir+"/"+wandb_model.split(":")[-1]+" inference"
+save_dir = args.save_dir+"/"+model_name.split(":")[-1]+" inference"
 os.makedirs(save_dir,exist_ok=True)
 print(f"Output will be saved in {save_dir}")
 print(f"model running on device {args.device}")
