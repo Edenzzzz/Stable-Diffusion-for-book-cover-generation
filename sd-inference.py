@@ -134,7 +134,7 @@ training_templates=[#the first entry is for "highly legible text"
 #     "A {} simple book cover with author {}, book title {} ",
 #     "A plain {} book cover with author {}. The book title is{} ",
 #     "A {} vivid book cover with author {}, book title {} ",
-    "A  {} book cover with author name:{}, book title: {}",
+    "A  {} book cover with author name: {}, book title: {}",
 # #     "We are going to create a clear, {}, highly detailed book cover with author named {}, and book title is '{}'",
 #     "An intricate {}, book cover including book author:{}, book title: '{}'",
 #     "A detailed, {}, book cover with {} ,written by author {}",
@@ -148,9 +148,9 @@ training_templates=[#the first entry is for "highly legible text"
 #TODO: add more to match the number of templates
 summary_placeholders=[
     ', and abstract {}',
-    ",summary {}",
-    ", the book describes that {}",
-    ", book discription {}",
+    ",summary {}}",
+    ", the book describes that {}",
+    ", book discription {}",
     ", main story {}",
     ", the book is mainly about {}",
     ", and main story {}",
@@ -164,7 +164,7 @@ test_templates=[#the first entry is for "highly legible text"
     "A {} simple book cover with author: {}, book title: {} ",
     "A {} vivid, fantastic book cover with author: {}, book title: {} ",
 #     "We are going to create a clear, {}, highly detailed book cover with author named {}, and book title is '{}'",
-    "An intricate {}, book cover including book author:{}, book title: '{}'",
+    "An intricate {}, book cover including book author:{}, book title: '{}'",
     "A detailed, {}, book cover written by author: {}, with title:{}",
     "A creative, colorful {}, book cover written by: {}. The book title is: {}, ",
     "A {} old-fashioned, plain book cover written by: {}. The book title is: {}",
@@ -200,11 +200,7 @@ def get_fid_images(
     images = pipeline(prompt,height=args.img_size,width=args.img_size,
                             num_inference_steps=50, guidance_scale=7.5).images
     for idx,img in enumerate(images):
-      print(prompt)
-      print()
-      print(name)
-      print()
-      print(name.iloc[idx])
+      print(type(name.iloc[idx]))
       img.save(os.path.join(args.save_dir,name.iloc[idx]+'.jpg'))
     #increment index  
     index += args.batch_size
