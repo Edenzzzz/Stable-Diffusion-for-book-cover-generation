@@ -182,7 +182,7 @@ def get_fid_images(
   save_dir: str
 ):
   index = 0
-  num_generated = os.listdir(save_dir)
+  num_generated = len(os.listdir(save_dir))
   df = pd.read_csv(args.data_root+"/df_test.csv").iloc[num_generated:]
   print(f"{num_generated} images already generated. Skipping them... ")
 
