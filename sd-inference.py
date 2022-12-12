@@ -195,7 +195,7 @@ def get_fid_images(
     prompt = []
     for i in range(len(rows)):
       prompt += [random.choice(training_templates).format(author[i],title[i],description[i])]
-
+    print(prompt)
     images = pipeline(prompt,height=args.img_size,width=args.img_size,
                             num_inference_steps=50, guidance_scale=7.5).images
     for img in range(images):
@@ -204,6 +204,8 @@ def get_fid_images(
     index += args.batch_size
   print("________________________________________")
   print(f"Finished generating {args.num_imgs-num_generated} images! Nice job, GPU! (pat it)")
+
+
 
 #fix random seed by fixing latents
 latents=None
@@ -352,7 +354,6 @@ def visualize_prompts(
         if batch_generate:#batch generation
           index = 0
           while index < len(text):
-            print(text[index:index+args.batch_size])
             images += pipeline(text[index:index+args.batch_size],height=img_size,width=img_size,
                             num_inference_steps=50, guidance_scale=7.5,
                             latents=latents[index:index+args.batch_size]).images
