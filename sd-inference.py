@@ -401,34 +401,39 @@ def visualize_prompts(
     wandb.log({"examples":wandb.Image(image)})
     subprocess.run(["rm", "checkpoint_image_sample.jpg"])
 
+if args.version!="v0":###v0 is pretrained model
+  ### Fine tune result evaluation
+  wandb_model = "stable_diffusion_model:"+args.version
+  noise_scheduler = DDIMScheduler(beta_start=0.00085, beta_end=0.012, beta_schedule="scaled_linear", clip_sample=False, set_alpha_to_one=False)
+  run_id = args.run_id
 
-### Fine tune result evaluation
-wandb_model = "stable_diffusion_model:"+args.version
-noise_scheduler = DDIMScheduler(beta_start=0.00085, beta_end=0.012, beta_schedule="scaled_linear", clip_sample=False, set_alpha_to_one=False)
-run_id = args.run_id
+  ###load from wandb checkpoint
+  wandb.init(project="book_cover_generation",id=run_id,name="stable_diffusion "+wandb_model.split(":")[-1]+"+inference",resume='must')
+  my_model_artifact = wandb.run.use_artifact(wandb_model)
+  # Download model weights to a folder and return the path
+  model_dir = my_model_artifact.download()
 
-###load from wandb checkpoint
-wandb.init(project="book_cover_generation",id=run_id,name="stable_diffusion "+wandb_model.split(":")[-1]+"+inference",resume='must')
-my_model_artifact = wandb.run.use_artifact(wandb_model)
-# Download model weights to a folder and return the path
-model_dir = my_model_artifact.download()
+  # Load your Hugging Face model from that folder
+  #  using the same model class
+  pipeline = StableDiffusionPipeline.from_pretrained(
+        model_dir,
+        torch_dtype=torch.float16,
+        safety_checker=None,
+        scheduler = noise_scheduler,
+        ).to(args.device)
 
-# Load your Hugging Face model from that folder
-#  using the same model class
-pipeline = StableDiffusionPipeline.from_pretrained(
-      model_dir,
-      torch_dtype=torch.float16,
-      safety_checker=None,
-      scheduler = noise_scheduler,
-      ).to(args.device)
-
-#delete downloaded model to save storage
-if args.delete_model:
-  subprocess.run(["rm", "-r","artifacts"])
-print("------------------------------------------")
-print(f'Load {wandb_model} from wandb cloud checkpoint')
+  #delete downloaded model to save storage
+  if args.delete_model:
+    subprocess.run(["rm", "-r","artifacts"])
+  print("------------------------------------------")
+  print(f'Load {wandb_model} from wandb cloud checkpoint')
 if os.path.isdir(args.data_root+"/"+wandb_model.split(":")[-1]+" inference"):
   print("Save dir already exists.")
+else:### version==v0, download pretrained model from huggingface 
+  model_id = "runwayml/stable-diffusion-v1-5"
+  pipeline = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16, revision="fp16").to(args.device)
+  print('Load pretrained model from huggingface')
+  
 save_dir = args.save_dir+"/"+wandb_model.split(":")[-1]+" inference"
 os.makedirs(save_dir,exist_ok=True)
 print(f"Output will be saved in {save_dir}")
