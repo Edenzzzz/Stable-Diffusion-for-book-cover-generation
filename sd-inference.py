@@ -49,7 +49,7 @@ login("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")
 # + colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 11618, "status": "ok", "timestamp": 1670617253194, "user": {"displayName": "Eden Tan", "userId": "11491147198112718283"}, "user_tz": 360} id="ZNincXUlQs0K" outputId="d7c71e46-3207-49f1-9074-5d481b7d7eb6"
 #@title Import required libraries
 # # %pip install protobuf==3.20.* #For deepspe
-import cv2
+
 import argparse
 import itertools
 import math
@@ -200,9 +200,12 @@ def get_fid_images(
     images = pipeline(prompt,height=args.img_size,width=args.img_size,
                             num_inference_steps=50, guidance_scale=7.5).images
     for idx,img in enumerate(images):
-      img = np.asarray(img)
-      cv2.imwrite(os.path.join(args.save_dir,name.iloc[idx]+'.jpg'),cv2.COLOR_RGB2BGR)
-      # img.save()
+      print(prompt)
+      print()
+      print(name)
+      print()
+      print(name.iloc[idx])
+      img.save(os.path.join(args.save_dir,name.iloc[idx]+'.jpg'))
     #increment index  
     index += args.batch_size
   print("________________________________________")
