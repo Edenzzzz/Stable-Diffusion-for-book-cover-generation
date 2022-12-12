@@ -199,11 +199,9 @@ def get_fid_images(
     # print(prompt)
     images = pipeline(prompt,height=args.img_size,width=args.img_size,
                             num_inference_steps=50, guidance_scale=7.5).images
-    for img in images:
+    for idx.img in enumerate(images):
       print(os.path.join(args.save_dir,name+'.jpg'))
-      print(args.save_dir)
-      print(name)
-      img.save(os.path.join(args.save_dir,name+'.jpg'))
+      img.save(os.path.join(args.save_dir,name[idx]+'.jpg'))
     #increment index  
     index += args.batch_size
   print("________________________________________")
