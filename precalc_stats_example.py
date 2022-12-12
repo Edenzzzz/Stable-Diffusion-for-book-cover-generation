@@ -7,7 +7,7 @@ import fid
 import tqdm
 # import tensorflow.compat.v1 as tf
 # tf.disable_v2_behavior()
-
+import tensorflow as tf
 from cv2 import imread,resize,INTER_CUBIC,cvtColor,COLOR_BGR2RGB
 import pandas as pd
 import numpy.lib as npl
