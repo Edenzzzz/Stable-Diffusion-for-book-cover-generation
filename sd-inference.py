@@ -267,7 +267,7 @@ def visualize_prompts(
       no summerization can be done without book description!" 
     if summerize==False and include_desc==True:
       batch_generate = False
-      print("Setting batch_generate to false since adding description without summerizing will cause batch tensors to have different lenght. This is probably a bug.")
+      print("Setting batch_generate to false since adding description without summerizing will cause batch tensors to have different length. This is probably a bug.")
     assert save_dir and save_to_drive and os.path.isdir(save_dir), "Must specify save_to_drive=True and save_dir with a valid dir"
     import gc
     gc.collect()
@@ -332,6 +332,7 @@ def visualize_prompts(
                                           clean_up_tokenization_spaces=False)[0]#batch_decode returns a list of strings; here len(list)=1, only one input string
             del summary_ids,inputs                             
             torch.cuda.empty_cache()
+
         template=test_templates[i]
         if include_desc:
           template+=summary_placeholders[i]#append new prompt to list
@@ -351,6 +352,7 @@ def visualize_prompts(
         if batch_generate:#batch generation
           index = 0
           while index < len(text):
+            print(text[index:index+args.batch_size])
             images += pipeline(text[index:index+args.batch_size],height=img_size,width=img_size,
                             num_inference_steps=50, guidance_scale=7.5,
                             latents=latents[index:index+args.batch_size]).images
