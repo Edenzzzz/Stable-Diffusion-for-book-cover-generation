@@ -5,8 +5,8 @@ import warnings
 import numpy as np
 import fid
 import tqdm
-import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
+# import tensorflow.compat.v1 as tf
+# tf.disable_v2_behavior()
 
 from cv2 import imread,resize,INTER_CUBIC,cvtColor,COLOR_BGR2RGB
 import pandas as pd
@@ -21,9 +21,9 @@ import argparse
 # PATHS
 ########
 parser = argparse.ArgumentParser()
-parser.add_argument("data_path",default="/home/wenxuan/book dataset",help="dir that contains the .dat file")
-parser.add_argument("compress_image",default=False)
-parser.add_argument("calc_stats",default=False)
+parser.add_argument("--data_path",default="/home/wenxuan/book dataset",help="dir that contains the .dat file")
+parser.add_argument("--compress_image",default=False)
+parser.add_argument("--calc_stats",default=False)
 args = parser.parse_args()
 data_path = args.data_path # set path to training set images
 # data_path="/content/drive/MyDrive/book dataset"

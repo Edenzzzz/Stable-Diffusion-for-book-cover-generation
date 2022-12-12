@@ -92,7 +92,7 @@ parser.add_argument("--calc_fid",default=False,help="whether to generate and sav
 parser.add_argument("--num_imgs",type=int,default=4000,help="number of images to generate for computing FID score. Only to be specified if save_for_fid is True")
 parser.add_argument('--save_dir',type=str,default="./Output_images",help="Output dir for generated images.")
 parser.add_argument("--delete_model",type=bool,default=True,help="whether to delete downloaded model artifact to save storage")
-parser.add_argument("--fid_source_path",type=str,default="../book dataset/test_set_with_missing_images.dat",help="path or compressed numpy file")
+parser.add_argument("--fid_stats_path",type=str,default="../book dataset/fid_stats.npz",help="path or compressed numpy file calculated from the original dataset")
 args = parser.parse_args()
 def image_grid(imgs, rows, cols):
     assert len(imgs) == rows*cols
@@ -181,10 +181,12 @@ def get_fid_images(
   pipeline: StableDiffusionPipeline,
   save_dir: str
 ):
-  # os.makedirs(args.save_dir,exist_ok=True)
   index = 0
-  df = pd.read_csv(args.data_root+"/df_test.csv")
-  while index < 4000:
+  num_generated = os.path.listdir(save_dir)
+  df = pd.read_csv(args.data_root+"/df_test.csv")[num_generated:]
+  print(f"{num_generated} images already generated. Skipping them... ")
+
+  while index < args.num_imgs-num_generated:
     torch.cuda.empty_cache()
     
     rows = df.iloc[index:index+args.batch_size]
@@ -197,7 +199,10 @@ def get_fid_images(
                             num_inference_steps=50, guidance_scale=7.5).images
     for img in range(images):
       img.save(os.path.join(args.save_dir,name+'.jpg'))
+    #increment index  
     index += args.batch_size
+  print("________________________________________")
+  print(f"Finished generating {args.num_imgs-num_generated} images! Nice job, GPU! (pat it)")
 
 #fix random seed by fixing latents
 latents=None
@@ -418,11 +423,13 @@ save_dir = args.save_dir+"/"+wandb_model.split(":")[-1]+" inference"
 os.makedirs(save_dir,exist_ok=True)
 print(f"Output will be saved in {save_dir}")
 print(f"model running on device {args.device}")
+
+
 if args.calc_fid:
   print("Generating images on the test set to compute FID score......")
   get_fid_images(pipeline, save_dir)
   import fid
-  paths = (save_dir,)
+  paths = (save_dir,args.fid_stats_path)
   fid.calculate_fid_given_paths(paths, inception_path)
 else:
   print("Generating a few images for quick comparison........")
