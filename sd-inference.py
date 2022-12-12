@@ -201,7 +201,7 @@ def get_fid_images(
                             num_inference_steps=50, guidance_scale=7.5).images
     for idx,img in enumerate(images):
       #be careful here, name.iloc[idx] is of type numpy.int64
-      img.save(os.path.join(args.save_dir,str(name.iloc[idx])+'.jpg'))
+      img.save(os.path.join(save_dir,str(name.iloc[idx])+'.jpg'))
     #increment index  
     index += args.batch_size
   print("________________________________________")
