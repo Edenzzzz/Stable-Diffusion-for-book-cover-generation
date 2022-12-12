@@ -197,11 +197,15 @@ def get_fid_images(
     for i in range(len(rows)):
       prompt += [random.choice(training_templates).format(legible_text,str(author.iloc[i]),str(title.iloc[i]))]
     # print(prompt)
-    images = pipeline(prompt,height=args.img_size,width=args.img_size,
-                            num_inference_steps=50, guidance_scale=7.5).images
-    for idx,img in enumerate(images):
-      #be careful here, name.iloc[idx] is of type numpy.int64
-      img.save(os.path.join(save_dir,str(name.iloc[idx])+'.jpg'))
+    try:
+      images = pipeline(prompt,height=args.img_size,width=args.img_size,
+                              num_inference_steps=50, guidance_scale=7.5).images
+      for idx,img in enumerate(images):
+        #be careful here, name.iloc[idx] is of type numpy.int64
+        img.save(os.path.join(save_dir,str(name.iloc[idx])+'.jpg'))
+    except Exception as e:
+      print("Encountered exception, skipping this iteration")
+      print(f"The problematic prompts are {prompt} ")
     #increment index  
     index += args.batch_size
   print("________________________________________")
