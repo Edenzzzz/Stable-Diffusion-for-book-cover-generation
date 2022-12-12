@@ -200,10 +200,7 @@ def get_fid_images(
     images = pipeline(prompt,height=args.img_size,width=args.img_size,
                             num_inference_steps=50, guidance_scale=7.5).images
     for img in images:
-      print(type(img))
-      print()
-      print(img.shape)
-      img.save(os.path.join(args.save_dir,name+'.jpg'))
+      img.save(os.path.join(args.save_dir,name+'.png'))
     #increment index  
     index += args.batch_size
   print("________________________________________")
