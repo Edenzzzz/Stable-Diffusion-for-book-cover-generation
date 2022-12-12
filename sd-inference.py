@@ -401,10 +401,10 @@ def visualize_prompts(
     wandb.log({"examples":wandb.Image(image)})
     subprocess.run(["rm", "checkpoint_image_sample.jpg"])
 
+noise_scheduler = DDIMScheduler(beta_start=0.00085, beta_end=0.012, beta_schedule="scaled_linear", clip_sample=False, set_alpha_to_one=False)
 if args.version!="v0":###v0 is pretrained model
   ### Fine tune result evaluation
   model_name = "stable_diffusion_model:"+args.version
-  noise_scheduler = DDIMScheduler(beta_start=0.00085, beta_end=0.012, beta_schedule="scaled_linear", clip_sample=False, set_alpha_to_one=False)
   run_id = args.run_id
 
   ###load from wandb checkpoint
@@ -431,7 +431,13 @@ else:### version==v0, download pretrained model from huggingface
   print('Load pretrained model from huggingface') 
   model_id = "runwayml/stable-diffusion-v1-5"
   model_name = "stable_diffusion_model:v0"
-  pipeline = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16, revision="fp16").to(args.device)
+  pipeline = StableDiffusionPipeline.from_pretrained(
+    model_id, 
+    torch_dtype=torch.float16, 
+    revision="fp16",
+    safety_checker=None,
+    scheduler = noise_scheduler,
+    ).to(args.device)
   
 if os.path.isdir(args.data_root+"/"+model_name.split(":")[-1]+" inference"):
   print("Save dir already exists.")
