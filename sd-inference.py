@@ -428,6 +428,9 @@ print(f"model running on device {args.device}")
 if args.calc_fid:
   print("Generating images on the test set to compute FID score......")
   get_fid_images(pipeline, save_dir)
+  if not os.path.isfile(args.fid_stats_path):
+    print(f"FID precalculated stats doesn't exist at {args.fid_stats_path}! Exiting program....")
+    exit()
   import fid
   paths = (save_dir,args.fid_stats_path)
   fid_score = fid.calculate_fid_given_paths(paths, None)
