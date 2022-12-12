@@ -427,12 +427,14 @@ if args.version!="v0":###v0 is pretrained model
     subprocess.run(["rm", "-r","artifacts"])
   print("------------------------------------------")
   print(f'Load {wandb_model} from wandb cloud checkpoint')
-if os.path.isdir(args.data_root+"/"+wandb_model.split(":")[-1]+" inference"):
-  print("Save dir already exists.")
 else:### version==v0, download pretrained model from huggingface
   print('Load pretrained model from huggingface') 
   model_id = "runwayml/stable-diffusion-v1-5"
   pipeline = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16, revision="fp16").to(args.device)
+  
+if os.path.isdir(args.data_root+"/"+wandb_model.split(":")[-1]+" inference"):
+  print("Save dir already exists.")
+
   
 
 save_dir = args.save_dir+"/"+wandb_model.split(":")[-1]+" inference"
