@@ -1,0 +1,39 @@
+
+You have passed `None` for safety_checker to disable its functionality in <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'>. Note that this might lead to problems when using <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> and is not recommended.
+You have disabled the safety checker for <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> by passing `safety_checker=None`. Ensure that you abide to the conditions of the Stable Diffusion license and do not expose unfiltered results in services or applications open to the public. Both the diffusers team and Hugging Face strongly recommend to keep the safety filter enabled in all public facing circumstances, disabling it only for use-cases that involve analyzing network behavior or auditing its results. For more information, please have a look at https://github.com/huggingface/diffusers/pull/254 .
+Load stable_diffusion_model:v14 from wandb cloud checkpoint
+Output will be saved in ../book dataset/v14 inference
+model running on device cuda:0
+Generating images on the test set to compute FID score......
+0 images already generated. Skipping them...
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:09<00:00,  5.41it/s]
+Traceback (most recent call last):
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/pandas/core/indexes/range.py", line 391, in get_loc
+    return self._range.index(new_key)
+ValueError: 0 is not in range
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 436, in <module>
+    get_fid_images(pipeline, save_dir)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 198, in get_fid_images
+    prompt += [random.choice(training_templates).format(legible_text,author[i],title[i])]
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/pandas/core/series.py", line 981, in __getitem__
+    return self._get_value(key)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/pandas/core/series.py", line 1089, in _get_value
+    loc = self.index.get_loc(label)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/pandas/core/indexes/range.py", line 393, in get_loc
+    raise KeyError(key) from err
+KeyError: 0
+../book dataset/0    43099
+1    43100
+Name: Unnamed: 0, dtype: int64.jpg
+../book dataset/0    43099
+1    43100
+Name: Unnamed: 0, dtype: int64.jpg
