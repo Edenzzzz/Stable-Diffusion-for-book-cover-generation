@@ -27,7 +27,7 @@ parser.add_argument("--calc_stats",default=True)
 parser.add_argument("--device",default="cuda:0")
 args = parser.parse_args()
 data_path = args.data_path # set path to training set images
-os.environ["CUDA_VISIBLE_DEVICES"] = int(parser.device[-1])
+os.environ["CUDA_VISIBLE_DEVICES"] = int(args.device[-1])
 # data_path="/content/drive/MyDrive/book dataset"
 output_path = os.path.join(data_path,'fid_stats.npz') # path for where to store the statistics
 # path to store compressed training dataset
