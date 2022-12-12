@@ -92,6 +92,7 @@ parser.add_argument("--calc_fid",default=False,help="whether to generate and sav
 parser.add_argument("--num_imgs",type=int,default=4000,help="number of images to generate for computing FID score. Only to be specified if save_for_fid is True")
 parser.add_argument('--save_dir',type=str,default="./Output_images",help="Output dir for generated images.")
 parser.add_argument("--delete_model",type=bool,default=True,help="whether to delete downloaded model artifact to save storage")
+parser.add_argument("--img_size",type=int,default=512,help="Size of generated image")
 parser.add_argument("--fid_stats_path",type=str,default="../book dataset/fid_stats.npz",help="path or compressed numpy file calculated from the original dataset")
 args = parser.parse_args()
 def image_grid(imgs, rows, cols):
@@ -195,7 +196,7 @@ def get_fid_images(
     for i in range(len(rows)):
       prompt += [random.choice(training_templates).format(author[i],title[i],description[i])]
 
-    images = pipeline(prompt,height=img_size,width=img_size,
+    images = pipeline(prompt,height=args.img_size,width=args.img_size,
                             num_inference_steps=50, guidance_scale=7.5).images
     for img in range(images):
       img.save(os.path.join(args.save_dir,name+'.jpg'))
@@ -213,7 +214,7 @@ def visualize_prompts(
     max_length=15,
     legible_prompt=True,
     samples_per_prompt=4,
-    img_size=512,
+    img_size=args.img_size,
     inference_steps=75,
     save_to_drive=False,
     save_dir=None,
@@ -471,8 +472,8 @@ else:
 
   num_cols = 2 #@param {type:"number"}
   num_rows = 2 #@param {type:"number"}
-  width=512
-  height=512
+  width=args.img_size
+  height=args.img_size
   all_images = [] 
 
   for _ in range(num_rows):
