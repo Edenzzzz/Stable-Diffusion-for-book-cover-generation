@@ -430,7 +430,11 @@ if args.calc_fid:
   get_fid_images(pipeline, save_dir)
   import fid
   paths = (save_dir,args.fid_stats_path)
-  fid.calculate_fid_given_paths(paths, inception_path)
+  fid_score = fid.calculate_fid_given_paths(paths, None)
+  print(f"FID score: {fid_score}" )
+  with open(os.path.join(save_dir,"fid_score.txt"),"w") as f:
+    f.write(f"FID score: {fid_score}")
+  
 else:
   print("Generating a few images for quick comparison........")
   visualize_prompts(pipeline,summerize=False,samples_per_prompt=4,
