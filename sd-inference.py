@@ -200,8 +200,8 @@ def get_fid_images(
     images = pipeline(prompt,height=args.img_size,width=args.img_size,
                             num_inference_steps=50, guidance_scale=7.5).images
     for idx,img in enumerate(images):
-      print(type(name.iloc[idx]))
-      img.save(os.path.join(args.save_dir,name.iloc[idx]+'.jpg'))
+      #be careful here, name.iloc[idx] is of type numpy.int64
+      img.save(os.path.join(args.save_dir,str(name.iloc[idx])+'.jpg'))
     #increment index  
     index += args.batch_size
   print("________________________________________")
