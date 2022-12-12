@@ -191,11 +191,12 @@ def get_fid_images(
     torch.cuda.empty_cache()
     
     rows = df.iloc[index:index+args.batch_size]
-    name,author,title,description = (rows[df.columns[0]],rows['book_authors'], rows['book_title'], rows['book_desc'])
+    #legible_text is a place_holder
+    name,legible_text,author,title = (rows[df.columns[0]],"",rows['book_authors'], rows['book_title'])
     prompt = []
     for i in range(len(rows)):
-      prompt += [random.choice(training_templates).format(author[i],title[i],description[i])]
-    print(prompt)
+      prompt += [random.choice(training_templates).format(legible_text,author[i],title[i])]
+    # print(prompt)
     images = pipeline(prompt,height=args.img_size,width=args.img_size,
                             num_inference_steps=50, guidance_scale=7.5).images
     for img in range(images):
