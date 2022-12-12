@@ -1,0 +1,45 @@
+You have passed `None` for safety_checker to disable its functionality in <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'>. Note that this might lead to problems when using <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> and is not recommended.
+You have disabled the safety checker for <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> by passing `safety_checker=None`. Ensure that you abide to the conditions of the Stable Diffusion license and do not expose unfiltered results in services or applications open to the public. Both the diffusers team and Hugging Face strongly recommend to keep the safety filter enabled in all public facing circumstances, disabling it only for use-cases that involve analyzing network behavior or auditing its results. For more information, please have a look at https://github.com/huggingface/diffusers/pull/254 .
+Load stable_diffusion_model:v14 from wandb cloud checkpoint
+Output will be saved in ../book dataset/v14 inference
+model running on device cuda:0
+Generating images on the test set to compute FID score......
+0 images already generated. Skipping them...
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 436, in <module>
+    get_fid_images(pipeline, save_dir)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 200, in get_fid_images
+    images = pipeline(prompt,height=args.img_size,width=args.img_size,
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/pipelines/stable_diffusion/pipeline_stable_diffusion.py", line 285, in __call__
+    text_embeddings = self.text_encoder(text_input_ids.to(self.device))[0]
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/models/clip/modeling_clip.py", line 733, in forward
+    return self.text_model(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/models/clip/modeling_clip.py", line 649, in forward
+    encoder_outputs = self.encoder(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/models/clip/modeling_clip.py", line 578, in forward
+    layer_outputs = encoder_layer(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/models/clip/modeling_clip.py", line 321, in forward
+    hidden_states, attn_weights = self.self_attn(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/models/clip/modeling_clip.py", line 210, in forward
+    query_states = self.q_proj(hidden_states) * self.scale
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/linear.py", line 114, in forward
+    return F.linear(input, self.weight, self.bias)
+KeyboardInterrupt

@@ -1,0 +1,25 @@
+You have passed `None` for safety_checker to disable its functionality in <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'>. Note that this might lead to problems when using <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> and is not recommended.
+You have disabled the safety checker for <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> by passing `safety_checker=None`. Ensure that you abide to the conditions of the Stable Diffusion license and do not expose unfiltered results in services or applications open to the public. Both the diffusers team and Hugging Face strongly recommend to keep the safety filter enabled in all public facing circumstances, disabling it only for use-cases that involve analyzing network behavior or auditing its results. For more information, please have a look at https://github.com/huggingface/diffusers/pull/254 .
+Load stable_diffusion_model:v14 from wandb cloud checkpoint
+Output will be saved in ../book dataset/v14 inference
+model running on device cuda:0
+Generating images on the test set to compute FID score......
+0 images already generated. Skipping them...
+
+
+
+
+100%|███████████████████████████████████████████| 50/50 [00:09<00:00,  5.42it/s]
+<class 'PIL.Image.Image'>
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 438, in <module>
+    get_fid_images(pipeline, save_dir)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 205, in get_fid_images
+    print(img.shape)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/PIL/Image.py", line 517, in __getattr__
+    raise AttributeError(name)
+AttributeError: shape

@@ -1,0 +1,42 @@
+
+You have passed `None` for safety_checker to disable its functionality in <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'>. Note that this might lead to problems when using <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> and is not recommended.
+You have disabled the safety checker for <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> by passing `safety_checker=None`. Ensure that you abide to the conditions of the Stable Diffusion license and do not expose unfiltered results in services or applications open to the public. Both the diffusers team and Hugging Face strongly recommend to keep the safety filter enabled in all public facing circumstances, disabling it only for use-cases that involve analyzing network behavior or auditing its results. For more information, please have a look at https://github.com/huggingface/diffusers/pull/254 .
+Traceback (most recent call last):
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/tokenization_utils_base.py", line 715, in convert_to_tensors
+    tensor = as_tensor(value)
+ValueError: expected sequence of length 279 at dim 1 (got 213)
+During handling of the above exception, another exception occurred:
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 434, in <module>
+    get_fid_images(pipeline, save_dir)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 199, in get_fid_images
+    images = pipeline(prompt,height=args.img_size,width=args.img_size,
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/pipelines/stable_diffusion/pipeline_stable_diffusion.py", line 270, in __call__
+    text_inputs = self.tokenizer(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/tokenization_utils_base.py", line 2488, in __call__
+    encodings = self._call_one(text=text, text_pair=text_pair, **all_kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/tokenization_utils_base.py", line 2574, in _call_one
+    return self.batch_encode_plus(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/tokenization_utils_base.py", line 2765, in batch_encode_plus
+    return self._batch_encode_plus(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/tokenization_utils.py", line 737, in _batch_encode_plus
+    batch_outputs = self._batch_prepare_for_model(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/tokenization_utils.py", line 817, in _batch_prepare_for_model
+    batch_outputs = BatchEncoding(batch_outputs, tensor_type=return_tensors)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/tokenization_utils_base.py", line 210, in __init__
+    self.convert_to_tensors(tensor_type=tensor_type, prepend_batch_axis=prepend_batch_axis)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/transformers/tokenization_utils_base.py", line 731, in convert_to_tensors
+    raise ValueError(
+ValueError: Unable to create tensor, you should probably activate truncation and/or padding with 'padding=True' 'truncation=True' to have batched tensors with the same length. Perhaps your features (`input_ids` in this case) have excessive nesting (inputs type `list` where type `int` is expected).
+Load stable_diffusion_model:v14 from wandb cloud checkpoint
+Output will be saved in ../book dataset/v14 inference
+model running on device cuda:0
+Generating images on the test set to compute FID score......
+0 images already generated. Skipping them...
+["A Alicia Howard book cover with author: Street Bitches Don't Need Love 2, book title: Hurricane succeeds at her plan to force Rashida into a mental institution. This leaves Taz with no choice but to put his children in the care of the last person Rashida would expect or accept. Taz feels he has no options since he has to find a new connect because Pablo refuses to deal with him. He delegates this task to Craig. Craig's drug usage is spiraling out of control. He has become more of a fiend than a hustler. Liking the sample he tested previously, he decides to reach out to the dealer and see if he could potentially become their new plug. However, Craig isn't aware that dealing with this guy may cost the lives of him and his team. Hurricane withdraws from WC and it is starting to piss him off. His anger is not directed towards her, but towards the cause of her problems. He decides to go after Taz and his crew to eliminate the cause of Hurricane's pain. WC recruits his brother who has more ties to the situation than anyone knows. Unbeknownst to WC, Hurricane is also working on a takedown of her own. This installment has more twists and turns, and revealed secrets. Which side will come out on top or which side will take losses due to those secrets. Read and find out.  ", 'A  Johann Wolfgang von Goethe book\xa0cover\xa0with\xa0author name:Iphigenie auf Tauris,\xa0book\xa0title:\xa0Da sie Diana ihr Leben verdankt, dient Iphigenie der Göttin auf der Insel Tauris als Priesterin, obwohl sie sich schmerzlich nach ihrer Heimat Griechenland sehnt. Als ihr Bruder Orest auf die Insel kommt und der Göttin geopfert werden soll, muss Iphigenie sich zwischen Pflicht und eigenen Wünschen entscheiden. Goethes Bearbeitung des antiken Stoffs, die er 1786 endgültig abschloss, besticht durch ihre glanzvolle Komposition und psychologische Tiefe: Mit seinem Drama »Iphigenie auf Tauris« schuf er eines der großen Meisterwerke der Weimarer Klassik.']

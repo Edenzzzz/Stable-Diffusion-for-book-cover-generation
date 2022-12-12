@@ -1,0 +1,42 @@
+You have passed `None` for safety_checker to disable its functionality in <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'>. Note that this might lead to problems when using <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> and is not recommended.
+You have disabled the safety checker for <class 'diffusers.pipelines.stable_diffusion.pipeline_stable_diffusion.StableDiffusionPipeline'> by passing `safety_checker=None`. Ensure that you abide to the conditions of the Stable Diffusion license and do not expose unfiltered results in services or applications open to the public. Both the diffusers team and Hugging Face strongly recommend to keep the safety filter enabled in all public facing circumstances, disabling it only for use-cases that involve analyzing network behavior or auditing its results. For more information, please have a look at https://github.com/huggingface/diffusers/pull/254 .
+Load stable_diffusion_model:v14 from wandb cloud checkpoint
+Output will be saved in ./Output_images/v14 inference
+model running on device cuda:0
+Generating a few images for quick comparison........
+Inference iteration 0
+["A  book cover with author: Alicia Howard, book title: Street Bitches Don't Need Love 2 ", 'A  book cover with author: Johann Wolfgang von Goethe, book title: Iphigenie auf Tauris ']
+
+ 16%|███████                                     | 8/50 [00:02<00:13,  3.17it/s]
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 446, in <module>
+    visualize_prompts(pipeline,summerize=False,samples_per_prompt=4,
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/sd-inference.py", line 356, in visualize_prompts
+    images += pipeline(text[index:index+args.batch_size],height=img_size,width=img_size,
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/autograd/grad_mode.py", line 27, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/pipelines/stable_diffusion/pipeline_stable_diffusion.py", line 387, in __call__
+    noise_pred = self.unet(latent_model_input, t, encoder_hidden_states=text_embeddings).sample
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/models/unet_2d_condition.py", line 333, in forward
+    sample = upsample_block(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/models/unet_2d_blocks.py", line 1189, in forward
+    hidden_states = resnet(hidden_states, temb)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/models/resnet.py", line 396, in forward
+    temb = self.time_emb_proj(self.nonlinearity(temb))[:, :, None, None]
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/activation.py", line 395, in forward
+    return F.silu(input, inplace=self.inplace)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/functional.py", line 2059, in silu
+    return torch._C._nn.silu(input)
+KeyboardInterrupt
