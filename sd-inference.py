@@ -195,7 +195,7 @@ def get_fid_images(
     name,legible_text,author,title = (rows[df.columns[0]],"",rows['book_authors'], rows['book_title'])
     prompt = []
     for i in range(len(rows)):
-      prompt += [random.choice(training_templates).format(legible_text,author[i],title[i])]
+      prompt += [random.choice(training_templates).format(legible_text,str(author.iloc[i]),str(title.iloc[i]))]
     # print(prompt)
     images = pipeline(prompt,height=args.img_size,width=args.img_size,
                             num_inference_steps=50, guidance_scale=7.5).images
@@ -421,7 +421,7 @@ pipeline = StableDiffusionPipeline.from_pretrained(
 #delete downloaded model to save storage
 if args.delete_model:
   subprocess.run(["rm", "-r","artifacts"])
-
+print("------------------------------------------")
 print(f'Load {wandb_model} from wandb cloud checkpoint')
 if os.path.isdir(args.data_root+"/"+wandb_model.split(":")[-1]+" inference"):
   print("Save dir already exists.")
