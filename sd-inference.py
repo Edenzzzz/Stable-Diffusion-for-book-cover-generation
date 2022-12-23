@@ -1,54 +1,5 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.14.2
-#   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
-# ---
-
-# + colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 70267, "status": "ok", "timestamp": 1670648335832, "user": {"displayName": "Eden Tan", "userId": "11491147198112718283"}, "user_tz": 360} id="Qcr_2f8gQs0G" outputId="c025ffe1-105e-4ed8-b367-b4ff85ff9d42"
-#@title Install the required libs
-# %pip install -qq diffusers["training"]==0.7.2
-# %pip install -qq transformers==4.24.0 ftfy
-# %pip install -qq "ipywidgets>=7,<8"
-# %pip install wandb
-# %pip install kornia
-# %pip install bitsandbytes
-#0.10 version doesn't contain login()
-# %pip install huggingface_hub==0.11.1
-
-#deepspeed
-# # !pip install torch==1.12.1 --extra-index-url https://download.pytorch.org/whl/cu116 --upgrade
-# # !pip install deepspeed==0.7.4 --upgrade
-# # !pip install diffusers==0.6.0 triton==2.0.0.dev20221005 --upgrade
-# # !pip install transformers[sentencepiece]==4.24.0 accelerate --upgrade
-
-# + id="rpElaJI0Zhsd" executionInfo={"status": "ok", "timestamp": 1670648339964, "user_tz": 360, "elapsed": 1120, "user": {"displayName": "Eden Tan", "userId": "11491147198112718283"}}
-# %pip freeze>requirements.txt
-
-# + colab={"base_uri": "https://localhost:8080/"} id="ZtZzUJVdZzLi" executionInfo={"status": "ok", "timestamp": 1670648414303, "user_tz": 360, "elapsed": 249, "user": {"displayName": "Eden Tan", "userId": "11491147198112718283"}} outputId="4873cdc5-cf75-4e51-a6d6-d4049b06e15b"
-# !python --version
-
-# + colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 16590, "status": "ok", "timestamp": 1670617239598, "user": {"displayName": "Eden Tan", "userId": "11491147198112718283"}, "user_tz": 360} id="zwvU-RUBQvcN" outputId="c4d1d93c-adaf-45a6-f7d6-4d250846bdad"
-
-# + colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 1984, "status": "ok", "timestamp": 1670617241578, "user": {"displayName": "Eden Tan", "userId": "11491147198112718283"}, "user_tz": 360} id="kVhLWX98Qs0J" outputId="2c3538a6-a7af-4b58-d6c1-ccce7a1a9eb0"
-#@title Login to the Hugging Face Hub
-#@markdown Add a token with the "Write Access" role to be able to add your trained concept to the [Library of Concepts](https://huggingface.co/sd-concepts-library)
 from huggingface_hub import login
 login("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")
-# notebook_login()
-# from google.colab import drive
-# drive.mount("/content/drive",force_remount=True)
-
-# + colab={"base_uri": "https://localhost:8080/"} executionInfo={"elapsed": 11618, "status": "ok", "timestamp": 1670617253194, "user": {"displayName": "Eden Tan", "userId": "11491147198112718283"}, "user_tz": 360} id="ZNincXUlQs0K" outputId="d7c71e46-3207-49f1-9074-5d481b7d7eb6"
-#@title Import required libraries
-# # %pip install protobuf==3.20.* #For deepspe
 
 import argparse
 import itertools

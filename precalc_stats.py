@@ -43,7 +43,7 @@ inception_path = fid.check_or_download_inception(inception_path) # download ince
 print("ok")
 
 
-def compress_image(set="df_train.csv",size=1000):
+def compress_image(set="df_test.csv",size=1000):
     
     df=pd.read_csv(os.path.join(data_path,set))
     assert len(df)>=size,"requested size is larger than size of the dataset "

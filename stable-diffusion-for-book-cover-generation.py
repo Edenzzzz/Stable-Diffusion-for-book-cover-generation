@@ -1,51 +1,3 @@
-# ---
-# jupyter:
-#   jupytext:
-#     text_representation:
-#       extension: .py
-#       format_name: light
-#       format_version: '1.5'
-#       jupytext_version: 1.14.2
-#   kernelspec:
-#     display_name: Python 3
-#     language: python
-#     name: python3
-# ---
-
-# + [markdown] id="tAZq3vFDcFiT"
-# # Textual-inversion fine-tuning for Stable Diffusion using d🧨ffusers 
-#
-# This notebook shows how to "teach" Stable Diffusion a new concept via textual-inversion using 🤗 Hugging Face [🧨 Diffusers library](https://github.com/huggingface/diffusers). 
-#
-# ![Textual Inversion example](https://textual-inversion.github.io/static/images/editing/colorful_teapot.JPG)
-# _By using just 3-5 images you can teach new concepts to Stable Diffusion and personalize the model on your own images_ 
-#
-# For a general introduction to the Stable Diffusion model please refer to this [colab](https://colab.research.google.com/github/huggingface/notebooks/blob/main/diffusers/stable_diffusion.ipynb).
-#
-#
-
-# + [markdown] id="KbzZ9xe6dWwf"
-# ## Initial setup
-
-# + id="30lu8LWXmg5j" outputId="19b7efac-8315-44ff-89d4-5f292b34d41a"
-#@title Install the required libs
-# %pip install -qq diffusers["training"]==0.7.2
-# %pip install -qq transformers==4.24.0 ftfy
-# %pip install -qq "ipywidgets>=7,<8"
-# %pip install wandb
-# %pip install kornia
-# %pip install bitsandbytes
-#0.10 version doesn't contain login()
-# !pip install huggingface_hub==0.11.1
-#deepspeed
-# # !pip install torch==1.12.1 --extra-index-url https://download.pytorch.org/whl/cu116 --upgrade
-# # !pip install deepspeed==0.7.4 --upgrade
-# # !pip install diffusers==0.6.0 triton==2.0.0.dev20221005 --upgrade
-# # !pip install transformers[sentencepiece]==4.24.0 accelerate --upgrade
-
-
-
-# + id="24zwrNSBm4A3" outputId="ca86aff9-110b-4cd9-d68d-a35fd56c36bd"
 #@title Login to the Hugging Face Hub
 #@markdown Add a token with the "Write Access" role to be able to add your trained concept to the [Library of Concepts](https://huggingface.co/sd-concepts-library)
 from huggingface_hub import login
@@ -83,6 +35,17 @@ from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer,Trai
 import kornia.augmentation as K#augmentaiton
 import pandas as pd
 import wandb
+import subprocess
+parser = argparse.ArgumentParser()
+parser.add_argument("--lr",help="learning rate",default=5e-6,type=int)
+parser.add_argument("--epochs",default=12,type=int)
+parser.add_argument("--train_unet",help="whether to train Unet or not",default=False,type=bool)
+parser.add_argument("--decay",help="weight_decay",default=1e-2,type=int)
+parser.add_argument("--train_text_encoder",default=True,type=bool)
+parser.add_argument("--data_root",default="",type=bool)
+parser.add_argument("--num_examples",default=6000,type=int,help="number of training examples")
+parser.add_argument("--num_devices",default=3)
+parser.add_argument("--gradient_acc_steps",default=8,type=int)
 def image_grid(imgs, rows, cols):
     assert len(imgs) == rows*cols
 
@@ -114,15 +77,11 @@ set_seed(global_seed)
 #@markdown `pretrained_model_name_or_path` which Stable Diffusion checkpoint you want to use
 #pretrained_model_name_or_path = "runwayml/stable-diffusion-v1-5" #@param {type:"string"}
 pretrained_model_name_or_path ="CompVis/stable-diffusion-v1-4"
-data_root="/kaggle/input/goodreads-best-books"
-label_root="/kaggle/input/goodreads-best-book-cleaned-version"
+# data_root="/kaggle/input/goodreads-best-books"
+# label_root="/kaggle/input/goodreads-best-book-cleaned-version"
+data_root=args.data_root
+label_root=args.data_root
 
-
-# + [markdown] id="EuFP688UEwQR"
-# ### Create Dataset
-
-# + id="u4c1vbVfnmLf"
-#@title Setup the prompt templates for training 
 book_cover_templates=[#the first entry is for "highly legible text"
     "A {} book cover with author {}, book title {} ",
     #repeat some prompts to give model prior knowledge about book cover styles
@@ -232,19 +191,19 @@ summary_placeholders=summary_placeholders[:len(test_templates)]
 # + id="fcA-kMQblqUe"
 #@title Training hyperparameters 
 hyperparam = {
-    "learning_rate": 5e-6, #original: 5e-4
+    "learning_rate": args.lr, #original: 5e-4
     "scale_lr": False,
-    "epochs": 2,
+    "epochs": args.epochs,
     "train_batch_size": 1,
-    "gradient_accumulation_steps": 8,
+    "gradient_accumulation_steps": args.gradient_acc_steps,
     "seed": global_seed,
-    "weight_decay": 1e-3,
+    "weight_decay": args.decay,
     # "noise_scheduler": "DDIM",
     "pretrained_model_name_or_path": pretrained_model_name_or_path,
     "output_dir": "./model",
-    "training_dataset_size":500,
-    "train_unet": False,
-    "train_text_encoder": True,
+    "training_dataset_size":args.num_examples,
+    "train_unet": args.train_unet,
+    "train_text_encoder": args.train_text_encoder,
     "num_templates": len(book_cover_templates),
     "include_summary": False,#True to add book summary to prompts
     "templates" : book_cover_templates
@@ -428,14 +387,9 @@ text_encoder.resize_token_embeddings(len(tokenizer))
 # + id="0mtxiZMNoQvE"
 token_embeds = text_encoder.get_input_embeddings().weight.data
 
-# + id="0MTkwTNxpRnq"
-#@title  Create noise scheduler
-# noise_scheduler = DDPMScheduler(
-#     beta_start=0.00085, beta_end=0.012, beta_schedule="scaled_linear", num_train_timesteps=1000, tensor_format="pt"
-# )
+
 noise_scheduler=DDPMScheduler.from_config(pretrained_model_name_or_path, subfolder="scheduler")
 
-# + id="esfL5sitvy11"
 #@title Visualize training result
 #fix random seed by fixing latents
 latents=None
@@ -522,14 +476,6 @@ def visualize_prompts(
         if include_desc:
           template+=summary_placeholders[i]#append new prompt to list
           template=template.format(legible_text,author,title,description)
-          # print("before tokenizer:", len(template))
-          # #pad to the same length
-          # inputs = tokenizer(template, max_length=1024, 
-          #                      return_tensors="pt",truncation=True,padding=True)
-          
-          # template = tokenizer.batch_decode(inputs['input_ids'], skip_special_tokens=True, 
-          #                                 clean_up_tokenization_spaces=False)[0]
-          # print("after:",len(template))
           text += [template]
         else:
           text += [template.format(legible_text,author,title)]
@@ -581,11 +527,7 @@ def visualize_prompts(
       wandb.log({"examples":wandb.Image(image)})
 
 
-# + [markdown] id="YNuNDw0wNN5X"
-# ### Define training function
 
-# + id="djBS3343sIiY" outputId="caded5c6-2951-466f-9524-9c958036b1d5"
-# %env WANDB_LOG_MODEL=true
 def freeze_params(params):
     for param in params:
         param.requires_grad = False
@@ -825,7 +767,7 @@ def training_function(
           #for distributed training 
           accelerator.wait_for_everyone()
     wandb.run.log_artifact(artifact)
-
+    subprocess.run(["rm","-r",output_dir])
 
       
         
@@ -852,12 +794,6 @@ accelerate.notebook_launcher(training_function, args=(text_encoder, vae, unet,
                             False,hyperparam["train_unet"],hyperparam["train_text_encoder"],False,True))
 
 
-# +
-# #shutdown notebook 
-# from IPython.display import Javascript
-# print(“Shutdown”)
-# Javascript("Ipython.notebook.session.delete()")
-# -
 
 # ### Load from  checkpoint
 
