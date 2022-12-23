@@ -46,6 +46,7 @@ parser.add_argument("--data_root",default="",type=bool)
 parser.add_argument("--num_examples",default=6000,type=int,help="number of training examples")
 parser.add_argument("--num_devices",default=3)
 parser.add_argument("--gradient_acc_steps",default=8,type=int)
+args = parser.parse_args()
 def image_grid(imgs, rows, cols):
     assert len(imgs) == rows*cols
 
