@@ -71,7 +71,7 @@ def set_seed(seed: int = 42) -> None:
     os.environ["PYTHONHASHSEED"] = str(seed)
     print(f"Random seed set as {seed}")
 global_seed=42
-set_seed(global_seed)
+
 
 
 # + id="If5Jswe526QP"
@@ -548,6 +548,13 @@ def training_function(
                     text_encoder, vae, unet,
                     resume=False,train_unet=False,train_text_encoder=True,
                     gradient_checkpointing=False,use_8bit_adam=True):
+    import gc
+    gc.collect()
+    torch.cuda.empty_cache()
+    torch.cuda.memory_allocated() 
+    #set random seed     
+    set_seed(global_seed)
+
     logger = get_logger(__name__)#TODO: switch to wandb
     wandb.login(key='16d21dc747a6f33247f1e9c96895d4ffa5ea0b27',relogin=True)
     wandb.init(
@@ -782,10 +789,7 @@ def training_function(
 
 # + id="jXi0NdsyBA4S" outputId="ac99079d-e0d2-45ea-ae00-050ac2b1ffb2"
 
-import gc
-gc.collect()
-torch.cuda.empty_cache()
-torch.cuda.memory_allocated()
+
 
 
 import accelerate
