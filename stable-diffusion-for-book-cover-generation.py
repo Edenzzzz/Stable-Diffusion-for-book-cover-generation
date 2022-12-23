@@ -565,7 +565,7 @@ def training_function(
     output_dir = hyperparam["output_dir"]
     weight_decay=hyperparam["weight_decay"]
     accelerator = Accelerator(
-        gradient_accumulation_steps=gradient_accumulation_steps,
+        gradient_accumulation_steps=gradient_accumulation_steps,num_processes=args.num_devices
     )
 
     train_dataloader = create_dataloader(train_batch_size)
