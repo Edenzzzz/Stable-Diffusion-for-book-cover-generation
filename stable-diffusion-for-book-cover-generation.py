@@ -789,6 +789,8 @@ torch.cuda.memory_allocated()
 
 
 import accelerate
+from multiprocess import set_start_method
+set_start_method("spawn")#avoid CUDA error: RuntimeError: Cannot re-initialize CUDA in forked subprocess
 #args in the second line:
 #resume,train_unet,train_text_encoder,gradient_checkpointing,use_8bit_adam
 accelerate.notebook_launcher(training_function, args=(text_encoder, vae, unet, 
