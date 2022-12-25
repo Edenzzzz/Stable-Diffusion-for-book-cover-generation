@@ -1,0 +1,26 @@
+2022-12-12 14:46:49,457 INFO    MainThread:191449 [wandb_setup.py:_flush():68] Configure stats pid to 191449
+2022-12-12 14:46:49,457 INFO    MainThread:191449 [wandb_setup.py:_flush():68] Loading settings from /home/wenxuan/.config/wandb/settings
+2022-12-12 14:46:49,458 INFO    MainThread:191449 [wandb_setup.py:_flush():68] Loading settings from /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/settings
+2022-12-12 14:46:49,458 INFO    MainThread:191449 [wandb_setup.py:_flush():68] Loading settings from environment variables: {'_require_service': 'True', 'silent': 'true', 'api_key': '***REDACTED***'}
+2022-12-12 14:46:49,458 INFO    MainThread:191449 [wandb_setup.py:_flush():68] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2022-12-12 14:46:49,458 INFO    MainThread:191449 [wandb_init.py:_log_setup():476] Logging user logs to /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221212_144649-2mpkn70q/logs/debug.log
+2022-12-12 14:46:49,458 INFO    MainThread:191449 [wandb_init.py:_log_setup():477] Logging internal logs to /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221212_144649-2mpkn70q/logs/debug-internal.log
+2022-12-12 14:46:49,459 INFO    MainThread:191449 [wandb_init.py:init():516] calling init triggers
+2022-12-12 14:46:49,459 INFO    MainThread:191449 [wandb_init.py:init():519] wandb.init called with sweep_config: {}
+config: {}
+2022-12-12 14:46:49,459 INFO    MainThread:191449 [wandb_init.py:init():569] starting backend
+2022-12-12 14:46:49,459 INFO    MainThread:191449 [wandb_init.py:init():573] setting up manager
+2022-12-12 14:46:49,464 INFO    MainThread:191449 [backend.py:_multiprocessing_setup():102] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2022-12-12 14:46:49,466 INFO    MainThread:191449 [wandb_init.py:init():580] backend started and connected
+2022-12-12 14:46:49,470 INFO    MainThread:191449 [wandb_init.py:init():658] updated telemetry
+2022-12-12 14:46:49,515 INFO    MainThread:191449 [wandb_init.py:init():693] communicating run to backend with 60 second timeout
+2022-12-12 14:46:52,544 WARNING MsgRouterThr:191449 [router.py:message_loop():77] message_loop has been closed
+2022-12-12 14:46:59,532 ERROR   MainThread:191449 [wandb_init.py:init():1105] error
+Traceback (most recent call last):
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/wandb/sdk/wandb_init.py", line 1078, in init
+    run = wi.init()
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/wandb/sdk/wandb_init.py", line 697, in init
+    result = handle.wait(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/wandb/sdk/lib/mailbox.py", line 259, in wait
+    raise MailboxError("transport failed")
+wandb.errors.MailboxError: transport failed

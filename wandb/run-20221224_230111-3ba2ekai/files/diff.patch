@@ -1,0 +1,130 @@
+diff --git a/__pycache__/fid.cpython-38.pyc b/__pycache__/fid.cpython-38.pyc
+index 41ad490..13b88a5 100644
+Binary files a/__pycache__/fid.cpython-38.pyc and b/__pycache__/fid.cpython-38.pyc differ
+diff --git a/__pycache__/precalc_stats_example.cpython-37.pyc b/__pycache__/precalc_stats_example.cpython-37.pyc
+index 1d0bd9c..2d30198 100644
+Binary files a/__pycache__/precalc_stats_example.cpython-37.pyc and b/__pycache__/precalc_stats_example.cpython-37.pyc differ
+diff --git a/__pycache__/sd-inference.cpython-37.pyc b/__pycache__/sd-inference.cpython-37.pyc
+index 8a24add..45ea4e7 100644
+Binary files a/__pycache__/sd-inference.cpython-37.pyc and b/__pycache__/sd-inference.cpython-37.pyc differ
+diff --git a/__pycache__/sd-inference.cpython-38.pyc b/__pycache__/sd-inference.cpython-38.pyc
+index 43946cc..527460a 100644
+Binary files a/__pycache__/sd-inference.cpython-38.pyc and b/__pycache__/sd-inference.cpython-38.pyc differ
+diff --git a/__pycache__/sd-inference.cpython-39.pyc b/__pycache__/sd-inference.cpython-39.pyc
+index e12f266..5092094 100644
+Binary files a/__pycache__/sd-inference.cpython-39.pyc and b/__pycache__/sd-inference.cpython-39.pyc differ
+diff --git a/training.py b/training.py
+index d7f27e6..711b1a3 100644
+--- a/training.py
++++ b/training.py
+@@ -70,8 +70,7 @@ def set_seed(seed: int = 42) -> None:
+     # Set a fixed value for the hash seed
+     os.environ["PYTHONHASHSEED"] = str(seed)
+     print(f"Random seed set as {seed}")
+-global_seed=42
+-
++global_seed = 42
+ 
+ 
+ # + id="If5Jswe526QP"
+@@ -212,11 +211,14 @@ hyperparam = {
+ 
+ # + id="xp2InXqXW8aY" outputId="32997303-8897-4243-9a83-e4b75a03272e"
+ #@title Load the Stable Diffusion model
++
++print("before loading tokenizer: cuda:",torch.cuda.is_available())
+ tokenizer = CLIPTokenizer.from_pretrained(
+     pretrained_model_name_or_path,
+     subfolder="tokenizer",
+     use_auth_token=True,
+ )
++    
+ 
+ # Load models and create wrapper for stable diffusion
+ text_encoder = CLIPTextModel.from_pretrained(
+@@ -231,6 +233,7 @@ unet = UNet2DConditionModel.from_pretrained(
+     pretrained_model_name_or_path, subfolder="unet"
+     , use_auth_token=True
+ )
++print("cuda: after loading models",torch.cuda.is_available())
+ #test model with out of max_length token sequence 
+ 
+ # input=tokenizer(book_df.loc[7202]['book_desc'], return_tensors="pt").input_ids[:,:999]
+@@ -359,7 +362,7 @@ class TextualInversionDataset(Dataset):
+             used_times.append(time.time()-start_time)
+         return example
+ 
+-
++print("cuda before initializing dataset:",torch.cuda.is_available())
+ train_dataset = TextualInversionDataset(
+       data_root=data_root,
+       tokenizer=tokenizer,
+@@ -367,6 +370,7 @@ train_dataset = TextualInversionDataset(
+       training_size=hyperparam["training_dataset_size"],
+       include_desc=hyperparam["include_summary"]
+ )
++
+ def create_dataloader(train_batch_size=1):
+     return torch.utils.data.DataLoader(train_dataset, batch_size=train_batch_size, shuffle=True,pin_memory=True,num_workers=2)
+ print("Number of training examples used:", len(train_dataset.df))
+@@ -376,23 +380,11 @@ print("Train loader size:", len(create_dataloader(hyperparam["train_batch_size"]
+ print()
+ print("Templates:\n",train_dataset.templates)
+ 
+-# + [markdown] id="GD5MU6EzFe27"
+-# We have added the `placeholder_token` in the `tokenizer` so we resize the token embeddings here, this will a new embedding vector in the token embeddings for our `placeholder_token`
+-
+-# + id="24-9I6mIoORT" outputId="868320de-f46b-42e1-88b9-0a878ac78093"
+ text_encoder.resize_token_embeddings(len(tokenizer))
+-
+-# + [markdown] id="IA3Xj7gBFv-6"
+-#  Initialise the newly added placeholder token with the embeddings of the initializer token
+-
+-# + id="0mtxiZMNoQvE"
+ token_embeds = text_encoder.get_input_embeddings().weight.data
+ 
+-
+ noise_scheduler=DDPMScheduler.from_config(pretrained_model_name_or_path, subfolder="scheduler")
+ 
+-#@title Visualize training result
+-#fix random seed by fixing latents
+ latents=None
+ def visualize_prompts(
+     pipeline: StableDiffusionPipeline,
+@@ -419,8 +411,6 @@ def visualize_prompts(
+     torch.cuda.empty_cache()
+     torch.cuda.memory_allocated()
+     
+-    #fix random seed by fixing latents.
+-    #generate fixed latents if no latents exist
+     global latents
+     if latents==None or latents.shape[0]!=samples_per_prompt:
+       generator = torch.Generator(device='cuda')
+@@ -528,7 +518,7 @@ def visualize_prompts(
+       wandb.log({"examples":wandb.Image(image)})
+ 
+ 
+-
++print("cuda:",torch.cuda.is_available())
+ def freeze_params(params):
+     for param in params:
+         param.requires_grad = False
+@@ -552,7 +542,7 @@ def training_function(
+     gc.collect()
+     torch.cuda.empty_cache()
+     torch.cuda.memory_allocated() 
+-    #set random seed     
++    #set random seed  
+     set_seed(global_seed)
+ 
+     logger = get_logger(__name__)#TODO: switch to wandb
+@@ -790,8 +780,7 @@ def training_function(
+ # + id="jXi0NdsyBA4S" outputId="ac99079d-e0d2-45ea-ae00-050ac2b1ffb2"
+ 
+ 
+-
+-
++print("cuda:",torch.cuda.is_available())
+ import accelerate
+ from multiprocess import set_start_method
+ set_start_method("spawn")#avoid CUDA error: RuntimeError: Cannot re-initialize CUDA in forked subprocess

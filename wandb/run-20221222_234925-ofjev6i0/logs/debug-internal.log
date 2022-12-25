@@ -1,0 +1,73 @@
+2022-12-22 23:49:25,768 INFO    StreamThr :211998 [internal.py:wandb_internal():87] W&B internal server running at pid: 211998, started at: 2022-12-22 23:49:25.767517
+2022-12-22 23:49:25,771 DEBUG   HandlerThread:211998 [handler.py:handle_request():139] handle_request: status
+2022-12-22 23:49:25,775 DEBUG   SenderThread:211998 [sender.py:send_request():317] send_request: status
+2022-12-22 23:49:25,777 DEBUG   SenderThread:211998 [sender.py:send():303] send: header
+2022-12-22 23:49:25,777 INFO    WriterThread:211998 [datastore.py:open_for_write():75] open: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/run-ofjev6i0.wandb
+2022-12-22 23:49:25,917 DEBUG   SenderThread:211998 [sender.py:send():303] send: run
+2022-12-22 23:49:26,117 DEBUG   HandlerThread:211998 [handler.py:handle_request():139] handle_request: check_version
+2022-12-22 23:49:26,118 INFO    SenderThread:211998 [dir_watcher.py:__init__():216] watching files in: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/files
+2022-12-22 23:49:26,118 INFO    SenderThread:211998 [sender.py:_start_run_threads():928] run started: ofjev6i0 with start time 1671774565.761534
+2022-12-22 23:49:26,118 DEBUG   SenderThread:211998 [sender.py:send():303] send: summary
+2022-12-22 23:49:26,118 INFO    SenderThread:211998 [sender.py:_save_file():1171] saving file wandb-summary.json with policy end
+2022-12-22 23:49:26,119 DEBUG   SenderThread:211998 [sender.py:send_request():317] send_request: check_version
+2022-12-22 23:49:26,228 DEBUG   HandlerThread:211998 [handler.py:handle_request():139] handle_request: run_start
+2022-12-22 23:49:26,241 DEBUG   HandlerThread:211998 [system_info.py:__init__():31] System info init
+2022-12-22 23:49:26,241 DEBUG   HandlerThread:211998 [system_info.py:__init__():46] System info init done
+2022-12-22 23:49:26,242 INFO    HandlerThread:211998 [system_monitor.py:start():150] Starting system monitor
+2022-12-22 23:49:26,242 INFO    SystemMonitor:211998 [system_monitor.py:_start():116] Starting system asset monitoring threads
+2022-12-22 23:49:26,242 INFO    HandlerThread:211998 [system_monitor.py:probe():171] Collecting system info
+2022-12-22 23:49:26,243 INFO    SystemMonitor:211998 [interfaces.py:start():168] Started cpu
+2022-12-22 23:49:26,243 INFO    SystemMonitor:211998 [interfaces.py:start():168] Started disk
+2022-12-22 23:49:26,244 INFO    SystemMonitor:211998 [interfaces.py:start():168] Started gpu
+2022-12-22 23:49:26,244 INFO    SystemMonitor:211998 [interfaces.py:start():168] Started memory
+2022-12-22 23:49:26,246 INFO    SystemMonitor:211998 [interfaces.py:start():168] Started network
+2022-12-22 23:49:26,293 DEBUG   HandlerThread:211998 [system_info.py:probe():195] Probing system
+2022-12-22 23:49:26,300 DEBUG   HandlerThread:211998 [system_info.py:_probe_git():180] Probing git
+2022-12-22 23:49:26,316 DEBUG   HandlerThread:211998 [system_info.py:_probe_git():188] Probing git done
+2022-12-22 23:49:26,316 DEBUG   HandlerThread:211998 [system_info.py:probe():241] Probing system done
+2022-12-22 23:49:26,316 DEBUG   HandlerThread:211998 [system_monitor.py:probe():180] {'os': 'Linux-5.15.0-48-generic-x86_64-with-glibc2.29', 'python': '3.8.10', 'heartbeatAt': '2022-12-23T05:49:26.294115', 'startedAt': '2022-12-23T05:49:25.750473', 'docker': None, 'cuda': None, 'args': ('--epochs=15',), 'state': 'running', 'program': 'stable-diffusion-for-book-cover-generation.py', 'codePath': 'stable-diffusion-for-book-cover-generation.py', 'git': {'remote': 'https://github.com/Edenzzzz/Stable-diffusion-for-book-cover-generation.git', 'commit': 'af2b67e7e1bf7f2bcc9bcd241034983348790225'}, 'email': 'wtan45@wisc.edu', 'root': '/home/wenxuan/Stable-diffusion-for-book-cover-generation', 'host': 'clique', 'username': 'wenxuan', 'executable': '/home/wenxuan/sd_training/bin/python', 'cpu_count': 6, 'cpu_count_logical': 12, 'cpu_freq': {'current': 1597.0123333333333, 'min': 1200.0, 'max': 4000.0}, 'cpu_freq_per_core': [{'current': 1766.293, 'min': 1200.0, 'max': 4000.0}, {'current': 1200.0, 'min': 1200.0, 'max': 4000.0}, {'current': 1200.0, 'min': 1200.0, 'max': 4000.0}, {'current': 1499.229, 'min': 1200.0, 'max': 4000.0}, {'current': 3287.739, 'min': 1200.0, 'max': 4000.0}, {'current': 3500.0, 'min': 1200.0, 'max': 4000.0}, {'current': 1200.0, 'min': 1200.0, 'max': 4000.0}, {'current': 1200.0, 'min': 1200.0, 'max': 4000.0}, {'current': 1200.0, 'min': 1200.0, 'max': 4000.0}, {'current': 1200.0, 'min': 1200.0, 'max': 4000.0}, {'current': 1200.0, 'min': 1200.0, 'max': 4000.0}, {'current': 1200.0, 'min': 1200.0, 'max': 4000.0}], 'disk': {'total': 915.3232879638672, 'used': 112.77161026000977}, 'gpu': 'NVIDIA GeForce RTX 2080 Ti', 'gpu_count': 4, 'gpu_devices': [{'name': 'NVIDIA GeForce RTX 2080 Ti', 'memory_total': 11811160064}, {'name': 'NVIDIA GeForce RTX 2080 Ti', 'memory_total': 11811160064}, {'name': 'NVIDIA GeForce RTX 2080 Ti', 'memory_total': 11811160064}, {'name': 'NVIDIA GeForce RTX 2080 Ti', 'memory_total': 11811160064}], 'memory': {'total': 62.71078109741211}}
+2022-12-22 23:49:26,316 INFO    HandlerThread:211998 [system_monitor.py:probe():181] Finished collecting system info
+2022-12-22 23:49:26,316 INFO    HandlerThread:211998 [system_monitor.py:probe():184] Publishing system info
+2022-12-22 23:49:26,316 DEBUG   HandlerThread:211998 [system_info.py:_save_pip():51] Saving list of pip packages installed into the current environment
+2022-12-22 23:49:26,317 DEBUG   HandlerThread:211998 [system_info.py:_save_pip():67] Saving pip packages done
+2022-12-22 23:49:26,317 DEBUG   HandlerThread:211998 [system_info.py:_save_code():89] Saving code
+2022-12-22 23:49:26,324 DEBUG   HandlerThread:211998 [system_info.py:_save_code():110] Saving code done
+2022-12-22 23:49:26,324 DEBUG   HandlerThread:211998 [system_info.py:_save_patches():127] Saving git patches
+2022-12-22 23:49:26,365 DEBUG   HandlerThread:211998 [system_info.py:_save_patches():169] Saving git patches done
+2022-12-22 23:49:26,366 INFO    HandlerThread:211998 [system_monitor.py:probe():186] Finished publishing system info
+2022-12-22 23:49:26,450 DEBUG   SenderThread:211998 [sender.py:send():303] send: files
+2022-12-22 23:49:26,450 INFO    SenderThread:211998 [sender.py:_save_file():1171] saving file wandb-metadata.json with policy now
+2022-12-22 23:49:26,451 INFO    SenderThread:211998 [sender.py:_save_file():1171] saving file code/stable-diffusion-for-book-cover-generation.py with policy now
+2022-12-22 23:49:26,452 INFO    SenderThread:211998 [sender.py:_save_file():1171] saving file diff.patch with policy now
+2022-12-22 23:49:26,460 DEBUG   HandlerThread:211998 [handler.py:handle_request():139] handle_request: stop_status
+2022-12-22 23:49:26,460 DEBUG   SenderThread:211998 [sender.py:send_request():317] send_request: stop_status
+2022-12-22 23:49:26,541 DEBUG   SenderThread:211998 [sender.py:send():303] send: telemetry
+2022-12-22 23:49:26,772 WARNING StreamThr :211998 [internal.py:is_dead():386] Internal process exiting, parent pid 211989 disappeared
+2022-12-22 23:49:26,772 ERROR   StreamThr :211998 [internal.py:wandb_internal():146] Internal process shutdown.
+2022-12-22 23:49:26,851 INFO    Thread-16 :211998 [upload_job.py:push():143] Uploaded file /tmp/tmpng3nginuwandb/tu15a83t-wandb-metadata.json
+2022-12-22 23:49:26,857 INFO    Thread-17 :211998 [upload_job.py:push():143] Uploaded file /tmp/tmpng3nginuwandb/2b20dq1n-code/stable-diffusion-for-book-cover-generation.py
+2022-12-22 23:49:26,865 INFO    Thread-18 :211998 [upload_job.py:push():143] Uploaded file /tmp/tmpng3nginuwandb/3ekr4abq-diff.patch
+2022-12-22 23:49:27,121 INFO    Thread-13 :211998 [dir_watcher.py:_on_file_created():275] file/dir created: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/files/code/stable-diffusion-for-book-cover-generation.py
+2022-12-22 23:49:27,122 INFO    Thread-13 :211998 [dir_watcher.py:_on_file_created():275] file/dir created: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/files/wandb-summary.json
+2022-12-22 23:49:27,122 INFO    Thread-13 :211998 [dir_watcher.py:_on_file_created():275] file/dir created: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/files/wandb-metadata.json
+2022-12-22 23:49:27,122 INFO    Thread-13 :211998 [dir_watcher.py:_on_file_created():275] file/dir created: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/files/diff.patch
+2022-12-22 23:49:27,122 INFO    Thread-13 :211998 [dir_watcher.py:_on_file_created():275] file/dir created: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/files/requirements.txt
+2022-12-22 23:49:27,123 INFO    Thread-13 :211998 [dir_watcher.py:_on_file_created():275] file/dir created: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/files/code
+2022-12-22 23:49:27,463 INFO    WriterThread:211998 [datastore.py:close():279] close: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/run-ofjev6i0.wandb
+2022-12-22 23:49:27,463 INFO    HandlerThread:211998 [handler.py:finish():814] shutting down handler
+2022-12-22 23:49:27,541 INFO    SenderThread:211998 [sender.py:finish():1331] shutting down sender
+2022-12-22 23:49:27,541 INFO    SenderThread:211998 [dir_watcher.py:finish():362] shutting down directory watcher
+2022-12-22 23:49:28,124 INFO    SenderThread:211998 [dir_watcher.py:finish():392] scan: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/files
+2022-12-22 23:49:28,124 INFO    SenderThread:211998 [dir_watcher.py:finish():406] scan save: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/files/requirements.txt requirements.txt
+2022-12-22 23:49:28,124 INFO    SenderThread:211998 [dir_watcher.py:finish():406] scan save: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/files/config.yaml config.yaml
+2022-12-22 23:49:28,125 INFO    SenderThread:211998 [dir_watcher.py:finish():406] scan save: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/files/diff.patch diff.patch
+2022-12-22 23:49:28,135 INFO    SenderThread:211998 [dir_watcher.py:finish():406] scan save: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/files/wandb-summary.json wandb-summary.json
+2022-12-22 23:49:28,135 INFO    SenderThread:211998 [dir_watcher.py:finish():406] scan save: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/files/wandb-metadata.json wandb-metadata.json
+2022-12-22 23:49:28,136 INFO    SenderThread:211998 [dir_watcher.py:finish():406] scan save: /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/files/code/stable-diffusion-for-book-cover-generation.py code/stable-diffusion-for-book-cover-generation.py
+2022-12-22 23:49:28,140 INFO    SenderThread:211998 [file_pusher.py:finish():168] shutting down file pusher
+2022-12-22 23:49:28,140 INFO    SenderThread:211998 [file_pusher.py:join():173] waiting for file pusher
+2022-12-22 23:49:28,512 INFO    Thread-19 :211998 [upload_job.py:push():143] Uploaded file /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/files/requirements.txt
+2022-12-22 23:49:28,517 INFO    Thread-20 :211998 [upload_job.py:push():143] Uploaded file /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/files/config.yaml
+2022-12-22 23:49:28,526 INFO    Thread-21 :211998 [upload_job.py:push():143] Uploaded file /home/wenxuan/Stable-diffusion-for-book-cover-generation/wandb/run-20221222_234925-ofjev6i0/files/wandb-summary.json
+2022-12-22 23:49:29,188 INFO    MainThread:211998 [internal.py:handle_exit():77] Internal process exited
+2022-12-22 23:49:29,189 WARNING MsgRouterThr:211998 [router.py:message_loop():74] EOFError seen in message_loop

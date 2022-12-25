@@ -1,0 +1,119 @@
+{
+    "os": "Linux-5.15.0-48-generic-x86_64-with-glibc2.29",
+    "python": "3.8.10",
+    "heartbeatAt": "2022-12-23T05:55:56.867380",
+    "startedAt": "2022-12-23T05:55:56.344387",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--epochs=15"
+    ],
+    "state": "running",
+    "program": "stable-diffusion-for-book-cover-generation.py",
+    "codePath": "stable-diffusion-for-book-cover-generation.py",
+    "git": {
+        "remote": "https://github.com/Edenzzzz/Stable-diffusion-for-book-cover-generation.git",
+        "commit": "af675f80066a28bf983855b8cb79c9edb516b627"
+    },
+    "email": "wtan45@wisc.edu",
+    "root": "/home/wenxuan/Stable-diffusion-for-book-cover-generation",
+    "host": "clique",
+    "username": "wenxuan",
+    "executable": "/home/wenxuan/sd_training/bin/python",
+    "cpu_count": 6,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 1601.3925833333333,
+        "min": 1200.0,
+        "max": 4000.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2127.089,
+            "min": 1200.0,
+            "max": 4000.0
+        },
+        {
+            "current": 1619.409,
+            "min": 1200.0,
+            "max": 4000.0
+        },
+        {
+            "current": 2300.0,
+            "min": 1200.0,
+            "max": 4000.0
+        },
+        {
+            "current": 2717.672,
+            "min": 1200.0,
+            "max": 4000.0
+        },
+        {
+            "current": 1900.0,
+            "min": 1200.0,
+            "max": 4000.0
+        },
+        {
+            "current": 1789.321,
+            "min": 1200.0,
+            "max": 4000.0
+        },
+        {
+            "current": 1300.0,
+            "min": 1200.0,
+            "max": 4000.0
+        },
+        {
+            "current": 1200.0,
+            "min": 1200.0,
+            "max": 4000.0
+        },
+        {
+            "current": 1200.0,
+            "min": 1200.0,
+            "max": 4000.0
+        },
+        {
+            "current": 1200.0,
+            "min": 1200.0,
+            "max": 4000.0
+        },
+        {
+            "current": 1200.0,
+            "min": 1200.0,
+            "max": 4000.0
+        },
+        {
+            "current": 1200.0,
+            "min": 1200.0,
+            "max": 4000.0
+        }
+    ],
+    "disk": {
+        "total": 915.3232879638672,
+        "used": 112.77228546142578
+    },
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "gpu_count": 4,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 2080 Ti",
+            "memory_total": 11811160064
+        },
+        {
+            "name": "NVIDIA GeForce RTX 2080 Ti",
+            "memory_total": 11811160064
+        },
+        {
+            "name": "NVIDIA GeForce RTX 2080 Ti",
+            "memory_total": 11811160064
+        },
+        {
+            "name": "NVIDIA GeForce RTX 2080 Ti",
+            "memory_total": 11811160064
+        }
+    ],
+    "memory": {
+        "total": 62.71078109741211
+    }
+}
