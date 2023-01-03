@@ -9,7 +9,7 @@ login("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")
 # + id="1_h0kO-VnQog" outputId="530fc822-cdad-4642-9e8b-37f9651dbd9d"
 #@title Import required libraries
 # # %pip install protobuf==3.20.* #For deepspe
-
+import torch,torch.nn as nn
 import argparse
 import itertools
 import math
@@ -17,15 +17,13 @@ import os
 import random
 import numpy as np
 import PIL
-
-
-
+from torch.utils.data import Dataset
 from PIL import Image
 from tqdm.auto import tqdm
-import kornia.augmentation as K#augmentaiton
 import pandas as pd
 import wandb
 import subprocess
+from contextlib import contextmanager,nullcontext
 parser = argparse.ArgumentParser()
 parser.add_argument("--lr",help="learning rate",default=5e-6,type=int)
 parser.add_argument("--epochs",default=12,type=int)
@@ -33,8 +31,8 @@ parser.add_argument("--train_unet",help="whether to train Unet or not",default=F
 parser.add_argument("--decay",help="weight_decay",default=1e-2,type=int)
 parser.add_argument("--train_text_encoder",default=True,type=bool)
 parser.add_argument("--data_root",default="../book dataset",type=str)
-parser.add_argument("--num_examples",default=6000,type=int,help="number of training examples")
-parser.add_argument("--num_devices",default=3)
+parser.add_argument("--num_examples",default=8000,type=int,help="number of training examples")
+parser.add_argument("--num_devices",default=3,type=int)
 parser.add_argument("--gradient_acc_steps",default=8,type=int)
 args = parser.parse_args()
 def image_grid(imgs, rows, cols):
@@ -49,6 +47,7 @@ def image_grid(imgs, rows, cols):
     return grid
     
 #For reproducibility
+global_seed = 42
 def set_seed(seed: int = 42) -> None:
     np.random.seed(seed)
     random.seed(seed)
@@ -60,9 +59,6 @@ def set_seed(seed: int = 42) -> None:
     # Set a fixed value for the hash seed
     os.environ["PYTHONHASHSEED"] = str(seed)
     print(f"Random seed set as {seed}")
-
-
-
 
 
 #pretrained_model_name_or_path = "runwayml/stable-diffusion-v1-5" #@param {type:"string"}
@@ -198,9 +194,6 @@ hyperparam = {
     "templates" : book_cover_templates
 }
 
-
-#test model with out of max_length token sequence 
-
 used_times=[]
 class TextualInversionDataset(Dataset):
     def __init__(
@@ -211,7 +204,6 @@ class TextualInversionDataset(Dataset):
         size=512,
         training_size=1000,#use a subset of the training set to save time
         interpolation="bicubic",
-        flip_prob=0,
         test_speed=False,
         include_desc=False,
         summerize_length:int="max length of summerized book description", #not implemented
@@ -219,20 +211,16 @@ class TextualInversionDataset(Dataset):
     ):
         
         self.data_root = data_root
-        self.image_path=data_root+"/images/images"
+        self.image_path=data_root+"/images"
         #changed path for kaggle 
         self.df=pd.read_csv(os.path.join(label_root,"df_train.csv")).iloc[:training_size]
         # self.df.set_index(self.df.columns[0],drop=True,inplace=True)
         self.tokenizer = tokenizer
         # self.learnable_property = learnable_property
         # self.size = size
-        self.flip_prob = flip_prob
         self.test_speed=test_speed
         self.include_desc=include_desc
         self.summerize_length=summerize_length
-        self.transform = nn.Sequential( 
-            K.RandomHorizontalFlip(p=self.flip_prob)
-        )
         self.legible_text_prob=legible_text_prob
         # self.image_paths = [os.path.join(self.data_root, file_path) for file_path in os.listdir(self.data_root)]
         self.size=size
@@ -295,8 +283,6 @@ class TextualInversionDataset(Dataset):
             return_tensors="pt",
         ).input_ids[0]
 
-
-
         # default to score-sde preprocessing
         img = np.array(image).astype(np.uint8)
         image = Image.fromarray(img)
@@ -306,25 +292,25 @@ class TextualInversionDataset(Dataset):
         image = (image / 127.5 - 1.0).astype(np.float32)
     
         example["pixel_values"] = torch.from_numpy(image).permute(2, 0, 1)
-        #Apply data augmentation 
-        #Kornia K.RandomHorizontalFlip() unsqueezes the tensor at dim 0, so apply squeeze() to get 3d tensor
-        example["pixel_values"] = torch.squeeze(self.transform(example["pixel_values"]))
-        # print("Afte transform",example["pixel_values"].shape)
-
         if self.test_speed:
             print("Used time=",time.time()-start_time)
             global used_times
             used_times.append(time.time()-start_time)
         return example
 
-def create_dataloader(datasettrain_batch_size=1):
+def create_dataloader(dataset,train_batch_size=1):
     return torch.utils.data.DataLoader(dataset, batch_size=train_batch_size, shuffle=True,pin_memory=True,num_workers=2)
+
+
+def freeze_params(params):
+    for param in params:
+        param.requires_grad = False
 
 ### Visualize training result
 #fix random seed by fixing latents
 latents=None
 def visualize_prompts(
-    pipeline: StableDiffusionPipeline,
+    pipeline,
     summerize=False,
     include_desc=False,#include description
     max_length=15,#only when summerize=True
@@ -456,21 +442,14 @@ def visualize_prompts(
       image=Image.open(img_path)
       wandb.log({"examples":wandb.Image(image)})
 
-def freeze_params(params):
-    for param in params:
-        param.requires_grad = False
-
-
 
 def training_function(
-                    text_encoder, vae, unet,
                     resume=False,train_unet=False,train_text_encoder=True,
-                    gradient_checkpointing=False,use_8bit_adam=True):
+                    gradient_checkpointing=False,use_8bit_adam=True
+                    ):
     #moved import statements here to avoid invoking cuda before notebook_launcher
-    import torch,torch.nn as nn
     import torch.nn.functional as F
     import torch.utils.checkpoint
-    from torch.utils.data import Dataset
     import torchvision
     from accelerate import Accelerator
     from accelerate.logging import get_logger
@@ -479,15 +458,9 @@ def training_function(
     from diffusers.hub_utils import init_git_repo, push_to_hub
     from diffusers.optimization import get_scheduler
     from diffusers.pipelines.stable_diffusion import StableDiffusionSafetyChecker
-    from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer,TrainingArguments
-
-    tokenizer = CLIPTokenizer.from_pretrained(
-        pretrained_model_name_or_path,
-        subfolder="tokenizer",
-        use_auth_token=True,
-    )
-
-    # Load models and create wrapper for stable diffusion
+    from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer,TrainingArguments   
+    from torch import autocast
+     # Load models and create wrapper for stable diffusion
     text_encoder = CLIPTextModel.from_pretrained(
         pretrained_model_name_or_path, subfolder="text_encoder"
         , use_auth_token=True
@@ -500,13 +473,19 @@ def training_function(
         pretrained_model_name_or_path, subfolder="unet"
         , use_auth_token=True
     )
-    
+    tokenizer = CLIPTokenizer.from_pretrained(
+        pretrained_model_name_or_path,
+        subfolder="tokenizer",
+        use_auth_token=True,
+    )
+    noise_scheduler = DDPMScheduler.from_config(pretrained_model_name_or_path,subfolder="scheduler")
+
     import gc
     gc.collect()
     torch.cuda.empty_cache()
     torch.cuda.memory_allocated() 
     #set random seed     
-    set_seed()
+    set_seed(global_seed)
 
     # logger = get_logger(__name__)
     wandb.login(key='16d21dc747a6f33247f1e9c96895d4ffa5ea0b27',relogin=True)
@@ -527,8 +506,8 @@ def training_function(
     accelerator = Accelerator(
         gradient_accumulation_steps=gradient_accumulation_steps
     )
-
-    train_dataloader = create_dataloader(train_batch_size)
+    dataset  = TextualInversionDataset(data_root,tokenizer,training_size=hyperparam['training_dataset_size'])
+    train_dataloader = create_dataloader(dataset,train_batch_size)
     if hyperparam["scale_lr"]:
         learning_rate = (
             learning_rate * gradient_accumulation_steps * train_batch_size * accelerator.num_processes
@@ -568,8 +547,8 @@ def training_function(
 
     # Initialize the optimizer
     print(f"Train unet:{unet.training} || Train text_encoder:{text_encoder.training}")
-    param_list=[model.parameters() for model in [unet,text_encoder] if model.training]
-    params_to_train=itertools.chain(*param_list)
+    param_list = [model.parameters() for model in [unet,text_encoder] if model.training]
+    params_to_train = itertools.chain(*param_list)
      
     if use_8bit_adam:
       import bitsandbytes as bnb
@@ -582,8 +561,9 @@ def training_function(
         lr=learning_rate,
         weight_decay=weight_decay
     )
-    optimizer, train_dataloader = accelerator.prepare(optimizer, train_dataloader)
-    scheduler=torch.optim.lr_scheduler.CosineAnnealingLR(optimizer,T_max=100,eta_min=1e-6,verbose=True)
+    
+    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer,T_max=100,eta_min=1e-6,verbose=True)
+    optimizer, train_dataloader, scheduler= accelerator.prepare(optimizer, train_dataloader,scheduler)
     print("optimizer after wrapping using accelerator:",optimizer)
 
     # We need to recalculate our total training steps as the size of the training dataloader may have changed.
@@ -613,12 +593,12 @@ def training_function(
     global_step = 0
     min_loss=1e9
     for epoch in range(num_train_epochs):
-        text_encoder.train()
         epoch_loss=None
         for step, batch in enumerate(train_dataloader):
-          from torch import autocast
           with autocast('cuda'):
-            with accelerator.accumulate():
+            context1 = accelerator.accumulate(unet) if args.train_unet else nullcontext()
+            context2 = accelerator.accumulate(text_encoder) if args.train_text_encoder else nullcontext()
+            with context1, context2:
                 # Convert images to latent space
                 latents = vae.encode(batch["pixel_values"]).latent_dist.sample().detach()
                 latents = latents * 0.18215
@@ -736,28 +716,18 @@ def training_function(
           # learned_embeds_dict = {placeholder_token: learned_embeds.detach().cpu()}
           # torch.save(learned_embeds_dict, os.path.join(output_dir, "learned_embeds.bin"))
 
-# + [markdown] id="pem_EG-C6OE9"
-# # Train model!
-
-# + id="jXi0NdsyBA4S" outputId="ac99079d-e0d2-45ea-ae00-050ac2b1ffb2"
-
-
-
-
-import accelerate
-from multiprocess import set_start_method
-set_start_method("spawn")#avoid CUDA error: RuntimeError: Cannot re-initialize CUDA in forked subprocess
-#args in the second line: resume,train_unet,train_text_encoder,gradient_checkpointing,use_8bit_adam
-accelerate.notebook_launcher(training_function, args=(text_encoder, vae, unet, 
-                            False,hyperparam["train_unet"],hyperparam["train_text_encoder"],False,True),
-                            num_processes=args.num_devices)
+### Train model!
+from accelerate import notebook_launcher 
+notebook_launcher(training_function, args=( 
+                                        False,hyperparam["train_unet"],hyperparam["train_text_encoder"],False,True),
+                                        num_processes=args.num_devices,mixed_precision="fp16"
+                                        )
 
 
 
 # ### Load from  checkpoint
 
-# + id="2CMlPbOeEC09"
- #@title Fine tune result evaluation
+#@title Fine tune result evaluation
 output_dir=hyperparam["output_dir"]
 if os.path.isdir(output_dir):
     #load from local checkpoint
@@ -900,6 +870,5 @@ for _ in range(num_rows):
 
 grid = image_grid(all_images, num_samples, num_rows)
 grid
-# -
 
 

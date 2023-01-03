@@ -1,0 +1,27 @@
+dataset.self.tokenizer.model_max_length: 77
+dataset.self.tokenizer.truncation_side right
+lr after hyperparam["scale_lr"]: 5e-06
+Max gradient update steps:   0%|                                                           | 0/3000 [00:00<?, ?it/s]
+Train unet:False || Train text_encoder:True
+Adjusting learning rate of group 0 to 5.0000e-06.
+optimizer after wrapping using accelerator: AcceleratedOptimizer (
+Parameter Group 0
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 5e-06
+    lr: 5e-06
+    weight_decay: 0.01
+)
+num_update_steps_per_epoch: 250
+num_train_epochs 12
+accelerator.num_processes 4
+
+Max gradient update steps:   0%|                        | 0/3000 [00:03<?, ?it/s, epoch=0, loss=0.0229, step=3/2000]
+Adjusting learning rate of group 0 to 4.9990e-06.
+Adjusting learning rate of group 0 to 4.9961e-06.
+Adjusting learning rate of group 0 to 4.9911e-06.
+Adjusting learning rate of group 0 to 4.9842e-06.
+
+Max gradient update steps:   0%|              | 1/3000 [00:05<4:32:29,  5.45s/it, epoch=0, loss=0.0843, step=7/2000]
+Adjusting learning rate of group 0 to 4.9646e-06.
+Adjusting learning rate of group 0 to 4.9518e-06.

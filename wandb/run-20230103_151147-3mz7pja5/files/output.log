@@ -1,0 +1,16 @@
+dataset.self.tokenizer.model_max_length: 77
+dataset.self.tokenizer.truncation_side right
+lr after hyperparam["scale_lr"]: 5e-06
+Train unet:False || Train text_encoder:True
+Adjusting learning rate of group 0 to 5.0000e-06.
+optimizer after wrapping using accelerator: AcceleratedOptimizer (
+Parameter Group 0
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 5e-06
+    lr: 5e-06
+    weight_decay: 0.01
+)
+num_update_steps_per_epoch: 250
+num_train_epochs 12
+accelerator.num_processes 4

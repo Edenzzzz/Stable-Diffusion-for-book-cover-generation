@@ -1,0 +1,2 @@
+dataset.self.tokenizer.model_max_length: 77
+dataset.self.tokenizer.truncation_side right
