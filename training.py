@@ -16,22 +16,12 @@ import math
 import os
 import random
 import numpy as np
-import torch,torch.nn as nn
-import torch.nn.functional as F
-import torch.utils.checkpoint
-from torch.utils.data import Dataset
-import torchvision
 import PIL
-from accelerate import Accelerator
-from accelerate.logging import get_logger
-from accelerate.utils import set_seed
-from diffusers import AutoencoderKL, DDPMScheduler, PNDMScheduler, StableDiffusionPipeline, UNet2DConditionModel
-from diffusers.hub_utils import init_git_repo, push_to_hub
-from diffusers.optimization import get_scheduler
-from diffusers.pipelines.stable_diffusion import StableDiffusionSafetyChecker
+
+
+
 from PIL import Image
 from tqdm.auto import tqdm
-from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer,TrainingArguments
 import kornia.augmentation as K#augmentaiton
 import pandas as pd
 import wandb
@@ -70,11 +60,11 @@ def set_seed(seed: int = 42) -> None:
     # Set a fixed value for the hash seed
     os.environ["PYTHONHASHSEED"] = str(seed)
     print(f"Random seed set as {seed}")
-global_seed = 42
 
 
-# + id="If5Jswe526QP"
-#@markdown `pretrained_model_name_or_path` which Stable Diffusion checkpoint you want to use
+
+
+
 #pretrained_model_name_or_path = "runwayml/stable-diffusion-v1-5" #@param {type:"string"}
 pretrained_model_name_or_path ="CompVis/stable-diffusion-v1-4"
 # data_root="/kaggle/input/goodreads-best-books"
@@ -188,7 +178,6 @@ summary_placeholders=summary_placeholders[:len(test_templates)]
 #     "a large painting in the style of {}",
 # ]
 
-# + id="fcA-kMQblqUe"
 #@title Training hyperparameters 
 hyperparam = {
     "learning_rate": args.lr, #original: 5e-4
@@ -209,42 +198,8 @@ hyperparam = {
     "templates" : book_cover_templates
 }
 
-# + id="xp2InXqXW8aY" outputId="32997303-8897-4243-9a83-e4b75a03272e"
-#@title Load the Stable Diffusion model
 
-print("before loading tokenizer: cuda:",torch.cuda.is_available())
-tokenizer = CLIPTokenizer.from_pretrained(
-    pretrained_model_name_or_path,
-    subfolder="tokenizer",
-    use_auth_token=True,
-)
-    
-
-# Load models and create wrapper for stable diffusion
-text_encoder = CLIPTextModel.from_pretrained(
-    pretrained_model_name_or_path, subfolder="text_encoder"
-    , use_auth_token=True
-)
-vae = AutoencoderKL.from_pretrained(
-    pretrained_model_name_or_path, subfolder="vae"
-    , use_auth_token=True
-)
-unet = UNet2DConditionModel.from_pretrained(
-    pretrained_model_name_or_path, subfolder="unet"
-    , use_auth_token=True
-)
-print("cuda: after loading models",torch.cuda.is_available())
 #test model with out of max_length token sequence 
-
-# input=tokenizer(book_df.loc[7202]['book_desc'], return_tensors="pt").input_ids[:,:999]
-# print(input.shape)
-# print("Test encode above max_length(77) text",text_encoder(input))
-
-
-tokenizer.tokenize(" . "),tokenizer.decode(tokenizer("谁")['input_ids']),tokenizer.convert_tokens_to_ids(tokenizer.tokenize("谁")),tokenizer.convert_tokens_to_ids('.'),tokenizer.encode(tokenizer.tokenize("."))==tokenizer.encode("."),tokenizer.decode(tokenizer.encode("."))
-
-# + id="2ntpEpVfnd-0" outputId="d7437541-b405-4225-8897-86d383419b62"
-#@title Setup the dataset and train loader
 
 used_times=[]
 class TextualInversionDataset(Dataset):
@@ -362,29 +317,11 @@ class TextualInversionDataset(Dataset):
             used_times.append(time.time()-start_time)
         return example
 
-print("cuda before initializing dataset:",torch.cuda.is_available())
-train_dataset = TextualInversionDataset(
-      data_root=data_root,
-      tokenizer=tokenizer,
-      size=512,
-      training_size=hyperparam["training_dataset_size"],
-      include_desc=hyperparam["include_summary"]
-)
+def create_dataloader(datasettrain_batch_size=1):
+    return torch.utils.data.DataLoader(dataset, batch_size=train_batch_size, shuffle=True,pin_memory=True,num_workers=2)
 
-def create_dataloader(train_batch_size=1):
-    return torch.utils.data.DataLoader(train_dataset, batch_size=train_batch_size, shuffle=True,pin_memory=True,num_workers=2)
-print("Number of training examples used:", len(train_dataset.df))
-print("Number of templates:",len(train_dataset.templates))
-print("Training image size:",train_dataset.size)
-print("Train loader size:", len(create_dataloader(hyperparam["train_batch_size"])))
-print()
-print("Templates:\n",train_dataset.templates)
-
-text_encoder.resize_token_embeddings(len(tokenizer))
-token_embeds = text_encoder.get_input_embeddings().weight.data
-
-noise_scheduler=DDPMScheduler.from_config(pretrained_model_name_or_path, subfolder="scheduler")
-
+### Visualize training result
+#fix random seed by fixing latents
 latents=None
 def visualize_prompts(
     pipeline: StableDiffusionPipeline,
@@ -411,6 +348,8 @@ def visualize_prompts(
     torch.cuda.empty_cache()
     torch.cuda.memory_allocated()
     
+    #fix random seed by fixing latents.
+    #generate fixed latents if no latents exist
     global latents
     if latents==None or latents.shape[0]!=samples_per_prompt:
       generator = torch.Generator(device='cuda')
@@ -517,35 +456,59 @@ def visualize_prompts(
       image=Image.open(img_path)
       wandb.log({"examples":wandb.Image(image)})
 
-
-print("cuda:",torch.cuda.is_available())
 def freeze_params(params):
     for param in params:
         param.requires_grad = False
 
 
 
-# Freeze all parameters except for the token embeddings in text encoder
-# params_to_freeze = itertools.chain(
-#     text_encoder.text_model.encoder.parameters(),
-#     text_encoder.text_model.final_layer_norm.parameters(),
-#     text_encoder.text_model.embeddings.position_embedding.parameters(),
-# )
-# freeze_params(params_to_freeze)
-
-
 def training_function(
                     text_encoder, vae, unet,
                     resume=False,train_unet=False,train_text_encoder=True,
                     gradient_checkpointing=False,use_8bit_adam=True):
+    #moved import statements here to avoid invoking cuda before notebook_launcher
+    import torch,torch.nn as nn
+    import torch.nn.functional as F
+    import torch.utils.checkpoint
+    from torch.utils.data import Dataset
+    import torchvision
+    from accelerate import Accelerator
+    from accelerate.logging import get_logger
+    from accelerate.utils import set_seed
+    from diffusers import AutoencoderKL, DDPMScheduler, PNDMScheduler, StableDiffusionPipeline, UNet2DConditionModel
+    from diffusers.hub_utils import init_git_repo, push_to_hub
+    from diffusers.optimization import get_scheduler
+    from diffusers.pipelines.stable_diffusion import StableDiffusionSafetyChecker
+    from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer,TrainingArguments
+
+    tokenizer = CLIPTokenizer.from_pretrained(
+        pretrained_model_name_or_path,
+        subfolder="tokenizer",
+        use_auth_token=True,
+    )
+
+    # Load models and create wrapper for stable diffusion
+    text_encoder = CLIPTextModel.from_pretrained(
+        pretrained_model_name_or_path, subfolder="text_encoder"
+        , use_auth_token=True
+    )
+    vae = AutoencoderKL.from_pretrained(
+        pretrained_model_name_or_path, subfolder="vae"
+        , use_auth_token=True
+    )
+    unet = UNet2DConditionModel.from_pretrained(
+        pretrained_model_name_or_path, subfolder="unet"
+        , use_auth_token=True
+    )
+    
     import gc
     gc.collect()
     torch.cuda.empty_cache()
     torch.cuda.memory_allocated() 
-    #set random seed  
-    set_seed(global_seed)
+    #set random seed     
+    set_seed()
 
-    logger = get_logger(__name__)#TODO: switch to wandb
+    # logger = get_logger(__name__)
     wandb.login(key='16d21dc747a6f33247f1e9c96895d4ffa5ea0b27',relogin=True)
     wandb.init(
            project="book_cover_generation", 
@@ -655,7 +618,7 @@ def training_function(
         for step, batch in enumerate(train_dataloader):
           from torch import autocast
           with autocast('cuda'):
-            with accelerator.accumulate(text_encoder):
+            with accelerator.accumulate():
                 # Convert images to latent space
                 latents = vae.encode(batch["pixel_values"]).latent_dist.sample().detach()
                 latents = latents * 0.18215
@@ -683,7 +646,6 @@ def training_function(
                 else:
                   epoch_loss+=loss.detach().item()
                 accelerator.backward(loss)
-
 
                 #save best model every 1/2 epoch
                 saves_per_epoch=2
@@ -780,12 +742,12 @@ def training_function(
 # + id="jXi0NdsyBA4S" outputId="ac99079d-e0d2-45ea-ae00-050ac2b1ffb2"
 
 
-print("cuda:",torch.cuda.is_available())
+
+
 import accelerate
 from multiprocess import set_start_method
 set_start_method("spawn")#avoid CUDA error: RuntimeError: Cannot re-initialize CUDA in forked subprocess
-#args in the second line:
-#resume,train_unet,train_text_encoder,gradient_checkpointing,use_8bit_adam
+#args in the second line: resume,train_unet,train_text_encoder,gradient_checkpointing,use_8bit_adam
 accelerate.notebook_launcher(training_function, args=(text_encoder, vae, unet, 
                             False,hyperparam["train_unet"],hyperparam["train_text_encoder"],False,True),
                             num_processes=args.num_devices)
@@ -876,30 +838,23 @@ else:
     print('Load model from wandb cloud checkpoint')
 
 
-# + [markdown] id="yY7vzTj4HIiK"
 # ## Visualize different prompt strategies
 
-# + id="NWJLAxXRbvPj" outputId="83fb187d-4316-43c6-f4c2-d93d7d029c75"
 visualize_prompts(pipeline,summerize=False,include_desc=False,legible_prompt=False)
 
-# + [markdown] id="nCJdBiUWLD4Q"
 # ### Test effectiveness of summerization with other factors controlled for.
 
-# + id="GLfsx-3HDMx2" outputId="ad3d29da-256c-4329-d91b-5572f80f2386"
 visualize_prompts(pipeline,summerize=True,include_desc=True,legible_prompt=False)
 
-# + id="QeoyImZMtFKH" outputId="4f63367e-6b0f-4d2b-8134-b1dd0df6a929"
 visualize_prompts(pipeline,summerize=False,include_desc=True,legible_prompt=False)
 
 
 
-# + [markdown] id="30H2mXBsKy4r"
 # ## Model Evaluation
 
-# + id="BXW02rvFKt3e"
 # /kaggle/input/goodreads-best-book-cleaned-version/df_test.csv
 # /kaggle/input/goodreads-best-books/df_test.csv
-# #@title CLIP score
+### CLIP score
 # import gradio as gr
 # from transformers import CLIPProcessor, CLIPModel
 
@@ -922,13 +877,6 @@ visualize_prompts(pipeline,summerize=False,include_desc=True,legible_prompt=Fals
 #     }
 #     return results_dict
 
-# + id="vw2LVBFvLXrq"
-#@title FID score
-
-
-# + id="E3UREGd7EkLh" outputId="759772e3-978b-4f23-96e7-93bab5c71526"
-#@title Run the Stable Diffusion pipeline
-#@markdown Don't forget to use the placeholder token in your prompt
 import gc
 gc.collect()
 torch.cuda.empty_cache()
