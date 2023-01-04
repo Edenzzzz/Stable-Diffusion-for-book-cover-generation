@@ -238,8 +238,8 @@ class TextualInversionDataset(Dataset):
           self.templates=book_cover_templates
     
         
-        print("dataset.self.tokenizer.model_max_length:",self.tokenizer.model_max_length)
-        print("dataset.self.tokenizer.truncation_side",self.tokenizer.truncation_side)
+#        print("dataset.self.tokenizer.model_max_length:",self.tokenizer.model_max_length)
+ #       print("dataset.self.tokenizer.truncation_side",self.tokenizer.truncation_side)
 
     def __len__(self):
         return self._length
@@ -496,29 +496,28 @@ def training_function(
            tags=["reverted to Kaggle version 10","Simplified templates", "text_encoder_only"],
            )
     
-    #extract hyperparams
+    #get hyperparams
     train_batch_size = hyperparam["train_batch_size"]
     gradient_accumulation_steps = hyperparam["gradient_accumulation_steps"]
     learning_rate = hyperparam["learning_rate"]
     num_train_epochs = hyperparam["epochs"]
     output_dir = hyperparam["output_dir"]
     weight_decay=hyperparam["weight_decay"]
+
     accelerator = Accelerator(
         gradient_accumulation_steps=gradient_accumulation_steps
     )
+    vae,unet,text_encoder,tokenizer = accelerator.prepare(vae,unet,text_encoder,tokenizer)
     dataset  = TextualInversionDataset(data_root,tokenizer,training_size=hyperparam['training_dataset_size'])
     train_dataloader = create_dataloader(dataset,train_batch_size)
+
     if hyperparam["scale_lr"]:
         learning_rate = (
             learning_rate * gradient_accumulation_steps * train_batch_size * accelerator.num_processes
         )
     print("lr after hyperparam[\"scale_lr\"]:",learning_rate)
 
-    
-
-    #prepare models for training
-    
-    
+    #select models for training
     if train_text_encoder: 
       text_encoder = accelerator.prepare(text_encoder)
       text_encoder.train()
@@ -545,6 +544,7 @@ def training_function(
     vae.to(accelerator.device,dtype=torch.float16)
     vae.eval()
 
+    
     # Initialize the optimizer
     print(f"Train unet:{unet.training} || Train text_encoder:{text_encoder.training}")
     param_list = [model.parameters() for model in [unet,text_encoder] if model.training]
@@ -563,7 +563,7 @@ def training_function(
     )
     
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer,T_max=100,eta_min=1e-6,verbose=True)
-    optimizer, train_dataloader, scheduler= accelerator.prepare(optimizer, train_dataloader,scheduler)
+    optimizer, train_dataloader, scheduler = accelerator.prepare(optimizer, train_dataloader,scheduler)
     print("optimizer after wrapping using accelerator:",optimizer)
 
     # We need to recalculate our total training steps as the size of the training dataloader may have changed.
@@ -574,7 +574,6 @@ def training_function(
     print("num_update_steps_per_epoch:",num_update_steps_per_epoch)
     print('num_train_epochs',num_train_epochs)
     print("accelerator.num_processes",accelerator.num_processes)
-
 
     ###########
     # Train!  #
@@ -622,9 +621,9 @@ def training_function(
                 loss = F.mse_loss(noise_pred, noise, reduction="none").mean([1, 2, 3]).mean()
                 #aggregate epoch training loss
                 if not epoch_loss:
-                  epoch_loss=loss.detach().item()
+                  epoch_loss = loss.detach().item()
                 else:
-                  epoch_loss+=loss.detach().item()
+                  epoch_loss += loss.detach().item()
                 accelerator.backward(loss)
 
                 #save best model every 1/2 epoch
@@ -653,7 +652,6 @@ def training_function(
                           safety_checker=StableDiffusionSafetyChecker.from_pretrained("CompVis/stable-diffusion-safety-checker"),
                           feature_extractor=CLIPFeatureExtractor.from_pretrained("openai/clip-vit-base-patch32"),
                       )
-
 
                       #save model
                       # pipeline.save_pretrained(output_dir)
@@ -689,7 +687,6 @@ def training_function(
                       except:
                         optimizer.save_state(output_dir)
 
-
                 optimizer.step()
                 optimizer.zero_grad()
             
@@ -708,14 +705,7 @@ def training_function(
           accelerator.wait_for_everyone()
     wandb.run.log_artifact(artifact)
     subprocess.run(["rm","-r",output_dir])
-
-      
         
-          # Also save the newly trained embeddings
-          # learned_embeds = accelerator.unwrap_model(text_encoder).get_input_embeddings().weight[placeholder_token_id]
-          # learned_embeds_dict = {placeholder_token: learned_embeds.detach().cpu()}
-          # torch.save(learned_embeds_dict, os.path.join(output_dir, "learned_embeds.bin"))
-
 ### Train model!
 from accelerate import notebook_launcher 
 notebook_launcher(training_function, args=( 
@@ -723,10 +713,7 @@ notebook_launcher(training_function, args=(
                                         num_processes=args.num_devices,mixed_precision="fp16"
                                         )
 
-
-
-# ### Load from  checkpoint
-
+### Load from  checkpoint
 #@title Fine tune result evaluation
 output_dir=hyperparam["output_dir"]
 if os.path.isdir(output_dir):
@@ -820,7 +807,7 @@ visualize_prompts(pipeline,summerize=False,include_desc=True,legible_prompt=Fals
 
 
 
-# ## Model Evaluation
+### Model Evaluation
 
 # /kaggle/input/goodreads-best-book-cleaned-version/df_test.csv
 # /kaggle/input/goodreads-best-books/df_test.csv
