@@ -1,0 +1,49 @@
+lr after hyperparam["scale_lr"]: 5e-05
+Train unet:False || Train text_encoder:True
+optimizer after wrapping using accelerator: AcceleratedOptimizer (
+Parameter Group 0
+    betas: (0.9, 0.999)
+    eps: 1e-08
+    initial_lr: 5e-05
+    lr: 5e-05
+    weight_decay: 0.01
+)
+num_update_steps_per_epoch: 625
+num_train_epochs 12
+accelerator.num_processes 1
+Number of training examples: 10000
+Train!
+Max gradient update steps:   0%|                                                           | 0/7500 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/usr/lib/python3.8/runpy.py", line 185, in _run_module_as_main
+    mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+  File "/usr/lib/python3.8/runpy.py", line 111, in _get_module_details
+    __import__(pkg_name)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/training.py", line 711, in <module>
+    notebook_launcher(training_function, args=(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/accelerate/launchers.py", line 135, in notebook_launcher
+    function(*args)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/training.py", line 615, in training_function
+    noise_pred = unet(noisy_latents, timesteps, encoder_hidden_states).sample
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/models/unet_2d_condition.py", line 333, in forward
+    sample = upsample_block(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/models/unet_2d_blocks.py", line 1190, in forward
+    hidden_states = attn(hidden_states, encoder_hidden_states=encoder_hidden_states).sample
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/models/attention.py", line 202, in forward
+    hidden_states = block(hidden_states, context=encoder_hidden_states, timestep=timestep)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/models/attention.py", line 404, in forward
+    hidden_states = self.attn1(norm_hidden_states) + hidden_states
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1190, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/models/attention.py", line 497, in forward
+    hidden_states = self._attention(query, key, value)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/diffusers/models/attention.py", line 520, in _attention
+    hidden_states = torch.matmul(attention_probs, value)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 256.00 MiB (GPU 0; 10.76 GiB total capacity; 6.63 GiB already allocated; 161.81 MiB free; 6.79 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF

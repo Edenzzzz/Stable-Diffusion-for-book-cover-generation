@@ -1,0 +1,33 @@
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/runpy.py", line 185, in _run_module_as_main
+    mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+  File "/usr/lib/python3.8/runpy.py", line 111, in _get_module_details
+    __import__(pkg_name)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/training.py", line 711, in <module>
+    notebook_launcher(training_function, args=(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/accelerate/launchers.py", line 135, in notebook_launcher
+    function(*args)
+  File "/home/wenxuan/Stable-diffusion-for-book-cover-generation/training.py", line 513, in training_function
+    vae,unet,text_encoder,tokenizer = accelerator.prepare(vae,unet,text_encoder,tokenizer)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/accelerate/accelerator.py", line 876, in prepare
+    result = tuple(
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/accelerate/accelerator.py", line 877, in <genexpr>
+    self._prepare_one(obj, first_pass=True, device_placement=d) for obj, d in zip(args, device_placement)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/accelerate/accelerator.py", line 741, in _prepare_one
+    return self.prepare_model(obj, device_placement=device_placement)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/accelerate/accelerator.py", line 912, in prepare_model
+    model = model.to(self.device)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 987, in to
+    return self._apply(convert)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 639, in _apply
+    module._apply(fn)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 639, in _apply
+    module._apply(fn)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 639, in _apply
+    module._apply(fn)
+  [Previous line repeated 2 more times]
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 662, in _apply
+    param_applied = fn(param)
+  File "/home/wenxuan/sd_training/lib/python3.8/site-packages/torch/nn/modules/module.py", line 985, in convert
+    return t.to(device, dtype if t.is_floating_point() or t.is_complex() else None, non_blocking)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 20.00 MiB (GPU 0; 10.76 GiB total capacity; 2.55 GiB already allocated; 8.81 MiB free; 2.62 GiB reserved in total by PyTorch) If reserved memory is >> allocated memory try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF
