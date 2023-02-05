@@ -25,7 +25,7 @@ parser.add_argument(
 parser.add_argument("--decay", help="weight_decay", default=1e-4, type=int)
 parser.add_argument("--train_text_encoder", default=True, type=bool)
 parser.add_argument("--data_root", default="../book dataset", type=str)
-parser.add_argument("--num_examples", default=10000,
+parser.add_argument("--num_examples", default=12000,
                     type=int, help="number of training examples")
 parser.add_argument("--num_gpus", default=3, type=int)
 parser.add_argument("--resume_id", default=None, type=int,
@@ -35,6 +35,7 @@ parser.add_argument("--wandb_key", default=None, type=str,
 parser.add_argument("--grad_acc_steps", default=16, type=int)
 parser.add_argument("--grad_ckpt", default=False, type=bool,
                     help="True to use gradient checkpointing")
+parser.add_argument("--inference_id", default=None, help="Wandb run id for model. If specified, will run inference only.")
 args = parser.parse_args()
 # set up wandb
 if args.wandb_key:
@@ -333,7 +334,6 @@ def visualize_prompts(
     samples_per_prompt=3,
     img_size=512,
     inference_steps=75,
-    save_to_drive=True,
     batch_generate=False
 ):
     if summerize == True:
@@ -447,22 +447,13 @@ def visualize_prompts(
             axes[i].imshow(images[0])
             axes[i].set_aspect('auto')
 
-    if save_to_drive:
-        # save fig with paramters
-        img_name = f"Generated_covers:legible={legible_prompt},summerize={summerize},\
-                include_desc={include_desc},max_length={max_length}.png"
-        path = "./"+img_name
-        plt.savefig(path)
-        fig.show()
-    else:
-        # save checkpoint generation results in wandb
-        img_path = "checkpoint_image_sample.jpg"
-        plt.savefig(img_path)
-        from PIL import Image
-        image = Image.open(img_path)
-        if args.wandb_key:
-            wandb.log({"examples": wandb.Image(image)})
-
+            # save checkpoint generation results in wandb
+    img_path = "checkpoint_image.jpg"
+    plt.savefig(img_path)
+    from PIL import Image
+    image = Image.open(img_path)
+    if args.wandb_key:
+        wandb.log({"examples": wandb.Image(image)})
 
 def training_function(
     resume=False, train_unet=False, train_text_encoder=True,
@@ -739,10 +730,14 @@ def training_function(
 
 
 # Train model!
-notebook_launcher(training_function, args=(
-    False, hyperparam["train_unet"], hyperparam["train_text_encoder"], args.grad_ckpt, True),
-    num_processes=args.num_gpus, mixed_precision="fp16"
-)
+if not args.inference_id:
+    notebook_launcher(training_function, args=(
+        False, hyperparam["train_unet"], hyperparam["train_text_encoder"], args.grad_ckpt, True),
+        num_processes=args.num_gpus, mixed_precision="fp16"
+    )
+
+from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer
+from diffusers import StableDiffusionPipeline
 
 # Load from  checkpoint
 # @title Fine tune result evaluation
@@ -796,25 +791,27 @@ if os.path.isdir(output_dir):
         print(f"Built pipeline from components from {output_dir}")
 else:
     # load from wandb checkpoint
-    with wandb.init(project="book_cover_generation") as run:
-        my_model_artifact = run.use_artifact("stable_diffusion_model:v17")
-        # Download model weights to a folder and return the path
-        model_dir = my_model_artifact.download()
+    if args.inference_id:
+        run = wandb.init(project="book_cover_generation", id=args.inference_id)
+    else:
+        run = wandb.init(project="book_cover_generation")            
+    my_model_artifact = run.use_artifact("stable_diffusion_model:latest")
+    # Download model weights to a folder and return the path
+    model_dir = my_model_artifact.download()
 
-        # Load your Hugging Face model from that folder
-        #  using the same model class
-        tokenizer = CLIPTokenizer.from_pretrained(
-            model_dir,
-            subfolder="tokenizer",
-            Padding="max_length",
-            Truncation=True,
-        )
-        pipeline = StableDiffusionPipeline.from_pretrained(
-            model_dir,
-            torch_dtype=torch.float16,
-            safety_checker=None,
-            tokenizer=tokenizer  # enable padding
-        ).to('cuda')
+    tokenizer = CLIPTokenizer.from_pretrained(
+        model_dir,
+        subfolder="tokenizer",
+        Padding="max_length",
+        Truncation=True,
+    )
+    pipeline = StableDiffusionPipeline.from_pretrained(
+        model_dir,
+        torch_dtype=torch.float16,
+        safety_checker=None,
+        tokenizer=tokenizer  # enable padding
+    ).to('cuda')
+    subprocess.Popen(["rm", "-r", "-f",  model_dir])
     print('Load model from wandb cloud checkpoint')
 
 # ## Visualize different prompt strategies
@@ -838,8 +835,8 @@ torch.cuda.memory_allocated()
 prompt = "Clear, highly detailed book cover with title とある魔術の禁書目録 2"
 # prompt="Clear, highly detailed book cover with description "+book_df.loc[7202]['book_desc']
 
-num_samples = 2  # @param {type:"number"}
-num_rows = 2  # @param {type:"number"}
+num_samples = 1  # @param {type:"number"}
+num_rows = 1  # @param {type:"number"}
 width = 512
 height = 512
 all_images = []
@@ -851,4 +848,4 @@ for _ in range(num_rows):
         all_images.extend(images)
 
 grid = image_grid(all_images, num_samples, num_rows)
-grid
+grid.save("for_fun.jpg")
