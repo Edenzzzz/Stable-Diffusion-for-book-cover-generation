@@ -24,23 +24,22 @@ import torch.nn.functional as F
 import numpy as np
 import random
 import os
-import math
-import itertools
+from utils import load_model
 import argparse
 from huggingface_hub import login
-login("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")
 
 warnings.filterwarnings("ignore")
 
 os.environ["WANDB_SILENT"] = "true"  # mute wandb run message
-os.environ["WANDB_API_KEY"] = "16d21dc747a6f33247f1e9c96895d4ffa5ea0b27"
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "--device", help="GPU device number, e.g. cuda:0", default="cuda:0")
 parser.add_argument("--version", type=str,
-                    help="wandb model version, e.g. v1", required=True)
+                    help="wandb model version, e.g. v1", default=None)
 parser.add_argument("--run_id", type=str,
-                    help="wandb run id of model", required=True)
+                    help="wandb run id of model", default=None)
+parser.add_argument("--wandb_key", type=str, default=None)
+
 parser.add_argument("--data_root", default="./book dataset",
                     help="path to read csv files")
 parser.add_argument("--batch_size", default=2, type=int,
@@ -50,7 +49,7 @@ parser.add_argument(
     "--mode", choices=["default,calc_fid,enter_prompt"], help="default mode will generate from ")
 parser.add_argument("--num_imgs", type=int, default=4000,
                     help="number of images to generate for computing FID score. Only to be specified if save_for_fid is True")
-parser.add_argument('--save_dir', type=str, default="./Output_images",
+parser.add_argument('--save_dir', type=str, default="./output_images",
                     help="Output dir for generated images.")
 parser.add_argument("--delete_model", type=bool, default=True,
                     help="whether to delete downloaded model artifact to save storage")
@@ -60,8 +59,11 @@ parser.add_argument("--fid_stats_path", type=str, default="../book dataset/fid_s
                     help="path or compressed numpy file calculated from the original dataset")
 parser.add_argument("--prompt", type=str,
                     help="Only to be specified in enter_prompt mode")
+parser.add_argument("--ckpt", type=str, default="./model_ckpt")
 args = parser.parse_args()
 
+if args.wandb_key:
+    os.environ["WANDB_API_KEY"] = args.wandb_key
 
 def image_grid(imgs, rows, cols):
     assert len(imgs) == rows*cols
@@ -154,7 +156,7 @@ def get_fid_images(
 ):
     index = 0
     num_generated = len(os.listdir(save_dir))
-    df = pd.read_csv(args.data_root+"/df_test.csv").iloc[num_generated:]
+    df = pd.read_csv(args.data_root + "/df_test.csv").iloc[num_generated:]
     print(f"{num_generated} images already generated. Skipping them... ")
 
     while index < args.num_imgs-num_generated:
@@ -385,29 +387,35 @@ noise_scheduler = DDIMScheduler(beta_start=0.00085, beta_end=0.012,
                                 beta_schedule="scaled_linear", clip_sample=False, set_alpha_to_one=False)
 if args.version != "v0":  # v0 is pretrained model
     # Fine tune result evaluation
-    model_name = "stable_diffusion_model:"+args.version
-    run_id = args.run_id
+    if args.wandb_key:
+        if args.version is not None:
+            model_name = "stable_diffusion_model:"+args.version 
+        elif args.version == "latest" or args.version is None:
+            model_name = "stable_diffusion_model:latest"
+            print("No version specified, use latest checkpoint from wandb cloud")
+            
+        run_id = args.run_id
+        wandb.init(project="book_cover_generation", id=run_id, name="stable_diffusion " +
+                model_name.split(":")[-1]+"+inference", resume='must')
+        my_model_artifact = wandb.run.use_artifact(model_name)
+        # Download model weights to a folder and return the path
+        model_dir = my_model_artifact.download()
 
-    # load from wandb checkpoint
-    wandb.init(project="book_cover_generation", id=run_id, name="stable_diffusion " +
-               model_name.split(":")[-1]+"+inference", resume='must')
-    my_model_artifact = wandb.run.use_artifact(model_name)
-    # Download model weights to a folder and return the path
-    model_dir = my_model_artifact.download()
-
-    pipeline = StableDiffusionPipeline.from_pretrained(
-        model_dir,
-        torch_dtype=torch.float16,
-        safety_checker=None,
-        scheduler=noise_scheduler,
-    ).to(args.device)
-
-    # delete downloaded model to save disk space
-    if args.delete_model:
-        subprocess.run(["rm", "-r", "artifacts"])
-    print("------------------------------------------")
-    print(f'Load {model_name} from wandb cloud checkpoint')
-
+        pipeline = StableDiffusionPipeline.from_pretrained(
+            model_dir,
+            torch_dtype=torch.float16,
+            safety_checker=None,
+            scheduler=noise_scheduler,
+        ).to(args.device)
+        print("------------------------------------------")
+        print(f'Load {model_name} from wandb cloud checkpoint')
+        # delete downloaded model to save disk space
+        if args.delete_model:
+            subprocess.run(["rm", "-r", "artifacts"])
+    else:
+        pipeline = load_model(args.ckpt)
+        
+    
 else:  # version==v0, download pretrained model from huggingface
     print('Load pretrained model from huggingface')
     model_id = "runwayml/stable-diffusion-v1-5"
