@@ -1,10 +1,11 @@
 # Stable diffusion for book cover generation
 ## To train the model: 
+- Uses 8bit adam, gradient checkpointing and other tricks by default to save GPU memory
 - Download dataset from https://www.kaggle.com/datasets/meetnaren/goodreads-best-books
 - Decompress and put folder in ../book_dataset or specify other dir in training.py
-- Choose to use wandb or local checkpoint (must specify "--wandb_key" in training.py and "--run_id" when resuming training and in sd-inference.py
+- Choose to use wandb or local checkpoint must specify "--wandb_key" in training.py and "--run_id" when resuming training and in sd-inference.py
 ```
-python -m training.py  --num_gpus=1 --train_text_encoder True --train_unet False"
+python -m training.py  --num_gpus=1 --train_text_encoder True --train_unet False
 ```
 ## Evaluation with some examples: 
 ```

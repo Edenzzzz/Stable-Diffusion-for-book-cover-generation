@@ -296,12 +296,11 @@ def training_function(
     # moved import statements here to avoid invoking cuda before notebook_launcher
     import torch.nn.functional as F
     import torch.utils.checkpoint
-    import torchvision
     from diffusers import AutoencoderKL, DDPMScheduler, PNDMScheduler, StableDiffusionPipeline, UNet2DConditionModel
     from diffusers.hub_utils import init_git_repo, push_to_hub
     from diffusers.optimization import get_scheduler
     from diffusers.pipelines.stable_diffusion import StableDiffusionSafetyChecker
-    from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer, 
+    from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer
     from torch import autocast
     from accelerate import Accelerator
     # Load models and create wrapper for stable diffusion
@@ -572,8 +571,7 @@ if not args.inference_id:
 
 pipeline = load_model(hyperparam["output_dir"], args.inference_id)
 
-# ## Visualize different prompt strategies
-
+### Visualize different prompt strategies
 visualize_prompts(pipeline, summerize=False,
                   include_desc=False, legible_prompt=False)
 
