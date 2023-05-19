@@ -1,5 +1,5 @@
-from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer, AutoencoderKL
-from diffusers import StableDiffusionPipeline, UNet2DConditionModel, PNDMScheduler  
+from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer
+from diffusers import StableDiffusionPipeline, UNet2DConditionModel, PNDMScheduler, AutoencoderKL
 from accelerate import Accelerator
 import wandb
 import torch, os, subprocess
@@ -81,7 +81,7 @@ class CustomDataset(Dataset):
     ):
 
         self.data_root = data_root
-        self.image_path = data_root+"/images/images"
+        self.image_path = os.path.join(data_root, "images", "images")
         # changed path for kaggle
         label_root = data_root if label_root is None else label_root
         self.df = pd.read_csv(os.path.join(

@@ -2,3 +2,5 @@
 !book dataset/book_data.csv
 !book dataset/df_train.csv
 !book dataset/df_test.csv
+**/__pycache__/**
+wandb/**

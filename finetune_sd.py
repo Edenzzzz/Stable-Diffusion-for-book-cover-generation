@@ -289,6 +289,7 @@ def visualize_prompts(
     if args.wandb_key:
         wandb.log({"examples": wandb.Image(image)})
 
+
 def training_function(
     resume=False, train_unet=False, train_text_encoder=True,
     gradient_checkpointing=False, use_8bit_adam=True
