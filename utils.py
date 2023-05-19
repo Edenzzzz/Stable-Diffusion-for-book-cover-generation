@@ -169,7 +169,7 @@ class CustomDataset(Dataset):
 
 
 def create_dataloader(dataset, train_batch_size=1):
-    return torch.utils.data.DataLoader(dataset, batch_size=train_batch_size, shuffle=True, pin_memory=True, num_workers=2)
+    return torch.utils.data.DataLoader(dataset, batch_size=train_batch_size, shuffle=True, pin_memory=True, num_workers=4)
 
 
 def freeze_params(params):

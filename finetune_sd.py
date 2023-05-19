@@ -1,4 +1,8 @@
+import torch.multiprocessing as mp
+# mp.set_start_method('spawn', force=True)  
+
 from accelerate import notebook_launcher
+
 from torch import autocast
 import gc
 import torch
@@ -15,6 +19,7 @@ import wandb
 from contextlib import contextmanager, nullcontext
 import subprocess
 from utils import *
+
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--lr", help="learning rate", default=5e-6, type=float)
@@ -304,6 +309,15 @@ def training_function(
     from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer
     from torch import autocast
     from accelerate import Accelerator
+
+    # get hyperparams
+    train_batch_size = hyperparam["train_batch_size"]
+    gradient_accumulation_steps = hyperparam["gradient_accumulation_steps"]
+    learning_rate = hyperparam["learning_rate"]
+    num_train_epochs = hyperparam["epochs"]
+    output_dir = hyperparam["output_dir"]
+    weight_decay = hyperparam["weight_decay"]
+
     # Load models and create wrapper for stable diffusion
     text_encoder = CLIPTextModel.from_pretrained(
         pretrained_model_name_or_path, subfolder="text_encoder"
@@ -321,6 +335,10 @@ def training_function(
     noise_scheduler = DDPMScheduler.from_config(
         pretrained_model_name_or_path, subfolder="scheduler")
 
+    dataset = CustomDataset(data_root, tokenizer,
+                            training_size=hyperparam['training_dataset_size'])
+    train_loader = create_dataloader(dataset, train_batch_size)
+
     import gc
     gc.collect()
     torch.cuda.empty_cache()
@@ -337,22 +355,14 @@ def training_function(
                   "Simplified templates", "text_encoder_only"],
         )
 
-    # get hyperparams
-    train_batch_size = hyperparam["train_batch_size"]
-    gradient_accumulation_steps = hyperparam["gradient_accumulation_steps"]
-    learning_rate = hyperparam["learning_rate"]
-    num_train_epochs = hyperparam["epochs"]
-    output_dir = hyperparam["output_dir"]
-    weight_decay = hyperparam["weight_decay"]
+
 
     accelerator = Accelerator(
         gradient_accumulation_steps=gradient_accumulation_steps
     )
-    vae, unet, text_encoder, tokenizer = accelerator.prepare(
-        vae, unet, text_encoder, tokenizer)
-    dataset = CustomDataset(data_root, tokenizer,
-                            training_size=hyperparam['training_dataset_size'])
-    train_dataloader = create_dataloader(dataset, train_batch_size)
+    train_loader, vae, unet, text_encoder, tokenizer = accelerator.prepare(
+        train_loader, vae, unet, text_encoder, tokenizer)
+    
 
     if hyperparam["scale_lr"]:
         learning_rate = (
@@ -407,13 +417,13 @@ def training_function(
     )
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
         optimizer, T_max=2*args.num_examples, eta_min=1e-6, verbose=False)
-    optimizer, train_dataloader, scheduler = accelerator.prepare(
-        optimizer, train_dataloader, scheduler)
+    optimizer, train_loader, scheduler = accelerator.prepare(
+        optimizer, train_loader, scheduler)
     print("optimizer after wrapping using accelerator:", optimizer)
 
     # We need to recalculate our total training steps as the size of the training dataloader may have changed.
     num_update_steps_per_epoch = math.ceil(
-        len(train_dataloader) / gradient_accumulation_steps)
+        len(train_loader) / gradient_accumulation_steps)
     # num_train_epochs = math.ceil(max_train_steps / num_update_steps_per_epoch)
     max_train_steps = num_update_steps_per_epoch*num_train_epochs
 
@@ -435,7 +445,7 @@ def training_function(
     min_loss = 1e9
     for epoch in range(num_train_epochs):
         mean_loss = None
-        for step, batch in enumerate(train_dataloader):
+        for step, batch in enumerate(train_loader):
             with autocast('cuda'):
                 context1 = accelerator.accumulate(
                     unet) if args.train_unet else nullcontext()
@@ -477,12 +487,12 @@ def training_function(
 
                     # save best model every 1/4 epoch
                     saves_per_epoch = 4
-                    if (step+1) % int(len(train_dataloader)/saves_per_epoch) == 0 or step+1 == len(train_dataloader):
+                    if (step+1) % int(len(train_loader)/saves_per_epoch) == 0 or step+1 == len(train_loader):
                         mean_loss = mean_loss / \
-                            len(train_dataloader)*saves_per_epoch
+                            len(train_loader)*saves_per_epoch
                         if args.wandb_key:
                             wandb.log({"mean_loss": mean_loss,
-                                       "epoch": int((step+1)/(len(train_dataloader)/saves_per_epoch))
+                                       "epoch": int((step+1)/(len(train_loader)/saves_per_epoch))
                                        })
                         if mean_loss < min_loss:
                             min_loss = mean_loss
@@ -552,7 +562,7 @@ def training_function(
                     global_step += 1
                 scheduler.step()
                 logs = {"loss": loss.detach().item(), "epoch": epoch,
-                        "step": f"{step}/{len(train_dataloader)}"}
+                        "step": f"{step}/{len(train_loader)}"}
                 if args.wandb_key:
                     wandb.log(logs)
                 progress_bar.set_postfix(**logs)
@@ -561,7 +571,6 @@ def training_function(
                     break
             # for distributed training
             accelerator.wait_for_everyone()
-
 
 # Train model!
 if not args.inference_id:

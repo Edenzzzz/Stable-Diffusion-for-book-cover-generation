@@ -453,7 +453,7 @@ if args.mode == "calc_fid":
     with open(os.path.join(save_dir, "fid_score.txt"), "w") as f:
         f.write(f"FID score: {fid_score}")
 
-elif mode == "default":
+elif args.mode == "default":
     print("Generating a few images for quick comparison........")
     visualize_prompts(pipeline, summerize=False, samples_per_prompt=4,
                       include_desc=False, legible_prompt=False,
@@ -498,7 +498,8 @@ elif mode == "default":
                 all_images.extend(images)
     grid = image_grid(all_images, num_rows, num_cols)
     wandb.log({"For_fun": wandb.Image(grid)})
-elif mode == "enter_prompt":
+
+elif arggmode == "enter_prompt":
     image = pipeline(args.prompt, height=args.height, width=args.width,
                       num_inference_steps=50, guidance_scale=7.5).images
     Image.fromarray(image).save(os.path.join(args.save_dir,args.prompt+".jpg"))    
