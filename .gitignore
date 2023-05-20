@@ -4,3 +4,4 @@
 !book dataset/df_test.csv
 **/__pycache__/**
 wandb/**
+model_ckpt/**

@@ -86,7 +86,9 @@ class CustomDataset(Dataset):
         label_root = data_root if label_root is None else label_root
         self.df = pd.read_csv(os.path.join(
             label_root, "df_train.csv")).iloc[:training_size]
-        
+        if len(self.df) < training_size:
+            print(f"Training size exceeds dataset size({len(self.df)}), using the whole dataset! ")
+            
         # self.df.set_index(self.df.columns[0],drop=True,inplace=True)
         self.tokenizer = tokenizer
         # self.learnable_property = learnable_property

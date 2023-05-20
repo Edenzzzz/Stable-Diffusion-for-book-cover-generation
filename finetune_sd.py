@@ -30,7 +30,7 @@ parser.add_argument("--train_text_encoder", default=True, type=bool)
 parser.add_argument("--data_root", default="./book dataset", type=str)
 parser.add_argument("--num_examples", default=12000,
                     type=int, help="number of training examples")
-parser.add_argument("--num_gpus", default=3, type=int)
+parser.add_argument("--num_gpus", default=1, type=int)
 parser.add_argument("--resume_id", default=None, type=int,
                     help="wandb run id of the model to be resumed")
 parser.add_argument("--wandb_key", default=None, type=str,
@@ -150,7 +150,7 @@ hyperparam = {
     # "noise_scheduler": "DDIM",
     "pretrained_model_name_or_path": pretrained_model_name_or_path,
     "output_dir": "./model_ckpt",
-    "training_dataset_size": args.num_examples,
+    "training_size": args.num_examples,
     "train_unet": args.train_unet,
     "train_text_encoder": args.train_text_encoder,
     "num_templates": len(book_cover_templates),
@@ -336,7 +336,7 @@ def training_function(
         pretrained_model_name_or_path, subfolder="scheduler")
 
     dataset = CustomDataset(data_root, tokenizer,
-                            training_size=hyperparam['training_dataset_size'])
+                            training_size=hyperparam['training_size'])
     train_loader = create_dataloader(dataset, train_batch_size)
 
     import gc
@@ -407,16 +407,19 @@ def training_function(
     if use_8bit_adam:
         import bitsandbytes as bnb
         optimizer_class = bnb.optim.AdamW8bit
+        kwargs = {"min_8bit_size": 16384}
     else:
         optimizer_class = torch.optim.AdamW
-
+        kwargs = {}
+    #functional programming! :)(:    
     optimizer = optimizer_class(
         params_to_train,
         lr=learning_rate,
-        weight_decay=weight_decay
+        weight_decay=weight_decay,
+        **kwargs
     )
     scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
-        optimizer, T_max=2*args.num_examples, eta_min=1e-6, verbose=False)
+        optimizer, T_max=args.num_examples, eta_min=1e-6, verbose=False)
     optimizer, train_loader, scheduler = accelerator.prepare(
         optimizer, train_loader, scheduler)
     print("optimizer after wrapping using accelerator:", optimizer)
@@ -443,6 +446,7 @@ def training_function(
     progress_bar.set_description("Max gradient update steps")
     global_step = 0
     min_loss = 1e9
+
     for epoch in range(num_train_epochs):
         mean_loss = None
         for step, batch in enumerate(train_loader):
@@ -483,11 +487,15 @@ def training_function(
                         mean_loss = loss.detach().item()
                     else:
                         mean_loss += loss.detach().item()
+
+                    if loss.isnan():
+                        print("nan loss detected! Please debug!!!")
+                        breakpoint()
                     accelerator.backward(loss)
 
                     # save best model every 1/4 epoch
                     saves_per_epoch = 4
-                    if (step+1) % int(len(train_loader)/saves_per_epoch) == 0 or step+1 == len(train_loader):
+                    if (step + 1) % int(len(train_loader) / saves_per_epoch) == 0 or step + 1 == len(train_loader):
                         mean_loss = mean_loss / \
                             len(train_loader)*saves_per_epoch
                         if args.wandb_key:
@@ -519,7 +527,12 @@ def training_function(
                                 )
 
                                 # save model
-                                pipeline.save_pretrained(output_dir)
+                                try:
+                                    pipeline.save_pretrained(output_dir)
+                                except:
+                                    print("debug!!")
+                                    breakpoint()
+
                                 torch.save(optimizer.state_dict(), os.path.join(
                                         output_dir, "optimizer.pt"))
                                 del pipeline
